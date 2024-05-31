@@ -5,4 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class SamplePage {
 
+    public SamplePage(WebDriver driver) {
+    }
 }

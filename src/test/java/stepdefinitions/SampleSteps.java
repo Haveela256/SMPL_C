@@ -11,7 +11,6 @@ public class SampleSteps {
 
     @Given("this is a sample defintions {string}")
     public void this_is_a_sample_defintions(String name) throws InterruptedException {
-        System.out.println("done");
-        sp.test(name);
+
     }
 }
