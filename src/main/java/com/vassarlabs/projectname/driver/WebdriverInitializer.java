@@ -1,19 +1,18 @@
-package com.vassarlabs.projectname.driver;
+package com.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.beans.JavaBean;
-
-@JavaBean
 public class WebdriverInitializer {
-//	public WebDriver driver;
+	public WebDriver driver;
 
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 
@@ -29,6 +28,7 @@ public class WebdriverInitializer {
 		System.out.println("browser value is: " + browser);
 
 		if (browser.equals("chrome")) {
+//           System.setProperty("webdriver.chrome.driver","/home/vassar/Downloads/chromedriver_linux64/chromedriver");
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--remote-allow-origins=*");
 			options.addArguments("window-size=1400,800");
@@ -38,13 +38,21 @@ public class WebdriverInitializer {
 			tlDriver.set(new ChromeDriver(options));
 
 		} else if (browser.equals("firefox")) {
+
+			FirefoxOptions options = new FirefoxOptions();
+
+			options.addArguments("window-size=1400,800");
+//    options.setHeadless(true);
 			WebDriverManager.firefoxdriver().setup();
-			tlDriver.set(new FirefoxDriver());
+			tlDriver.set(new FirefoxDriver(options));
 		} else if (browser.equals("safari")) {
 			tlDriver.set(new SafariDriver());
 		} else if (browser.equals("edge")) {
+			System.setProperty("webdriver.edge.driver", "/home/vassar-deepa/Downloads/edgedriver_linux64/msedgedriver");
 			EdgeOptions edgeOptions = new EdgeOptions();
 			edgeOptions.addArguments("--headless");
+//	       WebDriverManager.edgedriver();
+
 			tlDriver.set(new EdgeDriver(edgeOptions));
 		}
 		else {

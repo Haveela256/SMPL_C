@@ -1,4 +1,4 @@
-package com.vassarlabs.projectname.utils;
+package com.utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ public class ConfigReader {
 
 		prop = new Properties();
 		try {
-			FileInputStream ip = new FileInputStream("./src/test/resources/config/config.properties");
+			FileInputStream ip = new FileInputStream("./src/test/resources/config/config.properties.txt");
 			prop.load(ip);
 
 		} catch (FileNotFoundException e) {

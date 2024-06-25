@@ -1,12 +1,11 @@
 package apphooks;
 
-import com.vassarlabs.projectname.driver.WebdriverInitializer;
+import com.driver.WebdriverInitializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.vassarlabs.projectname.utils.ConfigReader;
-import com.vassarlabs.projectname.utils.Constants;
+import com.utils.ConfigReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -42,13 +41,13 @@ public class ApplicationHooks {
         driverFactory = new WebdriverInitializer();
         driver = driverFactory.init_driver(browserName);
         driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(2));
-        driver.get(Constants.URL);
+        driver.get("http://20.246.40.123/login");
     }
 
 
     @After(order = 0)
     public void quitBrowser() throws InterruptedException {
-        driver.quit();
+//        driver.quit();
     }
 
     @After(order = 1)

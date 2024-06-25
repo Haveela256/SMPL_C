@@ -1,2 +1,2 @@
 cucumber.publish.enabled = true
-// Add the link from gitHub
+CUCUMBER_PUBLISH_TOKEN=d0f5f34a-93ee-4f0d-a139-11816419d824
