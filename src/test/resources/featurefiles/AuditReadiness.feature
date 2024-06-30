@@ -34,10 +34,10 @@ Feature: Gap Assessment Module
 
 
     Examples:
-      | EmailAddress            | Password     | Toaster | AssessmentName  | Level     | Impact       | File | QuizTwo | QuizThree  | QuizFour         | QuizFive        | CopyAssessmentToaster            | AssessmenttName | DeletedFileToaster          |
-      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "qa assessment" | "Level 1" | "Low impact" | "Yes"   | "No"    | "Not Sure" | "Not Applicable" | "Not Appliable" | "Assessment Copied Successfully" | "Assess"        | "File deleted successfully" |
-      #| "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "aa assessment" | "Level 1" | "Low impact" | "Yes"           | "Yes"           | "Yes"           | "Yes"            | "Yes"           |
-      #| "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "bb assessment" | "Level 1" | "Low impact" | "No"            | "No"            | "No"            | "No"             | "No"            |
-      #| "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "cc assessment" | "Level 1" | "Low impact" | "Not Sure"      | "Not Sure"      | "Not Sure"      | "Not Sure"       | "Not Sure"      |
-      #| "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "dd assessment" | "Level 1" | "Low impact" | "Not Appliable" | "Not Appliable" | "Not Appliable" | "Not Appliable"  | "Not Appliable" |
-  #| "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "ee assessment" | "Level 1" | "Low impact" | "Yes"   | "Yes"   | "Yes"      | "No"             | "No"            |
+      | EmailAddress            | Password     | Toaster | AssessmentName  | Level     | Impact       | File            | QuizTwo         | QuizThree       | QuizFour         | QuizFive        | CopyAssessmentToaster            | AssessmenttName | DeletedFileToaster          |
+      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "qa assessment" | "Level 1" | "Low impact" | "Yes"           | "No"            | "Not Sure"      | "Not Applicable" | "Not Appliable" | "Assessment Copied Successfully" | ""              | "File deleted successfully" |
+      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "aa assessment" | "Level 1" | "Low impact" | "Yes"           | "Yes"           | "Yes"           | "Yes"            | "Yes"           | ""                               | ""              | ""                          |
+      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "bb assessment" | "Level 1" | "Low impact" | "No"            | "No"            | "No"            | "No"             | "No"            | ""                               | ""              | ""                          |
+      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "cc assessment" | "Level 1" | "Low impact" | "Not Sure"      | "Not Sure"      | "Not Sure"      | "Not Sure"       | "Not Sure"      | ""                               | ""              | ""                          |
+      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "dd assessment" | "Level 1" | "Low impact" | "Not Appliable" | "Not Appliable" | "Not Appliable" | "Not Appliable"  | "Not Appliable" | ""                               | ""              | ""                          |
+      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "ee assessment" | "Level 1" | "Low impact" | "Yes"           | "Yes"           | "Yes"           | "No"             | "No"            | ""                               | ""              | ""                          |

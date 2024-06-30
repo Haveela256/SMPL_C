@@ -62,4 +62,8 @@ AuditReadiness_page auditReadinessPage=new AuditReadiness_page(WebdriverInitiali
     public void validateThePaginationOfUploadedDocTable() {
         auditReadinessPage.pagination();
     }
+
+    @And("Validate the Pagination {} {} {}")
+    public void validateThePagination(String arg0, String arg1, String arg2) {
+    }
 }

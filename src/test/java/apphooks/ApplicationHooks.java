@@ -41,7 +41,7 @@ public class ApplicationHooks {
         driverFactory = new WebdriverInitializer();
         driver = driverFactory.init_driver(browserName);
         driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(2));
-        driver.get("http://20.246.40.123/login");
+        driver.get("https://aidemo.smpl-c.com/login");
     }
 
 

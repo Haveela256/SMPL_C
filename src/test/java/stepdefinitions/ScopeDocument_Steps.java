@@ -6,8 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
-
-
 public class ScopeDocument_Steps {
     ScopeDocument_page scopeDocumentPage=new ScopeDocument_page(com.driver.WebdriverInitializer.getDriver());
 
@@ -17,10 +15,11 @@ public class ScopeDocument_Steps {
        scopeDocumentPage.cancelbutton();
     }
 
-    @And("Click on the Submit button by entering all fields and without entering all fields and verify {} {}{}")
+    @And("Click on the Submit button by entering all fields and without entering all fields and verify {string} {string}{string}")
     public void clickOnTheSubmitButtonByEnteringAllFieldsAndWithoutEnteringAllFieldsAndVerify(String FileUploadToaster, String ScopeDocFileName, String File) throws InterruptedException {
-        scopeDocumentPage.submitbutton( FileUploadToaster, ScopeDocFileName, File);
+    scopeDocumentPage.submitbutton(FileUploadToaster,ScopeDocFileName, File);
     }
+
 
     @When("Click on Upload File button and enter the {string} {string}")
     public void click_on_upload_file_button_and_enter_the(String ScopeDocFileName , String File) throws InterruptedException {
@@ -46,19 +45,19 @@ public class ScopeDocument_Steps {
 
     @When("Validate the delete functionality {string}")
     public void validate_the_delete_functionality(String DeletedFileToaster) throws InterruptedException {
-scopeDocumentPage.deletedFile( DeletedFileToaster);
+    scopeDocumentPage.deletedFile( DeletedFileToaster);
     }
 
 
 
     @Given("Click on Select Year dropdown by Selecting Year")
     public void click_on_select_year_dropdown_by_selecting_year() throws InterruptedException {
-scopeDocumentPage.selectYear();
+    scopeDocumentPage.selectYear();
     }
 
 
     @When("Click on the discovery  module")
-    public void clickOnTheDiscoveryModule() {
+    public void clickOnTheDiscoveryModule() throws InterruptedException {
         scopeDocumentPage.discoveryModule();
     }
 
@@ -66,6 +65,9 @@ scopeDocumentPage.selectYear();
     public void validateThePagination(String ScopeDocFileName, String uploadCount, String File) throws InterruptedException {
         scopeDocumentPage.pagination( ScopeDocFileName, uploadCount, File);
     }
+
+
+
 
 
 }

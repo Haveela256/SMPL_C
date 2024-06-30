@@ -15,7 +15,7 @@ public class CompanyDetails_page {
     private By companydetailsModule = By.xpath("//span[text()='Company Details']");
     private By editButton = By.xpath("//button[@class='btn btn-primary btn-sm']"); // edit_button = driver.find_element(By.XPATH, "//button[contains(@class, 'btn') and contains(@class, 'btn-primary') and contains(@class, 'btn-sm') and .//i[contains(@class, 'bi') and contains(@class, 'bi-pencil-square')]]")
 
-    private By replaceIcon = By.xpath("//button[@class='btn upload-btn btn-sm ng-star-inserted']");
+    private By replaceIcon = By.xpath("//i[@class='bi bi-repeat']]");
     private By companyNameFiled = By.xpath("//input[@placeholder='Enter Company Name']");
     private By fienNo = By.xpath("//input[@formcontrolname='feinNo']");
 
@@ -94,29 +94,34 @@ public class CompanyDetails_page {
 
     }
 
-    public void profile(String File) throws InterruptedException {
-        Thread.sleep(11000);
-        driver.findElement(browse).sendKeys(File);
-        System.out.println("File selected");
-        Thread.sleep(7000);
-        if (driver.findElement(cropPopup).isDisplayed()) {
-            driver.findElement(cropPopupCancel).isDisplayed();
-            driver.findElement(cropPopupCancel).click();
-        }
-        driver.findElement(browse).sendKeys(File);
-        System.out.println("File selected");
-        Thread.sleep(7000);
-        if (driver.findElement(cropPopupTitle).isDisplayed()) {
-            driver.findElement(cropMinus).click();
-            driver.findElement(cropPlus).click();
-            driver.findElement(fitImage).click();
-            driver.findElement(ok).isDisplayed();
+    public void profile(String File, String ReplaceFile) throws InterruptedException {
+        editButton();
+        if (driver.findElement(browse).isDisplayed()) {
             Thread.sleep(3000);
-            driver.findElement(ok).click();
+            driver.findElement(browse).sendKeys(File);
+            System.out.println("File selected");
+            Thread.sleep(7000);
+            if (driver.findElement(cropPopup).isDisplayed()) {
+                driver.findElement(cropPopupCancel).isDisplayed();
+                driver.findElement(cropPopupCancel).click();
+            }
+            driver.findElement(browse).sendKeys(File);
+            System.out.println("File selected");
+            Thread.sleep(7000);
+            if (driver.findElement(cropPopupTitle).isDisplayed()) {
+                driver.findElement(cropMinus).click();
+                driver.findElement(cropPlus).click();
+                driver.findElement(fitImage).click();
+                driver.findElement(ok).isDisplayed();
+                Thread.sleep(3000);
+                driver.findElement(ok).click();
+            }
+            if (driver.findElement(replaceIcon).isDisplayed()) {
+                Thread.sleep(9000);
+                driver.findElement(replaceIcon).sendKeys(ReplaceFile);
+            }
         }
     }
-
-
     public void cancelButton() throws InterruptedException {
 //        driver.findElement(editButton).click();
         Thread.sleep(3000);
@@ -125,71 +130,127 @@ public class CompanyDetails_page {
     }
 
 
-    public void submitbutton(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String AddressOne, String AddressTwo, String ZipCode, String City, String CompanyDetailsUpdatedToaster, String ErrorMessage) throws InterruptedException {
+    public void submitbutton(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String AddressOne, String AddressTwo, String ZipCode, String City, String ErrorMessage, String CompanyDetailsUpdatedToaster,String ReplaceFile, String File) throws InterruptedException {
         Thread.sleep(3000);
-        System.out.println(driver.findElements(invalidFein).size());
-        if (driver.findElements(invalidFein).size()>0) {
-            System.out.println("Invalid Fein Found");
-            String feinError = driver.findElement(invalidFein).getText();
-            System.out.println(feinError);
-            Assert.assertEquals(ErrorMessage, feinError);
-            submit = true;
-        } else if (driver.findElements(invalidDuns).size()>0) {
-            String dunsError = driver.findElement(invalidDuns).getText();
-            System.out.println(dunsError);
-            Assert.assertEquals(ErrorMessage, dunsError);
-            submit = true;
-        } else if (driver.findElements(invalidPhone).size()>0) {
-            String phoneError = driver.findElement(invalidPhone).getText();
-            System.out.println(phoneError);
-            Assert.assertEquals(ErrorMessage, phoneError);
-            submit = true;
-        } else if (driver.findElements(invalidZipCode).size()>0) {
-            String zipCodeError = driver.findElement(invalidZipCode).getText();
-            System.out.println(zipCodeError);
-            Assert.assertEquals(ErrorMessage, zipCodeError);
-            submit = true;
-        } else if (driver.findElements(blankCompanyName).size()>0) {
-            String blankCompany = driver.findElement(blankCompanyName).getText();
-            System.out.println(blankCompany);
-            Assert.assertEquals(ErrorMessage, blankCompany);
-            submit = true;
-        } else if (driver.findElements(blankFien).size()>0) {
-            String blankfein = driver.findElement(blankFien).getText();
-            System.out.println(blankfein);
-            Assert.assertEquals(blankfein, ErrorMessage);
-            submit = true;
-        } else if (driver.findElements(blankPhone).size()>0) {
-            String blankphone = driver.findElement(blankPhone).getText();
-            System.out.println(blankphone);
-            Assert.assertEquals(ErrorMessage, blankphone);
-            submit = true;
-        } else if (driver.findElements(blankZipcCode).size()>0) {
-            String blankzip = driver.findElement(blankZipcCode).getText();
-            System.out.println(blankzip);
-            Assert.assertEquals(ErrorMessage, blankzip);
-            submit = true;
-        } else if (driver.findElements(blankCity).size()>0 ) {
-            submit = true;
-            String blankcity = driver.findElement(blankCity).getText();
-            System.out.println(blankcity);
-            Assert.assertEquals(ErrorMessage, blankcity);
-        } else if (!submit) {
+        System.out.println(ErrorMessage);
+        int value = 0;
+        if (ErrorMessage.contains("Company Name")) {
+            value = 1;
+            System.out.println("Case 1 Will Run");
+        }
+        if (ErrorMessage.contains("FEIN No")) {
+            value = 2;
+            System.out.println("Case 2 Will Run");
+        }
+        if (ErrorMessage.contains("DUNS No")) {
+            value = 3;
+            System.out.println("Case 3 Will Run");
+        }
+        if (ErrorMessage.contains("Phone number")) {
+            value = 4;
+            System.out.println("Case 4 Will Run");
+        }
+        if (ErrorMessage.contains("Zipcode")) {
+            value = 5;
+            System.out.println("Case 5 Will Run");
+        }
+        if (ErrorMessage.contains("City")) {
+            value = 6;
+            System.out.println("Case 6 Will Run");
+        }
+        switch (value) {
+            case 1:
+                if (driver.findElements(blankCompanyName).size() > 0) {
+                    String blankCompany = driver.findElement(blankCompanyName).getText();
+                    System.out.println(blankCompany);
+                    Assert.assertEquals(ErrorMessage, blankCompany);
+                    submit = true;
+                }
+                break;
+            case 2:
+                if (driver.findElements(invalidFein).size() > 0) {
+                    System.out.println("Invalid Fein Found");
+                    String feinError = driver.findElement(invalidFein).getText();
+                    System.out.println(feinError);
+                    Assert.assertEquals(ErrorMessage, feinError);
+                    submit = true;
+                }
+                if (driver.findElements(blankFien).size() > 0) {
+                    String blankfein = driver.findElement(blankFien).getText();
+                    System.out.println(blankfein);
+                    Assert.assertEquals(blankfein, ErrorMessage);
+                    submit = true;
+                }
+                break;
+            case 3:
+                if (driver.findElements(invalidDuns).size() > 0) {
+                    String dunsError = driver.findElement(invalidDuns).getText();
+                    System.out.println(dunsError);
+                    Assert.assertEquals(ErrorMessage, dunsError);
+                    submit = true;
+                }
+                break;
+            case 4:
+                if (driver.findElements(invalidPhone).size() > 0) {
+                    String phoneError = driver.findElement(invalidPhone).getText();
+                    System.out.println(phoneError);
+                    Assert.assertEquals(ErrorMessage, phoneError);
+                    submit = true;
+                }
+                if (driver.findElements(blankPhone).size() > 0) {
+                    String blankphone = driver.findElement(blankPhone).getText();
+                    System.out.println(blankphone);
+                    Assert.assertEquals(ErrorMessage, blankphone);
+                    submit = true;
+                }
+                break;
+            case 5:
+                if (driver.findElements(blankZipcCode).size() > 0) {
+                    String blankzip = driver.findElement(blankZipcCode).getText();
+                    System.out.println(blankzip);
+                    Assert.assertEquals(ErrorMessage, blankzip);
+                    submit = true;
+                }
+                if (driver.findElements(invalidZipCode).size() > 0) {
+                    String zipCodeError = driver.findElement(invalidZipCode).getText();
+                    System.out.println(zipCodeError);
+                    Assert.assertEquals(ErrorMessage, zipCodeError);
+                    submit = true;
+                }
+                break;
+            case 6:
+                if (driver.findElements(blankCity).size() > 0) {
+                    submit = true;
+                    String blankcity = driver.findElement(blankCity).getText();
+                    System.out.println(blankcity);
+                    Assert.assertEquals(ErrorMessage, blankcity);
+                }
+                break;
+            default:
+                submit = false;
+        }
+        if (!submit) {
             driver.findElement(submitButton).click();
+
+            }
+
         }
 
-    }
 
 
     public void replaceProfile(String File, String ReplaceFile) throws InterruptedException {
-        driver.findElement(editButton).click();
-        Thread.sleep(3000);
-        driver.findElement(replaceIcon).click();
-        driver.findElement(replaceIcon).sendKeys(ReplaceFile);
+//        if (!submit) {
+//            driver.findElement(editButton).click();
+//        } else if (driver.findElement(replaceIcon).isDisplayed()){
+//            Thread.sleep(9000);
+//            driver.findElement(replaceIcon).sendKeys(ReplaceFile);
+//        }
+}
     }
 
 
-}
+
+
 
 
 

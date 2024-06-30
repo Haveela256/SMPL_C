@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import com.vassarlabs.projectname.page.TechnicalFootprint_page;
 import com.driver.WebdriverInitializer;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -27,4 +28,7 @@ public class TechnicalFootprint_Steps {
     public void click_on_the_submit_button_and_verify(String FirstQstn, String SecondQstnNoOfUsers, String ThirdQstnTypeOfCUI, String FourthQstn, String FifthQstnPurposeOfSystem, String SixthQstn, String SeventhQstn, String EighthQstn, String NinethQstn, String TenthQstn, String EleventhQstn, String TwelthQstn, String TextfieldData, String ToasterMessage) throws InterruptedException {
         technicalFootprintPage.submitButton(FirstQstn, SecondQstnNoOfUsers, ThirdQstnTypeOfCUI, FourthQstn, FifthQstnPurposeOfSystem, SixthQstn, SeventhQstn, EighthQstn, NinethQstn, TenthQstn, EleventhQstn, TwelthQstn, TextfieldData, ToasterMessage);
     }
+
+
+
 }

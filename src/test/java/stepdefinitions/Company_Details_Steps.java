@@ -31,19 +31,19 @@ public class Company_Details_Steps {
         companyDetailsPage. replaceProfile(File, ReplaceFile);
     }
 
-    @And("Upload Profile and verify Crop popup {string}")
-    public void uploadProfileAndVerifyCropPopup(String File) throws InterruptedException {
-        companyDetailsPage.profile(File);
+
+
+
+
+
+
+    @Then("Validate the submit button and verify {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void validateTheSubmitButtonAndVerify(String CompanyName,String FEINno, String URL, String DUNSno,String Phone,String AddressOne,String AddressTwo,String ZipCode,String City, String CompanyDetailsUpdatedToaster, String ErrorMessage,String ReplaceFile, String File) throws InterruptedException {
+        companyDetailsPage.submitbutton(CompanyName,  FEINno,  URL,  DUNSno,  Phone,  AddressOne,  AddressTwo,  ZipCode,  City, CompanyDetailsUpdatedToaster, ErrorMessage,ReplaceFile,File);
     }
 
-    @Then("Validate the submit button and verify {string} {string} {string} {string} {string} {string} {string} {string} {string} {string} {string}")
-    public void validateTheSubmitButtonAndVerify(String CompanyName,String FEINno, String URL, String DUNSno,String Phone,String AddressOne,String AddressTwo,String ZipCode,String City, String CompanyDetailsUpdatedToaster, String ErrorMessage) throws InterruptedException {
-        companyDetailsPage.submitbutton(CompanyName,  FEINno,  URL,  DUNSno,  Phone,  AddressOne,  AddressTwo,  ZipCode,  City, CompanyDetailsUpdatedToaster, ErrorMessage);
+    @And("Upload Profile and verify Crop popup {} {}")
+    public void uploadProfileAndVerifyCropPopup(String File,String ReplaceFile) throws InterruptedException {
+        companyDetailsPage.profile(File,ReplaceFile);
     }
-
-
-
-
-
-
 }
