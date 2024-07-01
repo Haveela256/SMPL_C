@@ -17,7 +17,7 @@ public class Reporting_Steps {
        reportingPage.prioritizedRemediation();
     }
 
-    @And("click on the download Icons of Plan of Action & Milestones \\(POA&M) Report {}")
+    @And("click on the download Icons of Plan of Action & Milestones \\(POA&M) Report {string}")
     public void clickOnTheDownloadIconsOfPlanOfActionMilestonesPOAMReport(String PoamDownloadToaster) throws InterruptedException {
         reportingPage.poamDownload(PoamDownloadToaster);
     }
@@ -28,17 +28,17 @@ public class Reporting_Steps {
     }
 
 
-    @And("click on the Download icon of Scope Document {}")
-    public void clickOnTheDownloadIconOfScopeDocument(String TemplateDownloadSuccessful) {
+    @And("click on the Download icon of Scope Document {string}")
+    public void clickOnTheDownloadIconOfScopeDocument(String TemplateDownloadSuccessful) throws InterruptedException {
         reportingPage.scopeDoc(TemplateDownloadSuccessful);
     }
 
-    @And("click on the Download icon of Data flow diagram {}")
-    public void clickOnTheDownloadIconOfDataFlowDiagram(String TemplateDownloadSuccessful) {
-        reportingPage.dataFlow( TemplateDownloadSuccessful);
+    @And("click on the Download icon of Data flow diagram {string}")
+    public void clickOnTheDownloadIconOfDataFlowDiagram(String TemplateDownloadSuccessful) throws InterruptedException {
+        reportingPage.dataFlow(TemplateDownloadSuccessful);
     }
 
-    @And("click on the Download icon of Asset Inventory {}")
+    @And("click on the Download icon of Asset Inventory {string}")
     public void clickOnTheDownloadIconOfAssetInventory(String TemplateDownloadSuccessful) {
 
         reportingPage.assetInventory(TemplateDownloadSuccessful);
@@ -46,24 +46,29 @@ public class Reporting_Steps {
 
 
 
-    @And("click on the Download icon of Risk Assessment Overview Template {}")
-    public void clickOnTheDownloadIconOfRiskAssessmentOverviewTemplate(String TemplateDownloadSuccessful) {
+    @And("click on the Download icon of Risk Assessment Overview Template {string}")
+    public void clickOnTheDownloadIconOfRiskAssessmentOverviewTemplate(String TemplateDownloadSuccessful) throws InterruptedException {
         reportingPage.riskAssessment(TemplateDownloadSuccessful);
     }
 
-    @And("click on the Download icon of Shared Responsibilities Matrix Template {}")
-    public void clickOnTheDownloadIconOfSharedResponsibilitiesMatrixTemplate(String TemplateDownloadSuccessful) {
+    @And("click on the Download icon of Shared Responsibilities Matrix Template {string}")
+    public void clickOnTheDownloadIconOfSharedResponsibilitiesMatrixTemplate(String TemplateDownloadSuccessful) throws InterruptedException {
         reportingPage.responsibilitiesMatrix( TemplateDownloadSuccessful);
     }
 
 
-    @And("click on the Download icon of GAP Assessment Risk Register Template {}")
-    public void clickOnTheDownloadIconOfGAPAssessmentRiskRegisterTemplate(String TemplateDownloadSuccessful) {
+    @And("click on the Download icon of GAP Assessment Risk Register Template {string}")
+    public void clickOnTheDownloadIconOfGAPAssessmentRiskRegisterTemplate(String TemplateDownloadSuccessful) throws InterruptedException {
         reportingPage.GAPAssessmentRiskRegister(TemplateDownloadSuccessful);
     }
 
     @And("click on the Templates sub-module")
     public void clickOnTheTemplatesSubModule() throws InterruptedException {
         reportingPage.templates();
+    }
+
+    @And("click on the Download icon of Incident Response Plan Template {}")
+    public void clickOnTheDownloadIconOfIncidentResponsePlanTemplate(String TemplateDownloadSuccessful) {
+      reportingPage.incidentResponsePlanTemplate(TemplateDownloadSuccessful);
     }
 }

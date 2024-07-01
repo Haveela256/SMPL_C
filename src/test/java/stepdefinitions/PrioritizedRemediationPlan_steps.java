@@ -7,13 +7,13 @@ import com.driver.WebdriverInitializer;
 
 public class PrioritizedRemediationPlan_steps {
     PrioritizedRemediationPlan_page prioritizedRemediationPlanPage=new PrioritizedRemediationPlan_page(WebdriverInitializer.getDriver());
-    @When("Click on the Reporting module and click on the Reports sub-module {string}")
-    public void click_on_the_reporting_module_and_click_on_the_reports_sub_module(String AssessmentName) throws InterruptedException {
-        prioritizedRemediationPlanPage.reportingModule(AssessmentName);
+    @And("click on the Prioritized Remeditaion Plan card  {string}")
+    public void clickOnThePrioritizedRemeditaionPlanCard(String AssessmentName) throws InterruptedException {
+        prioritizedRemediationPlanPage.report(AssessmentName);
     }
 
     @When("validate the print button")
-    public void validate_the_print_button() {
+    public void validate_the_print_button() throws InterruptedException {
         prioritizedRemediationPlanPage.print();
     }
 
@@ -37,7 +37,7 @@ public class PrioritizedRemediationPlan_steps {
     }
 
     @When("validate the legends of Implementation Status graph")
-    public void validate_the_legends_of_implementation_status_graph() {
+    public void validate_the_legends_of_implementation_status_graph() throws InterruptedException {
        prioritizedRemediationPlanPage.legendsOfImplementatioGrapsh();
     }
 
@@ -46,10 +46,6 @@ public class PrioritizedRemediationPlan_steps {
        prioritizedRemediationPlanPage.implementationStatusTable();
     }
 
-    @When("Validate the sort icons of Implementation Status table")
-    public void validate_the_sort_icons_of_implementation_status_table() {
-       prioritizedRemediationPlanPage.sortIconsOfimplementationStatus();
-    }
 
     @When("Validate the pagination of Implementation Status table")
     public void validate_the_pagination_of_implementation_status_table() {
@@ -62,19 +58,16 @@ public class PrioritizedRemediationPlan_steps {
     }
 
     @When("validate the legends of poam graph")
-    public void validate_the_legends_of_poam_graph() {
+    public void validate_the_legends_of_poam_graph() throws InterruptedException {
 prioritizedRemediationPlanPage.legends();
     }
 
-    @When("verify the poam table")
-    public void verify_the_poam_table() {
-prioritizedRemediationPlanPage.poamTable();
-    }
 
     @When("Validate the sort icons of poam table")
     public void validate_the_sort_icons_of_poam_table() {
 prioritizedRemediationPlanPage.sortPoam();
     }
+
 
 
 }

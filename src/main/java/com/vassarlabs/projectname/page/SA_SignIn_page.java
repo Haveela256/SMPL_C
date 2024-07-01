@@ -38,7 +38,7 @@ public class SA_SignIn_page {
     private By otpField4 = By.xpath("//input[@formcontrolname='otp4']");
     private By submitPath = By.xpath("//button[text()='Submit']");
 
-    private By homePath = By.xpath("//div[@class='title']");
+    private By homePath = By.xpath("//div[text()=' Subscriptions ']");
 
 
     public SA_SignIn_page(WebDriver driver) {

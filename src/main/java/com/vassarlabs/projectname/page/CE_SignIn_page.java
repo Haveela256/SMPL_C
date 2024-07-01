@@ -37,7 +37,7 @@ public class CE_SignIn_page {
     private By otpField4 = By.xpath("//input[@formcontrolname='otp4']");
     private By submitPath = By.xpath("//button[text()='Submit']");
 
-    private By homePath = By.xpath("//a[@class='nav-link active']");
+    private By homePath = By.xpath("//span[text()='Companies']");
 
 
     public CE_SignIn_page(WebDriver driver) {
