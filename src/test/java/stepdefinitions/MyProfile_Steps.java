@@ -49,4 +49,6 @@ public class MyProfile_Steps {
   public void validateReplaceIcon(String ReplaceFile) throws InterruptedException {
     myProfilePage.replaceIcon(ReplaceFile);
   }
+
+
 }

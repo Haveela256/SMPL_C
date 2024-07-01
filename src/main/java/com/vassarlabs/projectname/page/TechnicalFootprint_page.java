@@ -22,9 +22,9 @@ public class TechnicalFootprint_page {
     private By firstQuestion = By.xpath("//button[text()='1. Is your company fully Remote?']");
 
     private By secondQuestion = By.xpath("//button[text()='2. Number of privileged users']");
-    private By thirdQuestion=By.xpath("//button[@id='ngb-accordion-item-2-toggle']");
+    private By thirdQuestion=By.xpath("//button[text()='3. What are the general descriptions and types of Controlled Unclassified Information (CUI) that are processed, stored, or transmitted by the system, and how are they determined and documented?']");
 
-    private By thirdQuestionText = By.xpath("//button[text()='3. What are the general descriptions and types of Controlled Unclassified Information (CUI) that are processed, stored, or transmitted by the system, and how are they determined and documented?']");
+    private By thirdQuestionText = By.xpath("//textarea[@placeholder='Enter here']");
 
     private By fourthQuestion = By.xpath("//button[text()='4. Is all hardware and software maintained and owned by the organization?']");
 
@@ -47,9 +47,9 @@ public class TechnicalFootprint_page {
 
     private By thirdQuestionTexfield = By.xpath("//button[text()='3. What are the general descriptions and types of Controlled Unclassified Information (CUI) that are processed, stored, or transmitted by the system, and how are they determined and documented?']//following::div[3]//input");
 
-    private By fifthQuestionTextfield = By.xpath("//button[text()='5. What is the function/purpose of the system?']//following::div[3]//input");
+    private By fifthQuestionTextfield = By.xpath("//button[text()='5. What is the function/purpose of the system?']//following::div//textarea[@placeholder='Enter here']");
 
-    private By seconfQuestionTextfield = By.xpath("//input[@class='form-control ng-valid ng-touched ng-dirty']");
+    private By seconfQuestionTextfield = By.xpath("//button[text()='2. Number of privileged users']//following::input");
 
     private By cancelButton = By.xpath("//button[text()='Cancel']");
 
@@ -66,15 +66,16 @@ public class TechnicalFootprint_page {
     }
 
     public void clickOnmodule() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(technicalFootprintModule).isDisplayed();
         wait.until(ExpectedConditions.elementToBeClickable(technicalFootprintModule));
         driver.findElement(technicalFootprintModule).click();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
     }
 
 
     public void answertheQuestions(String FirstQstn, String SecondQstnNoOfUsers, String ThirdQstnTypeOfCUI, String FourthQstn, String FifthQstnPurposeOfSystem, String SixthQstn, String SeventhQstn, String EighthQstn, String NinethQstn, String TenthQstn, String EleventhQstn, String TwelthQstn, String TextfieldData, String ToasterMessage) throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.findElement(technicalFootprintModule).isDisplayed();
@@ -122,7 +123,7 @@ public class TechnicalFootprint_page {
         // Iterate through the questions and check their presence in the graph
             if (driver.findElement(fifthQuestion).isDisplayed()) {
                 driver.findElement(fifthQuestion).click();
-                driver.findElement(fifthQuestion).sendKeys(FifthQstnPurposeOfSystem);
+                driver.findElement(fifthQuestionTextfield).sendKeys(FifthQstnPurposeOfSystem);
                 Thread.sleep(3000);
             } else {
                 System.out.println("data is not entered");
@@ -163,7 +164,8 @@ public class TechnicalFootprint_page {
                     if (driver.findElement(eighthQuestion).isDisplayed()) {
                         driver.findElement(eighthQuestion).click();
                         driver.findElement(By.xpath("//label[text()='" + eigthOptions + "']/.././/input")).click();
-                       driver.findElement(By.xpath("//div[@class='form-check ng-valid ng-dirty ng-touched']//input[@placeholder='Enter here']")).sendKeys(TextfieldData);
+                        Thread.sleep(3000);
+                       driver.findElement(By.xpath("//button[text()='8. What Project Management Systems do you utilize?']//following::div//input[@type='text']")).sendKeys(TextfieldData);
                         Thread.sleep(3000);
                     } else {
                         System.out.println(TextfieldData + " is entered");
@@ -183,14 +185,14 @@ public class TechnicalFootprint_page {
                         } else {
                             System.out.println(ninthOptions + " is not clicked");
                         }
-                        String tenthOptions = " Deltek Costpoint "; // Replace with the actual text
+                        String tenthOptions = " Oracle SCM Cloud "; // Replace with the actual text
                         ArrayList<String> tenthQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
                         // Print the questions list
                         System.out.println(questions);
                         // Iterate through the questions and check their presence in the graph
                             if (driver.findElement(tenthQuestion).isDisplayed()) {
                                 driver.findElement(tenthQuestion).click();
-                                driver.findElement(By.xpath("//label[text()=' "+tenthQuestions+"  ']/.././/input")).click();
+                                driver.findElement(By.xpath("//label[text()='"+tenthOptions+"']/.././/input")).click();
                                 System.out.println(tenthOptions + " is clicked");
                                 driver.findElement(tenthQuestion).click();
                                 Thread.sleep(3000);
@@ -229,6 +231,7 @@ public class TechnicalFootprint_page {
 
 
     public void cancelbutton() throws InterruptedException {
+        Thread.sleep(3000);
         driver.findElement(cancelButton).click();
         Thread.sleep(3000);
         driver.findElement(gapAssessment).isDisplayed();

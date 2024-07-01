@@ -9,9 +9,9 @@ Feature: Forget Password Page
 
 
     Examples:
-      | Email                   | ErrorMessage | Toaster |
-      | "Vassar.qa@yopmail.com" | ""           | ""      |
-    #| "agdbfj@yopmail.com"    | ""           | " Email-Id does not exist in the system! " |
-      #| "1234"                  | ""           | "Email is invalid"  |
-    #  | ""                      | ""           | "Email is required" |
+      | Email                   | ErrorMessage | Toaster                                    |
+      | "Vassar.qa@yopmail.com" | ""           | ""                                         |
+      | "agdbfj@yopmail.com"    | ""           | " Email-Id does not exist in the system! " |
+      | "1234"                  | ""           | "Email is invalid"                         |
+      | ""                      | ""           | "Email is required"                        |
 

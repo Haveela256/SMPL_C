@@ -157,14 +157,11 @@ public class ScopeDocument_page {
 
         if (driver.findElement(By.xpath("//table")).isDisplayed()) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(updatedOnDown));
-
             if (driver.findElements(updatedOnDown).size() > 0) {
                 wait.until(ExpectedConditions.elementToBeClickable(updatedOnDown));
                 js.executeScript("arguments[0].click();", driver.findElement(updatedOnDown));
-
                 wait.until(ExpectedConditions.elementToBeClickable(updatedOnUp));
                 js.executeScript("arguments[0].click();", driver.findElement(updatedOnUp));
-
                 if (driver.findElements(fileNameIocn).size() > 0) {
                     wait.until(ExpectedConditions.elementToBeClickable(fileNameIocn));
                     js.executeScript("arguments[0].click();", driver.findElement(fileNameIocn));

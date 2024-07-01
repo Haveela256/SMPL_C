@@ -5,10 +5,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import com.driver.WebdriverInitializer;
 
-import java.awt.*;
-
 public class Manage_Users_steps {
-    Manage_Users_page manageUsersPage = new Manage_Users_page(WebdriverInitializer.getDriver());
+    Manage_Users_page manageUsersPage=new Manage_Users_page(WebdriverInitializer.getDriver());
 
     @When("Click n the Manage Users module")
     public void click_n_the_manage_users_module() {
@@ -42,16 +40,18 @@ public class Manage_Users_steps {
 
 
 
-    @And("Edit the details of by changing {string} {string} {string} {string} or {string}")
-    public void editTheDetailsOfByChangingOr(String FirstName, String LastName, String MiddleName, String Designation, String Email) throws AWTException {
-        manageUsersPage.editUserDetails(FirstName, MiddleName, LastName, Designation, Email);
-    }
 
     @And("Delete the user by providing {string} {string} {string} {string} {string} {string} {string}")
     public void deleteTheUserByProviding(String FirstName, String LastName, String SuccessfulToaster, String ErrorToaster, String ErrorMessage, String Email, String DeleteToaster) {
         manageUsersPage.deleteUser(FirstName, LastName, SuccessfulToaster, ErrorToaster, ErrorMessage, Email, DeleteToaster);
     }
 
+
+
+    @And("Edit the details of by changing {string} {string} {string} {string} {string} or {string}")
+    public void editTheDetailsOfByChangingOr(String FirstName, String MiddleName,String LastName, String Email, String Designation, String NewDetails) throws Throwable {
+        manageUsersPage.editUserDetails(FirstName, MiddleName,LastName, Email, Designation, NewDetails);
+    }
 
 
 }

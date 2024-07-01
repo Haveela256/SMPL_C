@@ -36,9 +36,10 @@ public class ForgetPassword_page {
         driver.findElement(emailfield).click();
         Thread.sleep(3000);
         driver.findElement(emailfield).sendKeys(Email);
-        if (driver.findElement(submit).isEnabled()) {
+        if (driver.findElement(submit).isDisplayed()) {
             Thread.sleep(3000);
             driver.findElement(submit).click();
+            Thread.sleep(3000);
         } else if (driver.findElement(invalidToaster).isDisplayed()) {
             Thread.sleep(3000);
             String toaster = driver.findElement(invalidToaster).getText();
@@ -68,13 +69,16 @@ public class ForgetPassword_page {
 
     }
     public void backtoSignIn () throws InterruptedException {
-        driver.findElement(backToSIgnIn).click();
+        if(driver.findElement(backToSIgnIn).isDisplayed()){
+            driver.findElement(backToSIgnIn).click();
         Thread.sleep(3000);
         driver.findElement(loginPagepath).isDisplayed();
         Thread.sleep(3000);
-
     }
-}
+        else {
+            System.out.println("Back hyperlink is not displayed");
+        }
+}}
 
 
 

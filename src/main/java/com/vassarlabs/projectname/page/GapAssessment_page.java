@@ -229,8 +229,8 @@ public GapAssessment_page(WebDriver driver) {
     public void progressBar(String AssessmentName) throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
-        driver.findElement(By.xpath("//table//span[normalize-space()='New QA assessment3']")).click();
-        if(driver.findElement(By.xpath("//div[text()=' New QA assessment3 ']")).isDisplayed())
+        driver.findElement(By.xpath("//table//span[normalize-space()='"+AssessmentName+"']")).click();
+        if(driver.findElement(By.xpath("//div[text()='"+AssessmentName+"']")).isDisplayed())
         {
             driver.findElement(status).isDisplayed();
             Thread.sleep(3000);
@@ -248,10 +248,12 @@ public GapAssessment_page(WebDriver driver) {
             Thread.sleep(3000);
             String login = driver.findElement(lastLogin).getText();
             System.out.println(login);}
-  else {
+        else {
             System.out.println("Assessment is not displayed");
         }
-        }
+    }
+
+
 
 
     public void sPRSScore(String AssessmentName) {
@@ -343,10 +345,9 @@ else {
                 if(driver.findElement(By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='" + graphNames.get(i) + "']")).isDisplayed()){
                     Actions actions = new Actions(driver);
                     JavascriptExecutor js = (JavascriptExecutor) driver;
-
                     // Locate the current element using XPath
                     String graphName = graphNames.get(i);  // Assuming graphNames is a list of graph names
-                    WebElement currentElement = driver.findElement(By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='" + graphName + "']"));
+                    WebElement currentElement = driver.findElement(By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='" + graphNames + "']"));
 
                     // Check if the current element is displayed
                     if (currentElement.isDisplayed()) {
