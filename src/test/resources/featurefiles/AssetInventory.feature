@@ -18,7 +18,13 @@ Feature: Discovery Module
     Given Click on Select Year dropdown by Selecting Year
 
     Examples:
-      | EmailAddress            | Password     | Toaster | uploadCount | AssetInventoryFileName | File                                              | FileUploadToaster            | DeletedFileToaster          |
-      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "2"         | "Asset Inventory"      | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | EmailAddress           | Password     | Toaster | uploadCount | AssetInventoryFileName | File                                              | FileUploadToaster            | DeletedFileToaster          |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "6"         | "Asset Inventory"      | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Asset"                | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Inventory"            | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Assets"               | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "AssetInventory"       | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "AssetsInventory"      | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Inventoryy"           | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
 
 

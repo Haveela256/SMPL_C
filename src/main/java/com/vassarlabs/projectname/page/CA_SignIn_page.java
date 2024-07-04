@@ -38,11 +38,15 @@ public class CA_SignIn_page {
     private By otpField3 = By.xpath("//input[@formcontrolname='otp3']");
     private By otpField4 = By.xpath("//input[@formcontrolname='otp4']");
     private By submitPath = By.xpath("//button[text()='Submit']");
-
+    private By firstInvalid = By.xpath("//span[text()=' First name is Invalid ']");
+    private By lastNameInavlid = By.xpath("//span[text()=' Last name is Invalid ']");
+    private By emailInavlid = By.xpath("//span[text()=' Email is not Valid ']");
+    private By middleNameInvalid = By.xpath("//span[text()=' Middle name is Invalid ']");
+    private By firstNameRequired = By.xpath("//span[text()='First Name is required']");
+    private By lastNameRequired = By.xpath("//span[text()='Last Name is required']");
     private By homePath = By.xpath("//div[text()=' Control Center']");
-
-
-    public CA_SignIn_page(WebDriver driver) {
+    private By superAdminLanding=By.xpath("///div[text()=' Subscriptions ']");
+   public CA_SignIn_page(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -52,7 +56,6 @@ public class CA_SignIn_page {
         System.out.println(loginPagepath);
 
     }
-
     public void emailField(String EmailAddress, String ErrorMessage) {
         if (driver.findElement(emailFieldPath).isDisplayed()) {
             driver.findElement(emailFieldPath).sendKeys(EmailAddress);
@@ -92,11 +95,11 @@ public class CA_SignIn_page {
     }
 
     public void signInButton(String EmailAddress, String Password, String Toaster) throws InterruptedException {
+       WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
+       wait.until(ExpectedConditions.visibilityOfElementLocated(emailFieldPath));
         driver.findElement(emailFieldPath).sendKeys(EmailAddress);
         driver.findElement(passwordFieldPath).sendKeys(Password);
-
 // Click the login button
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         if (driver.findElement(loginbuttonPath).isEnabled()) {
             Thread.sleep(3000);
             driver.findElement(loginbuttonPath).click();
@@ -118,14 +121,15 @@ public class CA_SignIn_page {
                 if (homePage.isDisplayed()) {
                     System.out.println("Login Successful");
                 } else {
-                    // Check for error toaster if home page is not displayed
                     List<WebElement> errorToasterElements = driver.findElements(errorToaster);
                     if (!errorToasterElements.isEmpty() && errorToasterElements.get(0).isDisplayed()) {
                         Thread.sleep(3000);
                         String errortoaster = errorToasterElements.get(0).getText();
                         System.out.println(errortoaster);
                         Assert.assertEquals(Toaster, errortoaster);
-                    } else {
+                    } else if (driver.findElement(superAdminLanding).isDisplayed()) {
+                        System.out.println("Super admin login successful");
+                    }  else {
                         System.out.println("Login failed. Home page is not displayed.");
                     }
                 }

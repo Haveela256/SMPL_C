@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import com.vassarlabs.projectname.page.AuditReadiness_page;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import com.driver.WebdriverInitializer;
@@ -52,7 +53,7 @@ AuditReadiness_page auditReadinessPage=new AuditReadiness_page(WebdriverInitiali
     }
 
 
-    @And("Upload or Browse hyperlink functionality {}")
+    @And("Upload or Browse hyperlink functionality {string}")
     public void uploadOrBrowseHyperlinkFunctionality(String File) {
         auditReadinessPage.uploadIcon(File);
     }
@@ -63,7 +64,15 @@ AuditReadiness_page auditReadinessPage=new AuditReadiness_page(WebdriverInitiali
         auditReadinessPage.pagination();
     }
 
-    @And("Validate the Pagination {} {} {}")
-    public void validateThePagination(String arg0, String arg1, String arg2) {
+    @And("Validate the download icon functionality {string} {string} {string} {string}")
+    public void validateTheDownloadIconFunctionality(String RenameSuccessfulToaster,String RenameAssessment,String AssessmentNam,String ErrorToaster) {
+    auditReadinessPage.download(RenameSuccessfulToaster, RenameAssessment, AssessmentNam, ErrorToaster);
+    }
+
+    @Given("Validate Select year dropdown for audit readiness")
+    public void validateSelectYearDropdownForAuditReadiness() throws InterruptedException {
+        auditReadinessPage.selectYearDropdown();
     }
 }
+
+

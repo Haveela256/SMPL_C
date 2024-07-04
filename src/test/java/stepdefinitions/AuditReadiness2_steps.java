@@ -26,9 +26,9 @@ public class AuditReadiness2_steps {
         auditReadiness2Page.editJustification(EditText);
     }
 
-    @When("Validate the Save icon functionality")
-    public void validate_the_save_icon_functionality() {
-        auditReadiness2Page.saveJustifiaction();
+    @And("Validate the Save icon functionality {string}")
+    public void validateTheSaveIconFunctionality(String JustificationToaster) {
+        auditReadiness2Page.saveJustifiaction(JustificationToaster);
     }
 
     @When("Validate the Summarize button functionality")
@@ -65,7 +65,7 @@ public class AuditReadiness2_steps {
 
 
     @When("validate the sort icons of Document Type and File Name columns")
-    public void validate_the_sort_icons_of_document_type_and_file_name_columns() {
+    public void validate_the_sort_icons_of_document_type_and_file_name_columns() throws InterruptedException {
        auditReadiness2Page.sortIcons();
     }
 
@@ -80,22 +80,32 @@ public class AuditReadiness2_steps {
     }
 
     @And("Validate the Next icon functionality of the CMMC Regulation tab {string}")
-    public void validateTheNextIconFunctionalityOfTheCMMCRegulationTab(String Regulationtabs) {
+    public void validateTheNextIconFunctionalityOfTheCMMCRegulationTab(String Regulationtabs) throws InterruptedException {
         auditReadiness2Page.regulationtabs(Regulationtabs);
     }
 
-    @And("Validate the Select implementation Status dropdown functionality by selecting a option")
-    public void validateTheSelectImplementationStatusDropdownFunctionalityBySelectingAOption() {
-        auditReadiness2Page.implemetationDropdown();
-    }
+
 
     @And("Validate the Previous icon functionality CMMC Regulation tab {string}")
-    public void validateThePreviousIconFunctionalityCMMCRegulationTab(String Regulationtabs) {
+    public void validateThePreviousIconFunctionalityCMMCRegulationTab(String Regulationtabs) throws InterruptedException {
         auditReadiness2Page.previousIconOfRegulation(Regulationtabs);
     }
 
     @And("Validate the Upload Relevant Documentation dropdown functionality by selecting an option {string}")
-    public void validateTheUploadRelevantDocumentationDropdownFunctionalityBySelectingAnOption(String UploadFile) {
+    public void validateTheUploadRelevantDocumentationDropdownFunctionalityBySelectingAnOption(String UploadFile) throws InterruptedException {
         auditReadiness2Page.uploadRelevenatDoc(UploadFile);
+    }
+
+
+    @And("Validate the Select implementation Status dropdown functionality by selecting a option {string}")
+    public void validateTheSelectImplementationStatusDropdownFunctionalityBySelectingAOption(String UploadFile) throws InterruptedException {
+        auditReadiness2Page.implemetationDropdown(UploadFile);
+    }
+
+
+
+    @And("Validate the Upload policy Document button {string} {string}")
+    public void validateTheUploadPolicyDocumentButton(String UploadPolicy, String PolicyDocToaster) {
+        auditReadiness2Page.uploadPolicyDoc(UploadPolicy,PolicyDocToaster);
     }
 }

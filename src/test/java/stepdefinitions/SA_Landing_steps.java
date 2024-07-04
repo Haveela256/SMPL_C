@@ -2,23 +2,23 @@ package stepdefinitions;
 
 import com.vassarlabs.projectname.page.SA_Landing_page;
 import com.driver.WebdriverInitializer;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 
 public class SA_Landing_steps {
     SA_Landing_page saLandingPage=new SA_Landing_page(WebdriverInitializer.getDriver());
     @Given("Validate the Hamburger icon")
-    public void validate_the_hamburger_icon() {
+    public void validate_the_hamburger_icon() throws InterruptedException {
         saLandingPage.hamburger();
     }
 
     @Given("Validate the SMPL-C logo")
-    public void validate_the_smpl_c_logo() {
+    public void validate_the_smpl_c_logo() throws InterruptedException {
       saLandingPage.smplLogo();
     }
 
     @Given("Validate the Sort dropdown functionality by selecting a option")
-    public void validate_the_sort_dropdown_functionality_by_selecting_a_option() {
+    public void validate_the_sort_dropdown_functionality_by_selecting_a_option() throws InterruptedException {
         saLandingPage.sortDropdown();
     }
 
@@ -28,76 +28,74 @@ public class SA_Landing_steps {
     }
 
     @Given("Validate the Invite button functionality")
-    public void validate_the_invite_button_functionality() {
+    public void validate_the_invite_button_functionality() throws InterruptedException{
       saLandingPage.invitepopup();
     }
 
 
     @Given("Validate the Email Address text field functionality by entering valid and invalid email addresses {string} {string}")
-    public void validate_the_email_address_text_field_functionality_by_entering_valid_and_invalid_email_addresses(String string, String string2) {
-       saLandingPage.emailField();
+    public void validate_the_email_address_text_field_functionality_by_entering_valid_and_invalid_email_addresses(String Email, String ErrorMessage) throws InterruptedException{
+       saLandingPage.emailField(Email,ErrorMessage);
     }
 
     @Given("Validate the Subscription dropdown functionality by selecting a value {string} {string}")
-    public void validate_the_subscription_dropdown_functionality_by_selecting_a_value(String string, String string2) {
-        saLandingPage.subscription();
+    public void validate_the_subscription_dropdown_functionality_by_selecting_a_value(String Type, String ErrorMessage) {
+        saLandingPage.subscription(Type,ErrorMessage);
     }
 
     @Given("Validate the Order Number text field functionality {string} {string}")
-    public void validate_the_order_number_text_field_functionality(String string, String string2) {
-        saLandingPage.orderNumber();
+    public void validate_the_order_number_text_field_functionality(String OrderNumber, String ErrorMessage) {
+        saLandingPage.orderNumber(OrderNumber,ErrorMessage);
     }
 
-    @Given("Validate the Submit button functionality by entering and without entering the fields {string}")
-    public void validate_the_submit_button_functionality_by_entering_and_without_entering_the_fields(String string) {
-        saLandingPage.submitButton();
+    @And("Validate the Submit button functionality by entering and without entering the fields {string} {string}")
+    public void validateTheSubmitButtonFunctionalityByEnteringAndWithoutEnteringTheFields(String ToasterMessage, String ErrorMessage) throws InterruptedException{
+        saLandingPage.submitButton(ToasterMessage,ErrorMessage);
     }
-
     @Given("Verify the Company cards")
     public void verify_the_company_cards() {
       saLandingPage.companyCard();
     }
 
     @Given("Validate the Vertical Ellipsis icon functionality")
-    public void validate_the_vertical_ellipsis_icon_functionality() {
+    public void validate_the_vertical_ellipsis_icon_functionality()throws InterruptedException {
        saLandingPage.ellipsis();
     }
 
     @Given("Validate the Lock option functionality {string} {string}")
-    public void validate_the_lock_option_functionality(String string, String string2) {
-       saLandingPage.lock();
+    public void validate_the_lock_option_functionality(String CompanyCard, String ToasterMessage) throws InterruptedException {
+       saLandingPage.lock(CompanyCard, ToasterMessage);
     }
 
     @Given("Validate the Unlock option functionality {string} {string}")
-    public void validate_the_unlock_option_functionality(String string, String string2) {
-        saLandingPage.unlock();
+    public void validate_the_unlock_option_functionality(String CompanyCard, String ToasterMessage) {
+        saLandingPage.unlock(CompanyCard,ToasterMessage );
     }
 
     @Given("Validate the Delete option functionality {string} {string}")
-    public void validate_the_delete_option_functionality(String string, String string2) {
-      saLandingPage.delete();
+    public void validate_the_delete_option_functionality(String CompanyCard, String ToasterMessage) {
+      saLandingPage.delete(CompanyCard,ToasterMessage);
     }
 
     @Given("Verify the Are you sure to delete  popup {string}")
-    public void verify_the_are_you_sure_to_delete_popup(String string) {
-      saLandingPage.deletePopup();
+    public void verify_the_are_you_sure_to_delete_popup(String ToasterMessage) {
+      saLandingPage.deletePopup(ToasterMessage);
+    }
+    @And("Validate the Send Email popup {string} {string} {string} {string}")
+    public void validateTheSendEmailPopup(String CompanyCard, String Subject, String Body, String EmailSentToaster) {
+        saLandingPage.emailOption(CompanyCard, Subject, Body,EmailSentToaster);
     }
 
 
-
-    @Given("Validate the Send Email popup")
-    public void validate_the_send_email_popup() {
-        saLandingPage.semailOption();
-    }
 
     @Given("Validate the Renew option functionality {string} {string}")
-    public void validate_the_renew_option_functionality(String string, String string2) {
-        saLandingPage.renew();
+    public void validate_the_renew_option_functionality(String CompanyCard, String ToasterMessage) {
+        saLandingPage.renew(CompanyCard,ToasterMessage);
     }
 
     @Given("Validate the Company card functionality {string} {string}")
-    public void validate_the_company_card_functionality(String string, String string2) {
-        saLandingPage.company();
+    public void validate_the_company_card_functionality(String CompanyCard, String ToasterMessage) {
+        saLandingPage.company(CompanyCard,ToasterMessage);
     }
 
     @Given("Verify the Company page")
@@ -111,9 +109,12 @@ public class SA_Landing_steps {
     }
 
     @Given("Validate the  User Profile icon or Expand icon functionality")
-    public void validate_the_user_profile_icon_or_expand_icon_functionality() {
+    public void validate_the_user_profile_icon_or_expand_icon_functionality() throws InterruptedException {
         saLandingPage.userProfile();
     }
 
+    @And("validate the sort functionality of unsigned Companies")
+    public void validateTheSortFunctionalityOfUnsignedCompanies() throws InterruptedException {
+        saLandingPage.dateCreated();
+    }
 }
-9

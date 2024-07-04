@@ -6,12 +6,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 
 public class CE_Landing_steps {
-CE_Landing_page ceLandingPage=new CE_Landing_page(WebdriverInitializer.getDriver());
-    @When("Validate the card functionality {string}")
-    public void validate_the_card_functionality(String CompanyName) {
-       ceLandingPage.companyCard(CompanyName);
-    }
+    CE_Landing_page ceLandingPage = new CE_Landing_page(WebdriverInitializer.getDriver());
 
+    @When("Validate the card functionality {string}")
+    public void validate_the_card_functionality(String CompanyName) throws InterruptedException {
+        ceLandingPage.companyCard(CompanyName);
+    }
 
 
     @And("validate the signIn to company functionality {string}")
@@ -20,7 +20,8 @@ CE_Landing_page ceLandingPage=new CE_Landing_page(WebdriverInitializer.getDriver
     }
 
     @And("Validate the switch company functionality")
-    public void validateTheSwitchCompanyFunctionality() {
+    public void validateTheSwitchCompanyFunctionality() throws InterruptedException {
         ceLandingPage.switchtoCompany();
     }
+
 }

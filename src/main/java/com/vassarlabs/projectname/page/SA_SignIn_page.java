@@ -69,6 +69,7 @@ public class SA_SignIn_page {
 
                 // Wait for home page to be visible
                 WebElement homePage = wait.until(ExpectedConditions.visibilityOfElementLocated(homePath));
+                Thread.sleep(3000);
                 if (homePage.isDisplayed()) {
                     System.out.println("Login Successful");
                 } else {

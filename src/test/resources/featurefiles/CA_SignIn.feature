@@ -13,7 +13,7 @@ Feature: Sign In page
     Examples:
       | EmailAddress            | Password     | ErrorMessage           | Toaster                  | Example  |
       | "Vassar.qa@yopmail.com" | "Vassar@123" | ""                     | ""                       | Positive |
-      | "Vassar.qa@yopmail.com" | "Vassar123"  | ""                     | "Invalid login attempt." | Negative |
-      | "Vassar"                | "Vassar@123" | ""                     | " Email is Invalid "     | Negative |
+     | "Vassar.qa@yopmail.com" | "Vassar123"  | ""                     | "Invalid login attempt." | Negative |
+     | "Vassar"                | "Vassar@123" | ""                     | " Email is Invalid "     | Negative |
       | ""                      | "Vassar@123" | "Email is Required"    | ""                       | Negative |
-      | "Vassar.qa@yopmail.com" | ""           | "Password is Required" | ""                       | Negative |
+    | "Vassar.qa@yopmail.com" | ""           | "Password is Required" | ""                       | Negative |

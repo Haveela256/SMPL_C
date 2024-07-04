@@ -49,8 +49,13 @@ private By justificationToaster=By.xpath("//div[text()=' Justification Saved Suc
     private By previous = By.xpath("//pagination-controls/pagination-template/nav/ul/li[@class='pagination-previous']");
     private By numberhyperlink = By.xpath("//span[text()='2']");
     private By popup = By.xpath("//span[text()='Are you sure to delete ?']");
+    private By auditReadinessPath=By.xpath("//a[@class='nav-link ng-star-inserted']//span[@class='title'][normalize-space()='Audit Readiness']");
+    private By auditReadinessPathTitle=By.xpath("//div[text()='Audit Readiness']");
 //    private By uploadIcon=By.xpath("//i[@class='bi bi-upload cursor']");
     private By replaceFile=By.xpath("//button[text()='Upload Replacement File']");
+    private By selectYearPath = By.xpath("//select//option[text()='Select Year']/..");
+    private By yearPath = By.xpath("//option[text()='2024']");
+
     public AuditReadiness_page(WebDriver driver) {
         this.driver=driver;
     }
@@ -148,5 +153,25 @@ String toaster=driver.findElement(justificationToaster).getText();
         dropdown.selectByIndex(2);
         dropdown.selectByIndex(3);
         dropdown.selectByIndex(4);
+    }
+
+
+
+    public void download(String RenameSuccessfulToaster, String RenameAssessment, String AssessmentNam, String ErrorToaster) {
+        if(driver.findElement(By.xpath("//table//span[text()='"+AssessmentNam+"']")).isDisplayed()){
+            driver.findElement(downloadIcon).click();
+        }
+
+    }
+
+    public void selectYearDropdown() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.findElement(auditReadinessPath).click();
+        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(auditReadinessPathTitle));
+        Thread.sleep(3000);
+        driver.findElement(selectYearPath).click();
+        driver.findElement(yearPath).click();
+        Thread.sleep(3000);
     }
 }

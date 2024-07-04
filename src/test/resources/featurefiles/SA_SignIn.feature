@@ -12,9 +12,9 @@ Feature: Sign In page
 
 
     Examples:
-      | EmailAddress         | Password   | ErrorMessage | Toaster | Example  |
-      | "smplappc@gmail.com" | "Bond@009" | ""           | ""      | Positive |
-      #| "smplappc@gmail.com" | "Bond@000" | ""                     | "Invalid login attempt." | Negative |
-      #| "smpl"               | "Bond@009" | ""                     | " Email is Invalid " | Negative |
-      #| ""                   | "Bond@009" | "Email is Required"    | ""      | Negative |
-      #| "smplappc@gmail.com" | ""         | "Password is Required" | ""      | Negative |
+      | EmailAddress         | Password   | ErrorMessage           | Toaster                  | Example  |
+      | "smplappc@gmail.com" | "Bond@009" | ""                     | ""                       | Positive |
+      | "smplappc@gmail.com" | "Bond@000" | ""                     | "Invalid login attempt." | Negative |
+      | "smpl"               | "Bond@009" | ""                     | " Email is Invalid "     | Negative |
+      | ""                   | "Bond@009" | "Email is Required"    | ""                       | Negative |
+      | "smplappc@gmail.com" | ""         | "Password is Required" | ""                       | Negative |

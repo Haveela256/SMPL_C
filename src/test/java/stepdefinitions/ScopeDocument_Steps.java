@@ -37,18 +37,10 @@ public class ScopeDocument_Steps {
     public void validate_the_sort_icon_of_updated_on_file_name_column_and_validate_download_and_delete_icons() throws Throwable {
         scopeDocumentPage.icons();
     }
-
-    @When("verify delete popup")
-    public void verify_delete_popup() throws InterruptedException {
-        scopeDocumentPage.deletePopup();
+    @And("verify delete popup {string}")
+    public void verifyDeletePopup(String ScopeDocFileName) throws InterruptedException {
+        scopeDocumentPage.deletePopup(ScopeDocFileName);
     }
-
-    @When("Validate the delete functionality {string}")
-    public void validate_the_delete_functionality(String DeletedFileToaster) throws InterruptedException {
-    scopeDocumentPage.deletedFile( DeletedFileToaster);
-    }
-
-
 
     @Given("Click on Select Year dropdown by Selecting Year")
     public void click_on_select_year_dropdown_by_selecting_year() throws InterruptedException {
@@ -69,5 +61,8 @@ public class ScopeDocument_Steps {
 
 
 
-
+    @And("Validate the delete functionality {string}")
+    public void validateTheDeleteFunctionality(String DeletedFileToaster) throws InterruptedException {
+        scopeDocumentPage.deletedFile(DeletedFileToaster);
+    }
 }

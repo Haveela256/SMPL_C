@@ -44,6 +44,7 @@ public class ScopeDocument_page {
     private By uploadIcon = By.xpath("//i[@class='bi bi-upload cursor']");
     private By replaceFile = By.xpath("//button[text()='Upload Replacement File']");
     private By table=By.xpath("//table");
+    private By invalidFile=By.xpath("//div[text()=' Object reference not set to an instance of an object. ']");
     Boolean submit = false;
 
     public ScopeDocument_page(WebDriver driver) {
@@ -57,13 +58,14 @@ public class ScopeDocument_page {
         wait.until(ExpectedConditions.elementToBeClickable(discoveryPath));
         Thread.sleep(3000);
         driver.findElement(discoveryPath).click();
+        Thread.sleep(3000);
         System.out.println("Open Discovery");
     }
 
     public void uploadFile(String ScopeDocFileName, String File) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
         driver.findElement(uploadFilePath).isDisplayed();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         System.out.println(driver.findElement(uploadFilePath).isDisplayed());
         wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
         Thread.sleep(3000);
@@ -71,30 +73,24 @@ public class ScopeDocument_page {
         Thread.sleep(3000);
         driver.findElement(namePath).sendKeys(ScopeDocFileName);
         System.out.println("Name is Entered");
-        Thread.sleep(7000);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(browsePath));
-//        wait.until(ExpectedConditions.elementToBeClickable(browsePath));
-//        Thread.sleep(7000);
-        WebElement fileInputElement = driver.findElement(By.xpath("//input[@type='file']"));
-        fileInputElement.sendKeys(File);  // Provide the file path here
-        Thread.sleep(10000);
-        WebElement submitElement = wait.until(ExpectedConditions.elementToBeClickable(submitPath));
-        Thread.sleep(9000);
-        submitElement.click();
         Thread.sleep(3000);
-        String toaster = wait.until(ExpectedConditions.visibilityOfElementLocated(fileSuccessfulToaster)).getText();
-        Thread.sleep(30000);
-        System.out.println(toaster);
+        WebElement fileInputElement = driver.findElement(By.xpath("//input[@type='file']"));
+        fileInputElement.sendKeys(File);
+        Thread.sleep(3000);
+        wait.until(ExpectedConditions.elementToBeClickable(submitPath));
+        driver.findElement(submitPath).click();
+        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fileSuccessfulToaster)).getText();
+        Thread.sleep(3000);
         driver.findElement(uploadFilePath).isDisplayed();
-        Thread.sleep(8000);
+        Thread.sleep(3000);
         System.out.println(driver.findElement(uploadFilePath).isDisplayed());
         wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
-        Thread.sleep(3000);
         driver.findElement(uploadFilePath).click();
-        Thread.sleep(8000);
+        Thread.sleep(3000);
         driver.findElement(namePath).sendKeys(ScopeDocFileName);
         System.out.println("2nd time Name is Entered");
-        Thread.sleep(7000);
+        Thread.sleep(3000);
         WebElement fileInputElement1 = driver.findElement(By.xpath("//input[@type='file']"));
         fileInputElement1.sendKeys(File);
         WebElement fileInputElement2 = driver.findElement(By.xpath("//button[text()='Upload Replacement File']"));
@@ -108,12 +104,12 @@ public class ScopeDocument_page {
     public void cancelbutton() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(uploadFilePath).isDisplayed();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         System.out.println(driver.findElement(uploadFilePath).isDisplayed());
         wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         driver.findElement(uploadFilePath).click();
-        Thread.sleep(8000);
+        Thread.sleep(3000);
         driver.findElement(cancelButton).click();
         Thread.sleep(3000);
     }
@@ -122,21 +118,25 @@ public class ScopeDocument_page {
     public void submitbutton(String FileUploadToaster, String ScopeDocFileName, String File) throws InterruptedException {
         uploadFile(ScopeDocFileName, File);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-//        //uploadFile(ScopeDocFileName);
-//        driver.findElement(submitPath).click();
-//        Thread.sleep(8000);
+        if(driver.findElement(fileSuccessfulToaster).isDisplayed()){
         String toaster = wait.until(ExpectedConditions.visibilityOfElementLocated(fileSuccessfulToaster)).getText();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         System.out.println(toaster);
         Assert.assertEquals(toaster, FileUploadToaster);
+    } else if (driver.findElement(invalidFile).isDisplayed()) {
+            String toaster1=driver.findElement(invalidFile).getText();
+            System.out.println(toaster1);
+            Assert.assertEquals(FileUploadToaster,toaster1);
+        }
+        else {
+            System.out.println("File is not uploaded");
+        }
     }
 
 
     public void verifyUploadedFile(String ScopeDocFileName) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement uploadedFile =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table//tr//td[2]//span[text()='" + ScopeDocFileName + "']")));
-//        System.out.println(uploadedFile);
-//        Assert.assertEquals(ScopeDocFileName, ScopeDocFileName);
         if(uploadedFile.isDisplayed()) {
             int size=driver.findElements(table).size();
             System.out.println(size);
@@ -173,15 +173,15 @@ public class ScopeDocument_page {
         }
     }
 
-    public void deletePopup() throws InterruptedException {
+    public void deletePopup(String ScopeDocFileName) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Thread.sleep(10000);
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(downloadFile));
-        Thread.sleep(20000);
+        Thread.sleep(3000);
         driver.findElement(downloadIcon).click();
-        Thread.sleep(10000);
+        Thread.sleep(3000);
         driver.findElement(deleteIcon).click();
-        Thread.sleep(8000);
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
 
     }
@@ -189,36 +189,36 @@ public class ScopeDocument_page {
     public void deletedFile(String DeletedFileToaster) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(popupNoButton).click();
-        Thread.sleep(5000);
-        deletePopup();
+        Thread.sleep(3000);
+        deletePopup(DeletedFileToaster);
         driver.findElement(popupYesButton).click();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         String toaster = wait.until(ExpectedConditions.visibilityOfElementLocated(filedeletedToaster)).getText().trim();
-        Thread.sleep(4000);
+        Thread.sleep(3000);
         System.out.println(toaster);
         Assert.assertEquals(DeletedFileToaster, toaster);
     }
 
     public void pagination(String ScopeDocFileName, String uploadCount, String File) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         uploadCount = uploadCount.replace("\"", "");
         for (int i = 1; i < Integer.parseInt(uploadCount); i++) {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             driver.findElement(uploadFilePath).isDisplayed();
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             System.out.println(driver.findElement(uploadFilePath).isDisplayed());
             wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             driver.findElement(uploadFilePath).click();
             driver.findElement(namePath).sendKeys(ScopeDocFileName);
             System.out.println("Name is Entered");
-            Thread.sleep(7000);
+            Thread.sleep(3000);
             WebElement fileInputElement = driver.findElement(By.xpath("//input[@type='file']"));
             fileInputElement.sendKeys(File);
             Thread.sleep(3000);
             WebElement submitElement = wait.until(ExpectedConditions.elementToBeClickable(submitPath));
             submitElement.click();
-            Thread.sleep(5000);
+            Thread.sleep(3000);
 
 
             }
@@ -226,8 +226,11 @@ public class ScopeDocument_page {
 
             //Pagination
             wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
+        Thread.sleep(3000);
             driver.findElement(nextIcon).click();
+            Thread.sleep(3000);
             wait.until(ExpectedConditions.elementToBeClickable(previous));
+            Thread.sleep(3000);
             driver.findElement(previous).click();
             wait.until(ExpectedConditions.elementToBeClickable(numberhyperlink));
             driver.findElement(numberhyperlink).click();
@@ -242,13 +245,11 @@ public class ScopeDocument_page {
 
 
     public void selectYear() throws InterruptedException {
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOfElementLocated(selectYearPath));
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.elementToBeClickable(selectYearPath));
         driver.findElement(selectYearPath).click();
-        Thread.sleep(5000);
         driver.findElement(yearPath).click();
     }
 

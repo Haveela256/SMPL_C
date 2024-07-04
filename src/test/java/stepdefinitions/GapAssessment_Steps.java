@@ -69,4 +69,5 @@ gapAssessmentPage.sPRSScore(AssessmentName);
         gapAssessmentPage.barsFunctionality(AssessmentName, BarsCount, BarsNames);
     }
 
+
 }

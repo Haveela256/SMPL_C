@@ -37,9 +37,15 @@ public class GapAssessmentChatbot_Steps {
     }
 
 
-    @And("click on the Create new Assessment button and provide {string} {string} {string} {string}")
-    public void clickOnTheCreateNewAssessmentButtonAndProvide(String AssessmentName,String Level,String Impact,String AssessmentNameTwo) throws InterruptedException, AWTException {
-        gapAssessmentChatbotPage.createNewAssessment(AssessmentName, Level, Impact, AssessmentNameTwo);
+
+    @And("click on the Create new Assessment button and provide {string} {string} {string}  {string}")
+    public void clickOnTheCreateNewAssessmentButtonAndProvide(String AssessmentName,String Level,String Impact,String AssessmentCount) throws InterruptedException, AWTException {
+        gapAssessmentChatbotPage.createNewAssessment(AssessmentName, Level, Impact, AssessmentCount);
+    }
+
+    @And("validate the pagination of assessments table")
+    public void validateThePaginationOfAssessmentsTable() {
+        gapAssessmentChatbotPage.pagination();
     }
 
 

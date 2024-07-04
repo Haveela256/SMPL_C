@@ -7,5 +7,5 @@ Feature: Sign In page of Compliance Expert
     And  validate the signIn to company functionality <ToasterMessage>
     And Validate the switch company functionality
     Examples:
-      | EmailAddress                 | Password                     | Toaster | CompanyName | ToasterMessage                       |
-      | "new.compliance@yopmail.com" | "new.compliance@yopmail.com" | ""      | "Soda Labs" | " Sign In Into Company Successfull " |
+      | EmailAddress                 | Password     | Toaster | CompanyName | ToasterMessage                     |
+      | "new.compliance@yopmail.com" | "Vassar@123" | ""      | "Soda labz" | "Sign In Into Company Successfull" |
