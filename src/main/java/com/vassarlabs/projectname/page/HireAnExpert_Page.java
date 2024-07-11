@@ -25,7 +25,7 @@ public class HireAnExpert_Page {
     private By toasterPath = By.xpath("//div[@id='toast-container']/div/div");
     private By requestPath = By.xpath("//span[text()='Requests']");
     private By pendingDropDownPath = By.xpath("//select[@class='form-select form-select-sm ng-pristine ng-valid ng-touched']");
-    private By bodyError=By.xpath("//span[text()=' Email Body is Required ']");
+    private By bodyError = By.xpath("//span[text()=' Email Body is Required ']");
 
     String expected = "Expected: ";
     String but_Found = "But Found: ";
@@ -33,7 +33,7 @@ public class HireAnExpert_Page {
 
 
     public HireAnExpert_Page(WebDriver driver) {
-        this.driver=driver;
+        this.driver = driver;
     }
 
 
@@ -58,7 +58,7 @@ public class HireAnExpert_Page {
     }
 
     public void goToHireAnExpert(String search, String Subject, String body, String toaster, String ErrorMessage) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1000));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         wait.until(ExpectedConditions.elementToBeClickable(hireAnExpertPath));
         driver.findElement(hireAnExpertPath).click();
@@ -79,12 +79,12 @@ public class HireAnExpert_Page {
             Thread.sleep(1000);
             driver.findElement(bodyPath).sendKeys(body);
             wait.until(ExpectedConditions.elementToBeClickable(submitButtonPath));
-            Thread.sleep(1000);
             driver.findElement(submitButtonPath).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(toasterPath));
+            Thread.sleep(3000);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(toasterPath));
+            Thread.sleep(3000);
             expectedToaster = driver.findElement(toasterPath).getText();
-            Assert.assertEquals(expectedToaster, toaster, expected + expectedToaster + but_Found + toaster);
+            Assert.assertEquals(toaster, expectedToaster);
 
         } else {
             System.out.println("No experts Found");
@@ -101,8 +101,9 @@ public class HireAnExpert_Page {
             driver.findElement(bodyPath).sendKeys(body);
             wait.until(ExpectedConditions.elementToBeClickable(submitButtonPath));
             driver.findElement(submitButtonPath).click();
-
-            wait.until(ExpectedConditions.elementToBeClickable(toasterPath));
+            Thread.sleep(3000);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(toasterPath));
+            Thread.sleep(3000);
             expectedToaster = driver.findElement(toasterPath).getText();
             Assert.assertEquals(expectedToaster, toaster, expected + expectedToaster + but_Found + toaster);
 
@@ -115,11 +116,10 @@ public class HireAnExpert_Page {
             driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Approve'][1]")).click();
 
         } else if (driver.findElement(bodyError).isDisplayed()) {
-           String error= driver.findElement(bodyError).getText();
+            String error = driver.findElement(bodyError).getText();
             System.out.println(bodyError);
             Assert.assertEquals(ErrorMessage, error);
-        }
-        else {
+        } else {
             System.out.println("Error is not displayed");
         }
     }

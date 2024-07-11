@@ -59,7 +59,7 @@ public class PrioritizedRemediationPlan_page {
         if (driver.findElement(reportsTitle).isDisplayed()) {
             WebElement ele = driver.findElement(selectAssessmentDropdown);
             Select dropdown = new Select(ele);
-            dropdown.selectByIndex(2);
+            dropdown.selectByVisibleText(AssessmentName);
             driver.findElement(prioritixedRemediationPlan).click();
             Thread.sleep(3000);
         }

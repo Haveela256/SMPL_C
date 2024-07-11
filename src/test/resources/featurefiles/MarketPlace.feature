@@ -9,19 +9,18 @@ Feature: MarketPlace module
     And  validate the invite compliance expert popup
     And validate the cancel button of invite compliance expert popup
     And validate the email textfield of invite complianceexpert popup <Email> <ErrorMessage> <ToasterMessage>
-    And validate the submit button of invite compliance expert popup
-    And validate the ellipsis
-    And validate the Download details option
-    And validate the Email option
-    And  validate the send email popup functionality <Email> <ToasterMessage> <ErrorMessage>
-    And validate the ask to associate <ToasterMessage>
+    And Validate the ellipsis <ExpertName>
+    And validate the Download details option <ExpertName>
+    And validate the Email option <ExpertName>
+    And  validate the send email popup functionality <Email> <ToasterMessage> <ErrorMessage> <Subject> <Body>
+    And validate the ask to associate <ToasterMessage> <ExpertName>
     Examples:
-      | Example       | EmailAddress            | Password     | Toaster | ComplianceExpert | Email | ErrorMessage       | ToasterMessage | ErrorMessage |
-      #| SearchValid   | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Donovan Skyy"     | ""                                      | ""                 | ""                                                      | ""                       |
-      #| SearchIvalid  | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "123"            | ""                                      | ""                 | ""                                                      | ""                       |
-      #| Valid email   | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | ""               | "gaplite.test@yopmail.com"              | ""                 | " Invited Successfully "                                | ""                       |
-      | Invalid email | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Donovan Skyy"               | ""    | "Email is Invalid" | ""             | ""           |
-     # | Blank Email   | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | ""               | ""                                      | ""                 | ""                                                      | "Email is Required"      |
-      #| email Subject | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | ""               | "request to super admin"                | ""                 | ""                                                      | "Email Body is Required" |
-      #| Email body    | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | ""               | "Request to make the profile as expert" | ""                 | " Email Send Successfully "                             | ""           |
-      #|Ask to Associate               | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | ""               | ""    | ""                 | " Association request successfully sent to superadmin " | ""           |
+      | Example          | EmailAddress            | Password     | Toaster | ComplianceExpert | Email                      | Subject                  | Body                           | ErrorMessage             | ToasterMessage                                        | ErrorMessage             | ExpertName |
+      | SearchValid      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Abhi"           | "gaplite.test@yopmail.com" | "request to super admin" | "Subscription is going to end" | ""                       | "Association request successfully sent to superadmin" | ""                       | "Abhi"     |
+      | SearchIvalid     | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "123"            | "gaplite.test@yopmail.com" | "request to super admin" | "Subscription is going to end" | ""                       | ""                                                    | ""                       | ""         |
+      | Valid email      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Abhi"           | "gaplite.test@yopmail.com" | "request to super admin" | "Subscription is going to end" | ""                       | "Association request successfully sent to superadmin" | ""                       | "Abhi"     |
+      | Invalid email    | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Abhi"           | "gapliteyopmail.com"       | "request to super admin" | "Subscription is going to end" | "Email is Invalid"       | "Association request successfully sent to superadmin" | ""                       | "Abhi"     |
+      | Blank Email      | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Abhi"           | ""                         | "request to super admin" | "Subscription is going to end" | "Email is Required"      | "Association request successfully sent to superadmin" | "Email is Required"      | "Abhi"     |
+      | email Subject    | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Abhi"           | "gaplite.test@yopmail.com" | "request to super admin" | "Subscription is going to end" | ""                       | "Association request successfully sent to superadmin" | "Email Body is Required" | "Abhi"     |
+      | Blank Email body | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Abhi"           | "gaplite.test@yopmail.com" | "request to super admin" | ""                             | "Email Body is Required" | "Email Send Successfully"                             | ""                       | "Abhi"     |
+      | Ask to Associate | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "Abhi"           | "gaplite.test@yopmail.com" | "request to super admin" | "Subscription is going to end" | ""                       | "Association request successfully sent to superadmin" | ""                       | "Abhi"     |

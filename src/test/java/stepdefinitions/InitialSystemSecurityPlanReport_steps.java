@@ -17,7 +17,7 @@ public class InitialSystemSecurityPlanReport_steps {
     }
 
     @When("Validate the Print button functionality")
-    public void validate_the_print_button_functionality() {
+    public void validate_the_print_button_functionality() throws InterruptedException {
         initialSystemSecurityPlanReportPage.print();
     }
 
@@ -49,14 +49,19 @@ public class InitialSystemSecurityPlanReport_steps {
     }
 
     @When("validate the pagination of Record of changes table by priting multiple times")
-    public void validate_the_pagination_of_record_of_changes_table_by_priting_multiple_times() {
+    public void validate_the_pagination_of_record_of_changes_table_by_priting_multiple_times() throws InterruptedException {
        initialSystemSecurityPlanReportPage.paginationOfRecordOfChanges();
     }
 
     @And("Validate the Download icon functionality System Environment  section")
-    public void validateTheDownloadIconFunctionalitySystemEnvironmentSection() {
+    public void validateTheDownloadIconFunctionalitySystemEnvironmentSection() throws InterruptedException {
         initialSystemSecurityPlanReportPage.downloadIcon();
     }
 
 
+
+    @And("Select assessment from dropdown {string}")
+    public void selectAssessmentFromDropdown(String AssessmentName ) throws InterruptedException {
+        initialSystemSecurityPlanReportPage.selectAssessment(AssessmentName);
+    }
 }

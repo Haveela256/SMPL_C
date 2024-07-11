@@ -17,24 +17,24 @@ public class SignUp_page {
     private By subscriptionDropdown = By.xpath("//select[@class='form-select ng-pristine ng-invalid border-danger ng-touched']");
     private By orderNumber = By.xpath("//div[@class='form-custom-label ng-star-inserted']//input[@id='exampleFormControlInput1']");
     private By submit = By.xpath("//button[text()='Submit']");
-    private By refresh=By.xpath("//button[@id='refresh']");
-    private By registerButton=By.xpath("//div[text()='Please register & signup for SMPL-C!']//following::b[text()='Register']");
-private By signUptitle=By.xpath("//h3[text()='Sign up for SMPL-C ']");
-private By firstNameTextfield=By.xpath("//input[@formcontrolname='firstName']");
-private By middleNameTextField=By.xpath("//input[@formcontrolname='middleName']");
-private By lastNameTextField=By.xpath("//input[@formcontrolname='lastName']");
-private By uploadResumeButton=By.xpath("//input[@type='file']");
-private By reuploadResume=By.xpath("//span[text()='ReUpload Resume']");
-private By passwordLength=By.xpath("//span[text()='Password must be atleast of 8 characters long']");
-private By passwordError=By.xpath("//span[text()='Password must consist atleast one Uppercase character']");
-private By passwordBlank=By.xpath("//span[text()='Password is required']");
+    private By refresh = By.xpath("//button[@id='refresh']");
+    private By registerButton = By.xpath("//div[text()='Please register & signup for SMPL-C!']//following::b[text()='Register']");
+    private By signUptitle = By.xpath("//h3[text()='Sign up for SMPL-C ']");
+    private By firstNameTextfield = By.xpath("//input[@formcontrolname='firstName']");
+    private By middleNameTextField = By.xpath("//input[@formcontrolname='middleName']");
+    private By lastNameTextField = By.xpath("//input[@formcontrolname='lastName']");
+    private By uploadResumeButton = By.xpath("//input[@type='file']");
+    private By reuploadResume = By.xpath("//span[text()='ReUpload Resume']");
+    private By passwordLength = By.xpath("//span[text()='Password must be atleast of 8 characters long']");
+    private By passwordError = By.xpath("//span[text()='Password must consist atleast one Uppercase character']");
+    private By passwordBlank = By.xpath("//span[text()='Password is required']");
 
     private By eyeIconPath = By.xpath("//span[@class='input-group-text']");
 
-    private By checkbox=By.xpath("//input[@type='checkbox']");
+    private By checkbox = By.xpath("//input[@type='checkbox']");
     private By passwordRequiredPath = By.xpath("//span[text()='Password is Required']");
-    private By terms=By.xpath("//a[normalize-space()='Data Processing Addendum (\"DPA\")']");
-    private By createButton=By.xpath("//button[text()='Create Account']");
+    private By terms = By.xpath("//a[normalize-space()='Data Processing Addendum (\"DPA\")']");
+    private By createButton = By.xpath("//button[text()='Create Account']");
     private By passwordFieldPath = By.xpath("//input[@formcontrolname='password']");
     private By firstInvalid = By.xpath("//span[text()=' First name is Invalid ']");
     private By lastNameInavlid = By.xpath("//span[text()=' Last name is Invalid ']");
@@ -42,14 +42,13 @@ private By passwordBlank=By.xpath("//span[text()='Password is required']");
     private By middleNameInvalid = By.xpath("//span[text()=' Middle name is Invalid ']");
     private By firtNameRequired = By.xpath("//span[text()=' First name is Required ']");
     private By lastNameRequired = By.xpath("//span[text()=' Last name is Required ']");
-
+    boolean submitCheck = false;
 
     public SignUp_page(WebDriver driver) {
-        this.driver=driver;
+        this.driver = driver;
     }
 
     public void sendInviteFromSuperAdmin(String Email, String Subscription, String OrderNumber) {
-//driver.findElement(By.xpath("//option[text()='Select']")).isDisplayed();
         WebElement subsrciptiondropdown = driver.findElement(subscriptionDropdown);
         Select subscription = new Select(subsrciptiondropdown);
         subscription.selectByValue(Subscription);
@@ -63,17 +62,17 @@ private By passwordBlank=By.xpath("//span[text()='Password is required']");
     }
 
     public void register() throws InterruptedException {
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
-driver.get("https://yopmail.com/wm");
-driver.findElement(refresh).click();
-Thread.sleep(3000);
-driver.findElement(registerButton).click();
-Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.get("https://yopmail.com/wm");
+        driver.findElement(refresh).click();
+        Thread.sleep(3000);
+        driver.findElement(registerButton).click();
+        Thread.sleep(2000);
     }
 
     public void signUpPage() {
-        if(driver.findElement(signUptitle).isDisplayed()){
-            String title=driver.findElement(signUptitle).getText();
+        if (driver.findElement(signUptitle).isDisplayed()) {
+            String title = driver.findElement(signUptitle).getText();
             System.out.println(title);
         }
     }
@@ -88,12 +87,12 @@ Thread.sleep(2000);
 
 
     public void lastNameField(String LastName) {
-    driver.findElement(lastNameTextField).sendKeys(LastName);
+        driver.findElement(lastNameTextField).sendKeys(LastName);
 
     }
 
     public void verifyEmailField() {
-        if(driver.findElement(emailFeild).isDisplayed()){
+        if (driver.findElement(emailFeild).isDisplayed()) {
             System.out.println("Email field is displayed");
         }
     }
@@ -122,55 +121,113 @@ Thread.sleep(2000);
 
 
     public void terms() {
-driver.findElement(terms).click();
+        driver.findElement(terms).click();
     }
 
 
     public void CreateAccountButton(String ErrorMessage, String ToasterMessage) {
         if (driver.findElement(createButton).isEnabled()) {
             driver.findElement(createButton).click();
-        } else if (driver.findElement(firstInvalid).isEnabled()) {
-      String firstname= driver.findElement(firstInvalid).getText();
-            System.out.println(firstname);
-Assert.assertEquals(ErrorMessage, firstname);
-        } else if (driver.findElement(middleNameInvalid).isDisplayed()) {
-            String middlename= driver.findElement(middleNameInvalid).getText();
-            System.out.println(middlename);
-            Assert.assertEquals(ErrorMessage, middlename);
+        } else if (driver.findElement(signUptitle).isDisplayed()) {
+            driver.findElement(signUptitle).click();
+            int value = 0;
+            if (ErrorMessage.contains("First name is Invalid")) {
+                value = 1;
+                System.out.println("Case 1 Will Run");
+            }
+            if (ErrorMessage.contains("Middle name is Invalid")) {
+                value = 2;
+                System.out.println("Case 2 Will Run");
+            }
+            if (ErrorMessage.contains("Last name is Invalid")) {
+                value = 3;
+                System.out.println("Case 3 Will Run");
+            }
+            if (ErrorMessage.contains("atleast of 8 characters")) {
+                value = 4;
+                System.out.println("Case 4 Will Run");
+            }
+            if (ErrorMessage.contains("atleast one Uppercase")) {
+                value = 5;
+                System.out.println("Case 5 Will Run");
+            }
+            if (ErrorMessage.contains("First name is Required")) {
+                value = 6;
+                System.out.println("Case 6 Will Run");
+            }
+            if (ErrorMessage.contains("Last name is Required")) {
+                value = 7;
+                System.out.println("Case 7 Will Run");
+            }
+            if (ErrorMessage.contains("Password is Required")) {
+                value = 8;
+                System.out.println("Case 8 Will Run");
+            }
 
-        } else if (driver.findElement(lastNameInavlid).isDisplayed()) {
-            String lastname= driver.findElement(lastNameInavlid).getText();
-            System.out.println(lastname);
-            Assert.assertEquals(ErrorMessage, lastname);
+            switch (value) {
+                case 1:
+                    if (driver.findElement(firstInvalid).isEnabled()) {
+                        String firstname = driver.findElement(firstInvalid).getText();
+                        System.out.println(firstname);
+                        Assert.assertEquals(ErrorMessage, firstname);
+                        submitCheck = true;
+                    }
+                    break;
+                case 2:
+                    if (driver.findElement(middleNameInvalid).isDisplayed()) {
+                        String middlename = driver.findElement(middleNameInvalid).getText();
+                        System.out.println(middlename);
+                        Assert.assertEquals(ErrorMessage, middlename);
+                        submitCheck = true;
+                    }
+                    break;
+                case 3:
+                    if (driver.findElement(lastNameInavlid).isDisplayed()) {
+                        String lastname = driver.findElement(lastNameInavlid).getText();
+                        System.out.println(lastname);
+                        Assert.assertEquals(ErrorMessage, lastname);
+                        submitCheck = true;
+                    }
+                    break;
+                case 4:
+                    if (driver.findElement(passwordError).isDisplayed()) {
+                        String passworderror = driver.findElement(passwordError).getText();
+                        System.out.println(passworderror);
+                        Assert.assertEquals(ErrorMessage, passworderror);
+                        submitCheck = true;
+                    }
+                    break;
+                case 5:
+                    if (driver.findElement(passwordLength).isDisplayed()) {
+                        String passwordlength = driver.findElement(passwordLength).getText();
+                        System.out.println(passwordlength);
+                        Assert.assertEquals(ErrorMessage, passwordlength);
+                        submitCheck = true;
+                    }
+                    break;
+                case 6:
+                    if (driver.findElement(firtNameRequired).isDisplayed()) {
+                        String firstrequired = driver.findElement(firtNameRequired).getText();
+                        System.out.println(firstrequired);
+                        Assert.assertEquals(ErrorMessage, firstrequired);
+                        submitCheck = true;
+                    }
+                    break;
+                case 7:
+                    if (driver.findElement(lastNameRequired).isDisplayed()) {
+                        String lastnamerequired = driver.findElement(lastNameRequired).getText();
+                        System.out.println(lastnamerequired);
+                        Assert.assertEquals(ErrorMessage, lastnamerequired);
+                        submitCheck = true;
+                    }
+                    break;
+                case 8:
+                    if (driver.findElement(passwordRequiredPath).isDisplayed()) {
+                        String passwordrequired = driver.findElement(passwordRequiredPath).getText();
+                        System.out.println(passwordrequired);
+                        Assert.assertEquals(ErrorMessage, passwordrequired);
 
-        } else if (driver.findElement(passwordError).isDisplayed()) {
-            String passworderror= driver.findElement(passwordError).getText();
-            System.out.println(passworderror);
-            Assert.assertEquals(ErrorMessage, passworderror);
-
-        } else if (driver.findElement(passwordLength).isDisplayed()) {
-            String passwordlength= driver.findElement(passwordLength).getText();
-            System.out.println(passwordlength);
-            Assert.assertEquals(ErrorMessage, passwordlength);
-
-        } else if (driver.findElement(firtNameRequired).isDisplayed()) {
-            String firstrequired= driver.findElement(firtNameRequired).getText();
-            System.out.println(firstrequired);
-            Assert.assertEquals(ErrorMessage, firstrequired);
-
-        } else if (driver.findElement(lastNameRequired).isDisplayed()) {
-            String lastnamerequired= driver.findElement(lastNameRequired).getText();
-            System.out.println(lastnamerequired);
-            Assert.assertEquals(ErrorMessage, lastnamerequired);
-
-        } else if (driver.findElement(passwordRequiredPath).isDisplayed()) {
-            String passwordrequired= driver.findElement(passwordRequiredPath).getText();
-            System.out.println(passwordrequired);
-            Assert.assertEquals(ErrorMessage, passwordrequired);
-
-        } else {
-            System.out.println("Error is not displayed");
-        }
-    }}
-
-
+                    } else {
+                        System.out.println("Error is not displayed");
+                    }
+            }}}}

@@ -6,6 +6,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import com.driver.WebdriverInitializer;
 
+import java.awt.*;
+
 public class Company_Details_Steps {
     CompanyDetails_page companyDetailsPage=new CompanyDetails_page(WebdriverInitializer.getDriver());
     @When("Click on the Edit button")
@@ -14,7 +16,7 @@ public class Company_Details_Steps {
     }
 
     @When("Add the following company details {string} {string} {string} {string} {string} {string} {string} {string} {string}")
-    public void add_the_following_company_details(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String Address1, String Address2, String ZipCode, String City) throws InterruptedException {
+    public void add_the_following_company_details(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String Address1, String Address2, String ZipCode, String City) throws InterruptedException, AWTException {
         companyDetailsPage.addDetails( CompanyName,  FEINno,  URL,  DUNSno,  Phone,  Address1,  Address2,  ZipCode,  City);
     }
 

@@ -16,4 +16,4 @@ Feature: Sign In page of User
       | "haveela.user@yopmail.com" | "Vassar123"  | ""                     | "Invalid login attempt." | Negative |
       | "user"                     | "Vassar@123" | ""                     | " Email is Invalid "     | Negative |
       | ""                         | "Vassar@123" | "Email is Required"    | ""                       | Negative |
-      | "haveela.user@yopmail.com"    | ""           | "Password is Required" | ""                       | Negative |
+      | "haveela.user@yopmail.com" | ""           | "Password is Required" | ""                       | Negative |

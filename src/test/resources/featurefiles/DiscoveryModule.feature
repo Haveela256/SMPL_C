@@ -16,13 +16,13 @@ Feature: Discovery Module
 
 
     Examples:
-      | EmailAddress           | Password     | Toaster | uploadCount | ScopeDocFileName | File                                | FileUploadToaster            | DeletedFileToaster          |
-      #| "new.testAccount@yopmail.com" | "Vassar@123" | "" | "6" | "Scope File" | "C:/Users/user/Downloads/file.docx"             | "File uploaded successfully" | "File deleted successfully" |
-      #| "new.testAccount@yopmail.com" | "Vassar@123" | "" | "2" | "Evidence" | "C:/Users/user/Downloads/6322_6142_fdgfdh.docx" | "File uploaded successfully" | "File deleted successfully" |
-      #| "new.testAccount@yopmail.com" | "Vassar@123" | "" | "2" | "Progress" | "C:/Users/user/Downloads/File2.docx"        | "File uploaded successfully" | "File deleted successfully" |
-      #| "new.testAccount@yopmail.com" | "Vassar@123" | "" | "2" | "File"     | "C:/Users/user/Downloads/scope.docx"        | "File uploaded successfully" | "File deleted successfully" |
-      #| "new.testAccount@yopmail.com" | "Vassar@123" | "" | "2" | "New File" | "C:/Users/user/Downloads/6636.docx"         | "File uploaded successfully" | "File deleted successfully" |
-      #| "new.testAccount@yopmail.com" | "Vassar@123" | "" | "2" | "Doc"      | "C:/Users/user/Downloads/6229_WorkFlo.docx" | "File uploaded successfully" | "File deleted successfully" |
-      | "new.testAccount@yopmail.com" | "Vassar@123" | "" | "2" | "Document" | "C:/Users/user/Downloads/scope.docx" | "File uploaded successfully" | "File deleted successfully" |
+      | EmailAddress               | Password     | Toaster | uploadCount | ScopeDocFileName | File                                | FileUploadToaster            | DeletedFileToaster          |
+      | "random3.test@yopmail.com" | "Vassar@123" | ""      | "6"         | "Scope File"     | "C:/Users/user/Downloads/file.docx" | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | "" | "2" | "Evidence" | "C:/Users/user/Downloads/6322_6142_fdgfdh.docx" | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | "" | "2" | "Progress" | "C:/Users/user/Downloads/File2.docx"        | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | "" | "2" | "File"     | "C:/Users/user/Downloads/scope.docx"        | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | "" | "2" | "New File" | "C:/Users/user/Downloads/6636.docx"         | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | "" | "2" | "Doc"      | "C:/Users/user/Downloads/6229_WorkFlo.docx" | "File uploaded successfully" | "File deleted successfully" |
+     # | "random3.test@yopmail.com" | "Vassar@123" | ""      | "2"         | "Document"       | "C:/Users/user/Downloads/scope.docx" | "File uploaded successfully" | "File deleted successfully" |
 
 

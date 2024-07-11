@@ -1,6 +1,7 @@
 package com.vassarlabs.projectname.page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -51,7 +52,7 @@ public class TechnicalFootprint_page {
 
     private By seconfQuestionTextfield = By.xpath("//button[text()='2. Number of privileged users']//following::input");
 
-    private By cancelButton = By.xpath("//button[text()='Cancel']");
+    private By cancelButton = By.xpath("//div[text()=' Technical Footprint']//following::button[text()='Cancel']");
 
     private By submitButton = By.xpath("//button[text()='Submit']");
 
@@ -70,13 +71,10 @@ public class TechnicalFootprint_page {
         driver.findElement(technicalFootprintModule).isDisplayed();
         wait.until(ExpectedConditions.elementToBeClickable(technicalFootprintModule));
         driver.findElement(technicalFootprintModule).click();
-        Thread.sleep(5000);
     }
 
 
     public void answertheQuestions(String FirstQstn, String SecondQstnNoOfUsers, String ThirdQstnTypeOfCUI, String FourthQstn, String FifthQstnPurposeOfSystem, String SixthQstn, String SeventhQstn, String EighthQstn, String NinethQstn, String TenthQstn, String EleventhQstn, String TwelthQstn, String TextfieldData, String ToasterMessage) throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.findElement(technicalFootprintModule).isDisplayed();
         wait.until(ExpectedConditions.elementToBeClickable(technicalFootprintModule));
@@ -97,11 +95,17 @@ public class TechnicalFootprint_page {
                 System.out.println(options + " is not clicked");
             }
         driver.findElement(secondQuestion).click();
+            driver.findElement(seconfQuestionTextfield).click();
+            driver.findElement(seconfQuestionTextfield).sendKeys( Keys.CONTROL + "a" + Keys.DELETE);
         Thread.sleep(3000);
         driver.findElement(seconfQuestionTextfield).sendKeys(SecondQstnNoOfUsers);
+        driver.findElement(secondQuestion).click();
         driver.findElement(thirdQuestion).click();
         Thread.sleep(3000);
+        driver.findElement(thirdQuestionText).click();
+        driver.findElement(thirdQuestionText).sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
         driver.findElement(thirdQuestionText).sendKeys(ThirdQstnTypeOfCUI);
+        driver.findElement(thirdQuestion).click();
         String option = " Yes "; // Replace with the actual text
         ArrayList<String> questionss = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
         // Print the questions list
@@ -116,75 +120,89 @@ public class TechnicalFootprint_page {
             } else {
                 System.out.println(option + " is not clicked");
             }
-        String optionsss = ""; // Replace with the actual text
-        ArrayList<String> questionsss = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
-        // Print the questions list
-        System.out.println(questions);
-        // Iterate through the questions and check their presence in the graph
             if (driver.findElement(fifthQuestion).isDisplayed()) {
                 driver.findElement(fifthQuestion).click();
+                driver.findElement(fifthQuestionTextfield).click();
+                driver.findElement(fifthQuestionTextfield).sendKeys( Keys.CONTROL + "a" + Keys.DELETE);
                 driver.findElement(fifthQuestionTextfield).sendKeys(FifthQstnPurposeOfSystem);
                 Thread.sleep(3000);
             } else {
                 System.out.println("data is not entered");
             }
-        String sixOptions = " Asana "; // Replace with the actual text
+        String sixOptions = " Microsoft 365 "; // Replace with the actual text
         ArrayList<String> sixQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
-        // Print the questions list
-        System.out.println(questions);
-        // Iterate through the questions and check their presence in the graph
-            if (driver.findElement(sixthQuestion).isDisplayed()) {
-                driver.findElement(sixthQuestion).click();
-                driver.findElement(By.xpath("//label[text()='" + sixOptions + "']/.././/input")).click();
-                Thread.sleep(3000);
-                System.out.println(sixOptions + " is clicked");
-                driver.findElement(sixthQuestion).click();
+        System.out.println(sixOptions);
+        if (driver.findElement(sixthQuestion).isDisplayed()) {
+            driver.findElement(sixthQuestion).click();
+            driver.findElement(By.xpath("//input[@type='checkbox']//following::label[text()='"+sixOptions+"']")).click();
+            Thread.sleep(3000);
+            System.out.println(sixOptions + " is clicked");
+            driver.findElement(sixthQuestion).click();
+        } else {
+            System.out.println(sixOptions + " is not clicked");
+        }
+        String seventhOptions = " BitLocker "; // Replace with the actual text
+        ArrayList<String> seventhQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
+// Assuming 'seventhQuestion' is defined as a By object earlier in your code
+
+// Print the questions list (assuming 'questions' should be 'seventhQuestions')
+        System.out.println(seventhQuestions);
+        if (driver.findElement(seventhQuestion).isDisplayed()) {
+            driver.findElement(seventhQuestion).click();
+            driver.findElement(By.xpath("//input[@type='checkbox']//following::label[text()='"+seventhOptions+"']")).click();
+            Thread.sleep(3000);
+            System.out.println(seventhOptions + " is clicked");
+            driver.findElement(seventhQuestion).click();
+
             } else {
-                System.out.println(sixOptions + " is not clicked");
+                // Print if the question element is not displayed
+                System.out.println(seventhQuestion + " is not displayed or clickable");
             }
-            String seventhOptions = " BitLocker "; // Replace with the actual text
-            ArrayList<String> seventhQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
-            // Print the questions list
-            System.out.println(questions);
-            // Iterate through the questions and check their presence in the graph
-                if (driver.findElement(seventhQuestion).isDisplayed()) {
-                    driver.findElement(seventhQuestion).click();
-                    driver.findElement(By.xpath("//label[text()='" + seventhOptions + "']/.././/input")).click();
-                    System.out.println(options + " is clicked");
-                    driver.findElement(seventhQuestion).click();
-                    Thread.sleep(3000);
-                } else {
-                    System.out.println(options + " is not clicked");
-                }
-                String eigthOptions = " Other "; // Replace with the actual text
-                ArrayList<String> eigthQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
-                // Print the questions list
-                System.out.println(questions);
-                // Iterate through the questions and check their presence in the graph
-                    if (driver.findElement(eighthQuestion).isDisplayed()) {
-                        driver.findElement(eighthQuestion).click();
-                        driver.findElement(By.xpath("//label[text()='" + eigthOptions + "']/.././/input")).click();
-                        Thread.sleep(3000);
-                       driver.findElement(By.xpath("//button[text()='8. What Project Management Systems do you utilize?']//following::div//input[@type='text']")).sendKeys(TextfieldData);
-                        Thread.sleep(3000);
-                    } else {
-                        System.out.println(TextfieldData + " is entered");
-                        driver.findElement(eighthQuestion).click();
-                    }
-                    String ninthOptions = " FreshBooks "; // Replace with the actual text
-                    ArrayList<String> ninthQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
-                    // Print the questions list
-                    System.out.println(questions);
-                    // Iterate through the questions and check their presence in the graph
-                        if (driver.findElement(ninethQuestion).isDisplayed()) {
-                            driver.findElement(ninethQuestion).click();
-                            driver.findElement(By.xpath("//label[text()='" + ninthOptions + "']/.././/input")).click();
-                            driver.findElement(ninethQuestion).click();
-                            Thread.sleep(3000);
-                            System.out.println(ninthOptions + " is clicked");
-                        } else {
-                            System.out.println(ninthOptions + " is not clicked");
-                        }
+
+        String eigthOptions = " Other ";
+        ArrayList<String> eigthQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
+        System.out.println(eigthQuestions);
+
+        if (driver.findElement(eighthQuestion).isDisplayed()) {
+            driver.findElement(eighthQuestion).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[text()='" + eigthOptions + "']/.././/input")));
+            Thread.sleep(3000);
+            driver.findElement(By.xpath("//label[text()='" + eigthOptions + "']/.././/input")).click();
+            Thread.sleep(3000);
+
+            // Check if the input field is displayed
+            List<WebElement> textFields = driver.findElements(By.xpath("//button[text()='8. What Project Management Systems do you utilize?']//following::div//input[@type='text']"));
+            if (!textFields.isEmpty() && textFields.get(0).isDisplayed()) {
+                WebElement textField = textFields.get(0);
+                textField.click();
+                textField.sendKeys(Keys.CONTROL + "a" + Keys.DELETE);
+                textField.sendKeys(TextfieldData);
+                driver.findElement(eighthQuestion).click();
+                System.out.println(TextfieldData + " is entered");
+            } else {
+                System.out.println("Textfield is not displayed");
+            }
+        } else {
+            // Handle case if eighthQuestion is not displayed
+            System.out.println(TextfieldData + " is not entered");
+        }
+        String ninthOptions = " FreshBooks "; // Replace with the actual text
+        ArrayList<String> ninthQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
+
+// Print the questions list
+        System.out.println(ninthQuestions);
+
+// Iterate through the questions and check their presence in the graph
+        if (driver.findElement(ninethQuestion).isDisplayed()) {
+            driver.findElement(ninethQuestion).click();
+            Thread.sleep(3000);
+            driver.findElement(By.xpath("//input[@type='checkbox']//following::label[text()='"+ninthOptions+"']")).click();
+            Thread.sleep(3000);
+            System.out.println(ninthOptions + " is clicked");
+            driver.findElement(ninethQuestion).click();
+            } else {
+                System.out.println(ninthOptions + " is not clicked for question: " +ninethQuestion);
+            }
                         String tenthOptions = " Oracle SCM Cloud "; // Replace with the actual text
                         ArrayList<String> tenthQuestions = new ArrayList<>(Arrays.asList(FirstQstn.split(",")));
                         // Print the questions list
@@ -194,7 +212,6 @@ public class TechnicalFootprint_page {
                                 driver.findElement(tenthQuestion).click();
                                 driver.findElement(By.xpath("//label[text()='"+tenthOptions+"']/.././/input")).click();
                                 System.out.println(tenthOptions + " is clicked");
-                                driver.findElement(tenthQuestion).click();
                                 Thread.sleep(3000);
                             } else {
                                 System.out.println(tenthOptions + " is not clicked");
@@ -209,7 +226,6 @@ public class TechnicalFootprint_page {
                                     driver.findElement(By.xpath("//label[text()='" + eleventhOptions + "']/.././/input")).click();
                                     System.out.println(eleventhOptions + " is clicked");
                                     driver.findElement(eleventhQuestion).click();
-                                    Thread.sleep(3000);
                                 } else {
                                     System.out.println(eleventhOptions + " is not clicked");
                                 }
@@ -218,21 +234,23 @@ public class TechnicalFootprint_page {
                                 // Print the questions list
                                 System.out.println(questions);
                                 // Iterate through the questions and check their presence in the graph
-                                    if (driver.findElement(eleventhQuestion).isDisplayed()) {
-                                        driver.findElement(eleventhQuestion).click();
-                                        driver.findElement(By.xpath("//label[text()='" + twelthOptions + "']/.././/input")).click();
-                                        System.out.println(eleventhOptions + " is clicked");
-                                        driver.findElement(eleventhQuestion).click();
+                                    if (driver.findElement(twelthQuestion).isDisplayed()) {
+                                        driver.findElement(twelthQuestion).click();
                                         Thread.sleep(3000);
+                                        driver.findElement(By.xpath("//label[text()='" + twelthOptions + "']/.././/input")).click();
+                                        Thread.sleep(3000);
+                                        System.out.println(twelthOptions + " is clicked");
+                                        driver.findElement(twelthQuestion).click();
                                     } else {
                                         System.out.println(eleventhOptions + " is not clicked");
                                     }
                                 }
 
-
     public void cancelbutton() throws InterruptedException {
-        Thread.sleep(3000);
-        driver.findElement(cancelButton).click();
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()=' Technical Footprint']//following::button[text()='Cancel']")));
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//div[text()=' Technical Footprint']//following::button[text()='Cancel']")).click();
         Thread.sleep(3000);
         driver.findElement(gapAssessment).isDisplayed();
     }

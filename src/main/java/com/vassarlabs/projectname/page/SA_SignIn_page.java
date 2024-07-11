@@ -48,7 +48,6 @@ public class SA_SignIn_page {
     public void signInButton(String EmailAddress, String Password, String Toaster) throws InterruptedException {
         driver.findElement(emailFieldPath).sendKeys(EmailAddress);
         driver.findElement(passwordFieldPath).sendKeys(Password);
-
 // Click the login button
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         if (driver.findElement(loginbuttonPath).isEnabled()) {

@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 public class CompanyDetails_page {
@@ -15,7 +17,7 @@ public class CompanyDetails_page {
     private By companydetailsModule = By.xpath("//span[text()='Company Details']");
     private By editButton = By.xpath("//button[@class='btn btn-primary btn-sm']"); // edit_button = driver.find_element(By.XPATH, "//button[contains(@class, 'btn') and contains(@class, 'btn-primary') and contains(@class, 'btn-sm') and .//i[contains(@class, 'bi') and contains(@class, 'bi-pencil-square')]]")
 
-    private By replaceIcon = By.xpath("//i[@class='bi bi-repeat']]");
+    private By replaceIcon = By.xpath("//i[@class='bi bi-repeat']");
     private By companyNameFiled = By.xpath("//input[@placeholder='Enter Company Name']");
     private By fienNo = By.xpath("//input[@formcontrolname='feinNo']");
 
@@ -41,7 +43,7 @@ public class CompanyDetails_page {
     private By invalidZipCode = By.xpath("//span[text()='Zipcode should contain 5 digits']");
     private By blankCompanyName = By.xpath("//span[text()='Company Name is required']");
     private By blankFien = By.xpath("//span[text()=' FEIN No. is required']");
-    private By blankPhone = By.xpath("Phone number is required");
+    private By blankPhone = By.xpath("//span[text()='Phone number is required']");
     private By blankZipcCode = By.xpath("//span[text()=' FEIN No. is required']");
     private By blankCity = By.xpath("//span[text()='City name is required']");
     private By browse = By.xpath("//span[text()='Browse']/parent::div/parent::div/div/input[@type='file']");
@@ -61,6 +63,7 @@ public class CompanyDetails_page {
 
     }
 
+
     public void editButton() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.findElement(companydetailsModule).click();
@@ -75,19 +78,62 @@ public class CompanyDetails_page {
         }
     }
 
-    public void addDetails(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String AddressOne, String AddressTwo, String ZipCode, String City) throws InterruptedException {
+
+    public void addDetails(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String AddressOne, String AddressTwo, String ZipCode, String City) throws InterruptedException, AWTException {
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
         editButton();
+
+// Clear and enter new values in the fields with waits
+        wait.until(ExpectedConditions.elementToBeClickable(companyNameFiled)).clear();
         driver.findElement(companyNameFiled).sendKeys(CompanyName);
+
+        wait.until(ExpectedConditions.elementToBeClickable(fienNo)).clear();
         driver.findElement(fienNo).sendKeys(FEINno);
+
+        wait.until(ExpectedConditions.elementToBeClickable(enterDate)).clear();
         driver.findElement(enterDate).sendKeys("12/12/2020");
+
+        wait.until(ExpectedConditions.elementToBeClickable(uRL)).clear();
         driver.findElement(uRL).sendKeys(URL);
+
+        wait.until(ExpectedConditions.elementToBeClickable(dUNSno)).clear();
         driver.findElement(dUNSno).sendKeys(DUNSno);
+
+        Robot robot = new Robot();
+
+        wait.until(ExpectedConditions.elementToBeClickable(phone));
+
+        // Click on the element to focus
+        driver.findElement(phone).click();
+
+        // Clear the input using Robot class (Control + A then Backspace)
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_A);
+        robot.keyRelease(KeyEvent.VK_A);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_BACK_SPACE);
+        robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+
+        // Wait for 3 seconds
+        Thread.sleep(3000);
+
+        // Send the keys to the element using WebDriver's sendKeys
         driver.findElement(phone).sendKeys(Phone);
+
+        wait.until(ExpectedConditions.elementToBeClickable(address1)).clear();
         driver.findElement(address1).sendKeys(AddressOne);
+
+        wait.until(ExpectedConditions.elementToBeClickable(address2)).clear();
         driver.findElement(address2).sendKeys(AddressTwo);
+
+        wait.until(ExpectedConditions.elementToBeClickable(zipCode)).clear();
         driver.findElement(zipCode).sendKeys(ZipCode);
+
+        wait.until(ExpectedConditions.elementToBeClickable(cityField)).clear();
         driver.findElement(cityField).sendKeys(City);
-        WebElement stateDropdownElement = driver.findElement(stateDropdown);
+
+// Select a value from the state dropdown
+        WebElement stateDropdownElement = wait.until(ExpectedConditions.elementToBeClickable(stateDropdown));
         Select stateSelect = new Select(stateDropdownElement);
         stateSelect.selectByIndex(10);
 
@@ -123,7 +169,6 @@ public class CompanyDetails_page {
         }
     }
     public void cancelButton() throws InterruptedException {
-//        driver.findElement(editButton).click();
         Thread.sleep(3000);
         driver.findElement(cancelButton).click();
         Thread.sleep(3000);
@@ -132,32 +177,34 @@ public class CompanyDetails_page {
 
     public void submitbutton(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String AddressOne, String AddressTwo, String ZipCode, String City, String ErrorMessage, String CompanyDetailsUpdatedToaster,String ReplaceFile, String File) throws InterruptedException {
         Thread.sleep(3000);
+
+// Initialize variables
         System.out.println(ErrorMessage);
         int value = 0;
+        boolean submit = false; // Make sure 'submit' is initialized
+
+// Determine the value based on the error message
         if (ErrorMessage.contains("Company Name")) {
             value = 1;
             System.out.println("Case 1 Will Run");
-        }
-        if (ErrorMessage.contains("FEIN No")) {
+        } else if (ErrorMessage.contains("FEIN No")) {
             value = 2;
             System.out.println("Case 2 Will Run");
-        }
-        if (ErrorMessage.contains("DUNS No")) {
+        } else if (ErrorMessage.contains("DUNS No")) {
             value = 3;
             System.out.println("Case 3 Will Run");
-        }
-        if (ErrorMessage.contains("Phone number")) {
+        } else if (ErrorMessage.contains("Phone number")) {
             value = 4;
             System.out.println("Case 4 Will Run");
-        }
-        if (ErrorMessage.contains("Zipcode")) {
+        } else if (ErrorMessage.contains("Zipcode")) {
             value = 5;
             System.out.println("Case 5 Will Run");
-        }
-        if (ErrorMessage.contains("City")) {
+        } else if (ErrorMessage.contains("City")) {
             value = 6;
             System.out.println("Case 6 Will Run");
         }
+
+// Handle each case based on the value
         switch (value) {
             case 1:
                 if (driver.findElements(blankCompanyName).size() > 0) {
@@ -169,16 +216,15 @@ public class CompanyDetails_page {
                 break;
             case 2:
                 if (driver.findElements(invalidFein).size() > 0) {
-                    System.out.println("Invalid Fein Found");
                     String feinError = driver.findElement(invalidFein).getText();
+                    System.out.println("Invalid Fein Found");
                     System.out.println(feinError);
                     Assert.assertEquals(ErrorMessage, feinError);
                     submit = true;
-                }
-                if (driver.findElements(blankFien).size() > 0) {
+                } else if (driver.findElements(blankFien).size() > 0) {
                     String blankfein = driver.findElement(blankFien).getText();
                     System.out.println(blankfein);
-                    Assert.assertEquals(blankfein, ErrorMessage);
+                    Assert.assertEquals(ErrorMessage, blankfein);
                     submit = true;
                 }
                 break;
@@ -196,8 +242,7 @@ public class CompanyDetails_page {
                     System.out.println(phoneError);
                     Assert.assertEquals(ErrorMessage, phoneError);
                     submit = true;
-                }
-                if (driver.findElements(blankPhone).size() > 0) {
+                } else if (driver.findElements(blankPhone).size() > 0) {
                     String blankphone = driver.findElement(blankPhone).getText();
                     System.out.println(blankphone);
                     Assert.assertEquals(ErrorMessage, blankphone);
@@ -210,8 +255,7 @@ public class CompanyDetails_page {
                     System.out.println(blankzip);
                     Assert.assertEquals(ErrorMessage, blankzip);
                     submit = true;
-                }
-                if (driver.findElements(invalidZipCode).size() > 0) {
+                } else if (driver.findElements(invalidZipCode).size() > 0) {
                     String zipCodeError = driver.findElement(invalidZipCode).getText();
                     System.out.println(zipCodeError);
                     Assert.assertEquals(ErrorMessage, zipCodeError);
@@ -220,21 +264,27 @@ public class CompanyDetails_page {
                 break;
             case 6:
                 if (driver.findElements(blankCity).size() > 0) {
-                    submit = true;
                     String blankcity = driver.findElement(blankCity).getText();
                     System.out.println(blankcity);
                     Assert.assertEquals(ErrorMessage, blankcity);
+                    submit = true;
                 }
                 break;
             default:
                 submit = false;
         }
-        if (!submit) {
-            driver.findElement(submitButton).click();
 
+// Check if the submit button should be clicked
+        if (submit) {
+            WebElement submitBtn = driver.findElement(submitButton);
+            if (submitBtn.isEnabled()) {
+                submitBtn.click();
+            } else {
+                System.out.println("Submit button is disabled.");
             }
-
-        }
+        } else {
+            System.out.println("No valid case matched. Submit button will not be clicked.");
+        }}
 
 
 

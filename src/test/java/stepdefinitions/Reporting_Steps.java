@@ -39,7 +39,7 @@ public class Reporting_Steps {
     }
 
     @And("click on the Download icon of Asset Inventory {string}")
-    public void clickOnTheDownloadIconOfAssetInventory(String TemplateDownloadSuccessful) {
+    public void clickOnTheDownloadIconOfAssetInventory(String TemplateDownloadSuccessful) throws InterruptedException {
 
         reportingPage.assetInventory(TemplateDownloadSuccessful);
     }
@@ -67,8 +67,8 @@ public class Reporting_Steps {
         reportingPage.templates();
     }
 
-    @And("click on the Download icon of Incident Response Plan Template {}")
-    public void clickOnTheDownloadIconOfIncidentResponsePlanTemplate(String TemplateDownloadSuccessful) {
+    @And("click on the Download icon of Incident Response Plan Template {string}")
+    public void clickOnTheDownloadIconOfIncidentResponsePlanTemplate(String TemplateDownloadSuccessful) throws InterruptedException {
       reportingPage.incidentResponsePlanTemplate(TemplateDownloadSuccessful);
     }
 }

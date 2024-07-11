@@ -24,5 +24,13 @@ public class AssetInventory_steps {
 
 
 
+    @And("verify delete popup of Asset Inventory tab {string}")
+    public void verifyDeletePopupOfAssetInventoryTab(String AssetInventoryFileName) throws InterruptedException {
+        assetInventoryPage.deletePopup(AssetInventoryFileName);
+    }
 
+    @And("Validate the delete functionality of asset inventory tab {string}")
+    public void validateTheDeleteFunctionalityOfAssetInventoryTab(String DeletedFileToaster) throws InterruptedException {
+        assetInventoryPage.deleteFunctionality(DeletedFileToaster);
+    }
 }

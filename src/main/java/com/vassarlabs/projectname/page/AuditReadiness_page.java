@@ -174,4 +174,17 @@ String toaster=driver.findElement(justificationToaster).getText();
         driver.findElement(yearPath).click();
         Thread.sleep(3000);
     }
+
+    public void deleteIcon(String DeletedFileToaster, String AssessmentName) throws InterruptedException {
+        if(driver.findElement(By.xpath("//table//span[text()='"+AssessmentName+"']")).isDisplayed()){
+            Thread.sleep(3000);
+            driver.findElement(deleteIcon).click();
+            if(driver.findElement(filedeletedToaster).isDisplayed()){
+                String delete=driver.findElement(filedeletedToaster).getText();
+                System.out.println(delete);
+                Assert.assertEquals(DeletedFileToaster, delete);
+            }
+
+        }
+    }
 }

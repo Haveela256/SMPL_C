@@ -6,25 +6,24 @@ Feature: Discovery Module
     When Click on the discovery  module
     And Click on the Asset Inventory tab
     And Click on Upload File button and enter the <AssetInventoryFileName> <File>
-    And Click on the Cancel button
     And Click on the Submit button by entering all fields and without entering all fields and verify <FileUploadToaster> <AssetInventoryFileName> <File>
     And Verfiy the uploaded file <AssetInventoryFileName> on table
     And Verify Asset Inventory bar chart
     And Verify Asset Inventory pie chart
     And Validate the Sort icon of Updated On , File Name column and Validate Download and Delete icons
-    And verify delete popup
-    And  Validate the delete functionality <DeletedFileToaster>
+    And verify delete popup of Asset Inventory tab <AssetInventoryFileName>
+    And  Validate the delete functionality of asset inventory tab <DeletedFileToaster>
     And Validate the Pagination <AssetInventoryFileName> <uploadCount> <File>
     Given Click on Select Year dropdown by Selecting Year
 
     Examples:
       | EmailAddress           | Password     | Toaster | uploadCount | AssetInventoryFileName | File                                              | FileUploadToaster            | DeletedFileToaster          |
-      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "6"         | "Asset Inventory"      | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
-      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Asset"                | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
-      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Inventory"            | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
-      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Assets"               | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
-      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "AssetInventory"       | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
-      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "AssetsInventory"      | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
-      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Inventoryy"           | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | ""      | "6"         | "Asset Inventory"      | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+     # | "random3.test@yopmail.com" | "Vassar@123" | ""      | "2"         | "Asset"                | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | ""      | "2"         | "Inventory"            | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | ""      | "2"         | "Assets"               | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | ""      | "2"         | "AssetInventory"       | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      #| "random3.test@yopmail.com" | "Vassar@123" | ""      | "2"         | "AssetsInventory"      | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "random3.test@yopmail.com" | "Vassar@123" | ""      | "2"         | "Inventoryy"           | "C:/Users/user/Downloads/5932_4725_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
 
 

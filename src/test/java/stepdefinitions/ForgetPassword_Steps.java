@@ -8,8 +8,8 @@ public class ForgetPassword_Steps {
     ForgetPassword_page forgetPasswordPage=new ForgetPassword_page(WebdriverInitializer.getDriver());
 
     @And("Validate Submit button functionality by entering valid and invalid {string} {string} {string}")
-    public void validateSubmitButtonFunctionalityByEnteringValidAndInvalid(String Email, String Toaster, String ErrorMessage) throws InterruptedException {
-        forgetPasswordPage.submitButton(Email, Toaster, ErrorMessage);
+    public void validateSubmitButtonFunctionalityByEnteringValidAndInvalid(String Email, String ErrorMessage, String Toaster) throws InterruptedException {
+        forgetPasswordPage.submitButton(Email,  ErrorMessage,Toaster);
     }
     @Then("Validate Back hyperlink functionality")
     public void validate_back_hyperlink_functionality() throws InterruptedException {

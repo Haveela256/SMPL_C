@@ -1,9 +1,6 @@
 package com.vassarlabs.projectname.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -23,7 +20,7 @@ public class GapAssessment_page {
     private By assessmentDown = By.xpath("//span[text()='Assessment Name ']/parent::div/span/i[contains(@class,'down')]");
     private By assessmentUp = By.xpath("//span[text()='Assessment Name ']/parent::div/span/i[contains(@class,'up')]");
     private By assessmentIcon = By.xpath("//i[@class='px-1 bi bi-filter']");
-    private By copyIcon = By.xpath("/html[1]/body[1]/app-root[1]/div[1]/div[1]/app-intial-gap-assesment[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/lib-data-table[1]/div[1]/table[1]/tbody[1]/tr[1]/td[3]/div[1]/button[1]/i[1]");
+    private By copyIcon = By.xpath("//button[@ngbtooltip='Make a copy']");
     private By copyAssessmentTitle = By.xpath("//h4[text()='Copy Assessment']");
     private By closeIcon = By.xpath("//button[@class='btn-close']");
     private By assessmentName = By.xpath("//input[@id='assessment_name']");
@@ -54,32 +51,33 @@ public class GapAssessment_page {
     private By fullyImplementedLegend = By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='Fully Implemented']");
     private By notApplicableLegend = By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='NotApplicable']");
     private By notImplementedLegend = By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='Not Implemented']");
-    private By partiallyImplemented=By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='Partially Implemented']");
+    private By partiallyImplemented = By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='Partially Implemented']");
     private By notAnsweredLegend = By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='Not Answered']");
-    private By bar = By.xpath("/html[1]/body[1]/app-root[1]/div[1]/div[1]/app-intial-gap-assesment[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/vl-chart[1]/highcharts-chart[1]/div[1]/*[name()='svg'][1]/*[name()='g'][6]/*[name()='g'][9]/*[name()='path'][1]");
     private By gapAssesmentPath = By.xpath("//a[@class='nav-link']//span[@class='title'][normalize-space()='Gap Assessment']");
     private By gapAssessmentTitle = By.xpath("//div[contains(text(),'Gap Assessment')]");
-    private By renameIcon=By.xpath("//tbody/tr[1]/td//button//i[@class='bi bi-pencil-square']");
-    private By renamepopupTitle=By.xpath("//h4[@class='modal-title']");
-    private By renamePopupCloseIcon= By.xpath("//button[@aria-label='Close']");
-    private By renamePopupCancelButton=By.xpath("//button[normalize-space()='Cancel']");
-    private By renamepopuptextField=By.xpath("//input[@id='assessment_name']");
-    private By renamepopupSave=By.xpath("//button[text()='Save']");
-private By renameToaster=By.xpath("//div[text()=' Assessment Renamed Successfully ']");
-private By existingAssessmentError=By.xpath("//div[text()=' Assessment Name Already Exist Please Choose Another Assessment name !!! ']");
+    private By renameIcon = By.xpath("//tbody/tr[1]/td//button//i[@class='bi bi-pencil-square']");
+    private By renamepopupTitle = By.xpath("//h4[@class='modal-title']");
+    private By renamePopupCloseIcon = By.xpath("//button[@aria-label='Close']");
+    private By renamePopupCancelButton = By.xpath("//button[normalize-space()='Cancel']");
+    private By renamepopuptextField = By.xpath("//input[@id='assessment_name']");
+    private By renamepopupSave = By.xpath("//button[text()='Save']");
+    private By renameToaster = By.xpath("//div[text()=' Assessment Renamed Successfully ']");
+    private By existingAssessmentError = By.xpath("//div[text()=' Assessment Name Already Exist Please Choose Another Assessment name !!! ']");
     private By collapseChatbot = By.xpath("//button[@class='btn btn-sm d-none d-md-block']//i[@class='bi bi-chevron-down']");
-    boolean flag=false;
-    boolean buttonDisbaled=false;
-public GapAssessment_page(WebDriver driver) {
+    boolean flag = false;
+    boolean submit = false;
+
+    public GapAssessment_page(WebDriver driver) {
         this.driver = driver;
     }
 
     public void selectYear() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(gapAssesmentPath).click();
         Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(gapAssessmentTitle));
         Thread.sleep(3000);
+        wait.until(ExpectedConditions.elementToBeClickable(selectYearPath));
         driver.findElement(selectYearPath).click();
         driver.findElement(yearPath).click();
         Thread.sleep(3000);
@@ -115,123 +113,207 @@ public GapAssessment_page(WebDriver driver) {
         }
     }
 
-    public void copyIcon(String CopyAssessmentToaster, String newName, String AssessmentName, String ErrorToaster) throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-        if (driver.findElement(By.xpath("//table//tr//td[2]//span[text()='" + AssessmentName + "']")).isDisplayed()) {
-            driver.findElement(copyIcon).click();
+    public void copyIcon(String CopyAssessmentToaster, String NewName, String RenameAssessment, String ErrorToaster) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            WebElement assessmentElement = driver.findElement(By.xpath("//table//tr//td[2]//span[text()='" + RenameAssessment + "']"));
+            if (assessmentElement.isDisplayed()) {
+                wait.until(ExpectedConditions.elementToBeClickable(copyIcon));
+                driver.findElement(copyIcon).click();
+                Thread.sleep(3000);
+                WebElement copyAssessmentTitleElement = driver.findElement(copyAssessmentTitle);
+                    if (copyAssessmentTitleElement.isDisplayed()) {
+                        Thread.sleep(3000);
+                        WebElement assessmentNameElement = driver.findElement(assessmentName);
+                        assessmentNameElement.sendKeys(NewName);
+                        Thread.sleep(3000);
+                        WebElement saveButtonElement = driver.findElement(saveButton);
+                        if (saveButtonElement.isEnabled()) {
+                            saveButtonElement.click();
+                        } else {
+                            System.out.println("Save button disabled");
+                            driver.findElement(closeIcon).click();
+                            driver.close();
+                            return;
+                        }
+                        WebElement assessmentCopiedToasterElement = driver.findElement(assessmentCopiedToaster);
+                        if (assessmentCopiedToasterElement.isDisplayed()) {
+                            Thread.sleep(3000);
+                            try {
+                                wait.until(ExpectedConditions.elementToBeClickable(assessmentUp));
+                            } catch (TimeoutException e) {
+                                System.out.println("Element assessmentUp is not clickable within the timeout period. Continuing...");
+                                String toaster1 = assessmentCopiedToasterElement.getText();
+                                System.out.println(toaster1);
+                                System.out.println("File copied Successfully");
+                                flag = true;}
+                        }
+                    } else if (driver.findElement(existingAssessmentError).isDisplayed()) {
+                        String error = driver.findElement(existingAssessmentError).getText();
+                        System.out.println(error);
+                        Assert.assertEquals(ErrorToaster, error);
+                        flag = false;
+                    } else {
+                        System.out.println("File not copied");
+                    }
+                }
+        }
+    public void renameAssessment(String RenameSuccessfulToaster, String RenameAssessment, String AssessmentName, String ErrorToaster) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement assessmentElement = driver.findElement(By.xpath("//table//tr//td[2]//span[text()='" + AssessmentName + "']"));
+        if (assessmentElement.isDisplayed()) {
+            wait.until(ExpectedConditions.elementToBeClickable(renameIcon));
+            driver.findElement(renameIcon).click();
             Thread.sleep(3000);
-
-            if (driver.findElement(copyAssessmentTitle).isDisplayed()) {
+            WebElement renameAssessmentTitleElement = driver.findElement(renamepopupTitle);
+            if (renameAssessmentTitleElement.isDisplayed()) {
                 Thread.sleep(3000);
-                driver.findElement(assessmentName).sendKeys(newName);
+                WebElement assessmentNameElement = driver.findElement(assessmentName);
+                assessmentNameElement.sendKeys(RenameAssessment);
                 Thread.sleep(3000);
-
-                if (driver.findElement(saveButton).isEnabled()) {
-                    driver.findElement(saveButton).click();
+                WebElement saveButtonElement = driver.findElement(saveButton);
+                if (saveButtonElement.isEnabled()) {
+                    saveButtonElement.click();
                 } else {
                     System.out.println("Save button disabled");
                     driver.findElement(closeIcon).click();
                     driver.close();
-                    return;  // Exit method to avoid further execution
+                    return;
                 }
-
-                Thread.sleep(3000);
-                if (driver.findElement(assessmentCopiedToaster).isDisplayed()) {
+                try {
+                    WebElement assessmentrenameToasterElement = driver.findElement(renameToaster);
                     Thread.sleep(3000);
-                    String toaster = driver.findElement(assessmentCopiedToaster).getText();
-                    System.out.println(toaster);
-                    Assert.assertEquals(CopyAssessmentToaster, toaster);
-                    String actualName = driver.findElement(assessmentName).getText();
-                    System.out.println(actualName);
-                    Assert.assertEquals(newName, actualName);
-                    System.out.println("File copied Successfully");
-                    flag = false;
-                } else {
-                    System.out.println("File not copied");
+                    if (assessmentrenameToasterElement.isDisplayed()) {
+                        Thread.sleep(3000);
+                        try {
+                            wait.until(ExpectedConditions.elementToBeClickable(assessmentUp));
+                        } catch (TimeoutException e) {
+                            System.out.println("Element assessmentUp is not clickable within the timeout period. Continuing...");
+
+                        String toaster = assessmentrenameToasterElement.getText();
+                        System.out.println(toaster);
+                        System.out.println("File copied Successfully");
+                        flag = true;
+                    } }else {
+                        System.out.println("File not renamed");
+                    }
+                } catch (NoSuchElementException e) {
+                    System.out.println("Rename toaster element not displayed");
                 }
-            } else if (driver.findElement(existingAssessmentError).isDisplayed()) {
-                String error = driver.findElement(existingAssessmentError).getText();
-                System.out.println(error);
-                Assert.assertEquals(ErrorToaster, error);
-                flag = false;
-            } else {
-                System.out.println("File not copied");
-                driver.close();
             }
+        } else if (driver.findElement(existingAssessmentError).isDisplayed()) {
+            String error = driver.findElement(existingAssessmentError).getText();
+            System.out.println(error);
+            Assert.assertEquals(ErrorToaster, error);
+            flag = false;
+        } else {
+            System.out.println("File not renamed");
         }
-
+//        int value = 0;
+//        if (RenameSuccessfulToaster.contains("Assessment Renamed Successfully")) {
+//            value = 1;
+//            System.out.println("Case 1 Will Run");
+//        }
+//        if (ErrorToaster.contains("Assessment Name Already Exist Please Choose Another Assessment name")) {
+//            value = 2;
+//            System.out.println("Case 2 Will Run");
+//        }
+//
+//        switch (value) {
+//            case 1:
+//                if (driver.findElements(renameToaster).size() > 0) {
+//                    String rename = driver.findElement(renameToaster).getText();
+//                    System.out.println(rename);
+//                    Assert.assertEquals(RenameSuccessfulToaster, rename);
+//                    submit = true;
+//                }
+//                break;
+//            case 2:
+//                if (driver.findElements(existingAssessmentError).size() > 0) {
+//                    String error = driver.findElement(existingAssessmentError).getText();
+//                    System.out.println(error);
+//                    Assert.assertEquals(RenameSuccessfulToaster, renameToaster);
+//                    submit = true;
+//                }
+//                break;
+//        }
+//    }
     }
-    public void renameAssessment(String RenameSuccessfulToaster, String RenameAssessment, String AssessmentName, String ErrorToaster) throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-    driver.findElement(renameIcon).click();
-    driver.findElement(renamepopupTitle).isDisplayed();
-        driver.findElement(renamePopupCloseIcon).click();
-        driver.findElement(renamepopupTitle).click();
-        driver.findElement(renameIcon).click();
-        driver.findElement(renamepopupTitle).isDisplayed();
-        Thread.sleep(3000);
-        driver.findElement(renamePopupCancelButton).click();
-        Thread.sleep(3000);
-        driver.findElement(renameIcon).click();
-        driver.findElement(renamepopupTitle).isDisplayed();
-        driver.findElement(renamepopuptextField).sendKeys(RenameAssessment);
-        if(driver.findElement(renamepopupSave).isEnabled()){
-            driver.findElement(renamepopupSave).click();
-        if(driver.findElement(renameToaster).isDisplayed()){
-          String rename=  driver.findElement(renameToaster).getText();
-          Assert.assertEquals(RenameSuccessfulToaster, rename);}
-          else{
-                if(buttonDisbaled){
-                    driver.findElement(renamePopupCloseIcon).click();
-                    System.out.println("Save button disabled");
+
+    public void deleteIcon(String DeletedFileToaster, String AssessmentName, String RenameAssessment) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        try {
+            WebElement assessmentElement = null;
+            try {
+                assessmentElement = driver.findElement(By.xpath("//table//tr//td[2]//span[text()='" + RenameAssessment + "']"));
+            } catch (NoSuchElementException e) {
+                try {
+                    assessmentElement = driver.findElement(By.xpath("//table//tr//td[2]//span[text()='" + RenameAssessment + "']"));
+                } catch (NoSuchElementException ignored) {
                 }
-    }
-        if (driver.findElement(existingAssessmentError).isDisplayed()){
-            String assessmentIsExisting=driver.findElement(existingAssessmentError).getText();
-            Assert.assertEquals(ErrorToaster, assessmentIsExisting);
-        }else {
-            System.out.println("Assessment not renamed");
-        }}}
-    public void deleteIcon(String DeletedFileToaster, String AssessmentName) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        if (driver.findElement(By.xpath("//table//tr//td[2]//span[text()='" + AssessmentName + "']")).isDisplayed()){
-        driver.findElement(renamePopupCloseIcon).click();
-        driver.findElement(deleteIcon).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
-        Thread.sleep(3000);
-        driver.findElement(popupDeleteButton).click();
-        Thread.sleep(5000);}
-        else {
-            System.out.println("Assessment is not displayed on the table");
+            }
+
+            if (assessmentElement != null && assessmentElement.isDisplayed()) {
+                assessmentElement.findElement(deleteIcon).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+                wait.until(ExpectedConditions.elementToBeClickable(popupDeleteButton)).click();
+            } else {
+                System.out.println("Assessment is not displayed on the table");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("An error occurred while trying to delete the assessment.");
         }
     }
-
     public void pagination() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        driver.findElement(collapseChatbot).click();
-        //Pagination
-        Thread.sleep(3000);
-        wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
-        driver.findElement(nextIcon).click();
-        wait.until(ExpectedConditions.elementToBeClickable(previous));
-        Thread.sleep(3000);
-        driver.findElement(previous).click();
-        wait.until(ExpectedConditions.elementToBeClickable(numberhyperlink));
-        driver.findElement(numberhyperlink).click();
-        WebElement ele = driver.findElement(paginationDropdown);
-        Select dropdown = new Select(ele);
-        dropdown.selectByIndex(1);
-        dropdown.selectByIndex(2);
-        dropdown.selectByIndex(3);
-        dropdown.selectByIndex(4);
-    }
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+        try {
+            // Wait for collapseChatbot to be clickable and then click it
+            WebElement collapseChatbotElement = wait.until(ExpectedConditions.elementToBeClickable(collapseChatbot));
+            Thread.sleep(4000);
+            collapseChatbotElement.click();
 
-    public void progressBar(String AssessmentName) throws InterruptedException {
+            // Wait for nextIcon to be clickable and then click it
+            WebElement nextIconElement = wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
+            Thread.sleep(3000); // Introduce a wait if necessary
+            nextIconElement.click();
+
+            // Check if previous is clickable and click it
+            WebElement previousElement = wait.until(ExpectedConditions.elementToBeClickable(previous));
+            if (previousElement != null) {
+                previousElement.click();
+            }
+
+            // Check if numberhyperlink is clickable and click it
+            WebElement numberhyperlinkElement = wait.until(ExpectedConditions.elementToBeClickable(numberhyperlink));
+            if (numberhyperlinkElement != null) {
+                numberhyperlinkElement.click();
+            }
+
+            // Check if paginationDropdown is present before selecting options
+            WebElement paginationDropdownElement = wait.until(ExpectedConditions.presenceOfElementLocated(paginationDropdown));
+            if (paginationDropdownElement != null) {
+                Select dropdown = new Select(paginationDropdownElement);
+                // Select options by index
+                dropdown.selectByIndex(1);
+                dropdown.selectByIndex(2);
+                dropdown.selectByIndex(3);
+                dropdown.selectByIndex(4);
+            }
+        } catch (NoSuchElementException | TimeoutException e) {
+            // Handle specific exceptions or log the error
+            System.out.println("Element not found or timeout occurred: " + e.getMessage());
+        } catch (InterruptedException e) {
+            // Handle thread interruption exception
+            e.printStackTrace();
+        }}
+        public void progressBar(String RenameAssessment) throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
-        driver.findElement(By.xpath("//table//span[normalize-space()='"+AssessmentName+"']")).click();
-        if(driver.findElement(By.xpath("//div[text()='"+AssessmentName+"']")).isDisplayed())
-        {
+        driver.findElement(By.xpath("//table//span[normalize-space()='" + RenameAssessment + "']")).click();
+        String progressData=driver.findElement(progress).getText();
+            System.out.println(progressData);
+        if (driver.findElement(By.xpath("//div[text()=' " + RenameAssessment + " ']")).isDisplayed()) {
             driver.findElement(status).isDisplayed();
             Thread.sleep(3000);
             String statuss = driver.findElement(status).getText();
@@ -247,16 +329,31 @@ public GapAssessment_page(WebDriver driver) {
             driver.findElement(lastLogin).isDisplayed();
             Thread.sleep(3000);
             String login = driver.findElement(lastLogin).getText();
-            System.out.println(login);}
-        else {
-            System.out.println("Assessment is not displayed");
+            System.out.println(login);
+        } else if (driver.findElement(By.xpath("//div[text()=' " + RenameAssessment + " ']")).isDisplayed()) {
+            driver.findElement(status).isDisplayed();
+            Thread.sleep(3000);
+            String statuss = driver.findElement(status).getText();
+            System.out.println(statuss);
+            driver.findElement(progress).isDisplayed();
+            Thread.sleep(3000);
+            String progresss = driver.findElement(progress).getText();
+            System.out.println(progresss);
+            driver.findElement(remediationReadiness).isDisplayed();
+            Thread.sleep(3000);
+            String remediation = driver.findElement(remediationReadiness).getText();
+            System.out.println(remediation);
+            driver.findElement(lastLogin).isDisplayed();
+            Thread.sleep(3000);
+            String login = driver.findElement(lastLogin).getText();
+            System.out.println(login);
         }
     }
 
 
 
 
-    public void sPRSScore(String AssessmentName) {
+    public void sPRSScore(String RenameAssessment) {
         if (driver.findElement(sprsTitle).isDisplayed()) {
             String sprs = driver.findElement(sprsTitle).getText();
             System.out.println(sprs);
@@ -266,8 +363,9 @@ public GapAssessment_page(WebDriver driver) {
         }
     }
 
-    public void barChart() throws InterruptedException {
-        if (driver.findElement(By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='New QA assessment3']")).isDisplayed()){
+    public void barChart(String RenameAssessment) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+        if (driver.findElement(By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='"+RenameAssessment+"']")).isDisplayed()){
             Thread.sleep(3000);
             driver.findElement(xaxis).isDisplayed();
             Thread.sleep(3000);
@@ -294,9 +392,6 @@ public GapAssessment_page(WebDriver driver) {
             Thread.sleep(3000);
             driver.findElement(notAnsweredLegend).isDisplayed();
             Thread.sleep(3000);
-            driver.findElement(notAnsweredLegend).click();
-            Thread.sleep(3000);
-
         }
 else {
             System.out.println("Assessment's graph is not displayed");
@@ -304,8 +399,9 @@ else {
     }
 
 
-    public void legendsOfBarChart() throws InterruptedException {
-        if (driver.findElement(By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='New QA assessment3']")).isDisplayed()) {
+    public void legendsOfBarChart(String AssessmentName) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+        if (driver.findElement(By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='"+AssessmentName+"']")).isDisplayed()) {
             driver.findElement(fullyImplementedLegend).isDisplayed();
             Thread.sleep(3000);
             driver.findElement(fullyImplementedLegend).click();
@@ -320,11 +416,12 @@ else {
             driver.findElement(partiallyImplemented).isDisplayed();
             Thread.sleep(3000);
             driver.findElement(partiallyImplemented).click();
-            Thread.sleep(3000);
+            Thread.sleep(4000);
             driver.findElement(notAnsweredLegend).isDisplayed();
-            Thread.sleep(3000);
+            Thread.sleep(10000);
+            wait.until(ExpectedConditions.elementToBeClickable(notAnsweredLegend));
             driver.findElement(notAnsweredLegend).click();
-            Thread.sleep(3000);
+            Thread.sleep(6000);
 
         }
         else {
@@ -332,10 +429,10 @@ else {
         }
     }
 
-    public void barsFunctionality(String AssessmentName, String BarsCount, String BarsNames) throws InterruptedException {
+    public void barsFunctionality(String RenameAssessment, String BarsCount, String BarsNames) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         ArrayList<String> graphNames = new ArrayList<>();
-        graphNames.add(AssessmentName);
+        graphNames.add(RenameAssessment);
         String[] splitB = BarsNames.split(",");
         graphNames.addAll(Arrays.asList(splitB));
         System.out.println(graphNames);

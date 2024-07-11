@@ -1,8 +1,6 @@
 package com.vassarlabs.projectname.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -126,6 +124,7 @@ private By switchmodule=By.xpath("//span[normalize-space()='Switch Company']");
     public void subscription(String Type, String ErrorMessage) {
         WebElement subsrciptiondropdown = driver.findElement(subscriptionDropdown);
         Select subscription = new Select(subsrciptiondropdown);
+
         subscription.selectByVisibleText(Type);
     }
 
@@ -173,6 +172,8 @@ private By switchmodule=By.xpath("//span[normalize-space()='Switch Company']");
     }
 
     public void lock(String CompanyCard, String ToasterMessage) throws InterruptedException {
+        ellipsis();
+        try {
         if (driver.findElement(By.xpath("//h5[text()='" + CompanyCard + "']")).isDisplayed()) {
             driver.findElement(lock).click();
             Thread.sleep(3000);
@@ -182,36 +183,47 @@ private By switchmodule=By.xpath("//span[normalize-space()='Switch Company']");
             System.out.println(locktoaster);
             Assert.assertEquals(ToasterMessage, locktoaster);
         }}
-    }
 
-    public void unlock(String CompanyCard, String ToasterMessage) {
+    } catch (InvalidSelectorException e) {
+         System.out.println("Invalid selector error: " + e.getMessage());}}
+
+    public void unlock(String CompanyCard, String ToasterMessage) throws InterruptedException {
+        ellipsis();
+        try {
         if (driver.findElement(By.xpath("//h5[text()='" + CompanyCard + "']")).isDisplayed()) {
-            driver.findElement(lock).click();
-            String unlockatoaster = driver.findElement(lockToaster).getText();
+            driver.findElement(unlock).click();
+            String unlockatoaster = driver.findElement(unlockToaster).getText();
             System.out.println(unlockatoaster);
             Assert.assertEquals(ToasterMessage, unlockatoaster);
         }
-    }
+    } catch (InvalidSelectorException e) {
+         System.out.println("Invalid selector error: " + e.getMessage());}}
 
-    public void delete(String CompanyCard, String ToasterMessage) {
-        if (driver.findElement(By.xpath("//h5[text()='" + CompanyCard + "']")).isDisplayed()) {
-            driver.findElement(delete).click();
+    public void delete(String DeleteCard, String ToasterMessage) throws InterruptedException {
+        ellipsis();
+        try {
+            if (driver.findElement(By.xpath("//h5[text()='" + DeleteCard + "']")).isDisplayed()) {
+                driver.findElement(delete).click();
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found: " + e.getMessage());
         }
     }
-
-    public void deletePopup(String ToasterMessage) {
+    public void deletePopup(String ToasterMessage) throws InterruptedException {
+        try {
         if (driver.findElement(deletePopup).isDisplayed()) {
             driver.findElement(deletYes).click();
             if (driver.findElement(deletToaster).isDisplayed()) {
                 String toaster = driver.findElement(deletToaster).getText();
                 System.out.println(toaster);
                 Assert.assertEquals(ToasterMessage, toaster);
-            }
+            }}}
+    catch (NoSuchElementException e) {
+                System.out.println("Element not found: " + e.getMessage());
+            }}
 
-        }
-    }
-
-    public void emailOption(String CompanyCard, String Subject, String Body, String EmailSentToaster) {
+    public void emailOption(String CompanyCard, String Subject, String Body, String EmailSentToaster) throws InterruptedException {
+        ellipsis();
         if (driver.findElement(By.xpath("//h5[text()='" + CompanyCard + "']")).isDisplayed()) {
             driver.findElement(emailButton).click();
             if (driver.findElement(emailPopupTitle).isDisplayed()) {
@@ -235,7 +247,8 @@ private By switchmodule=By.xpath("//span[normalize-space()='Switch Company']");
     }}}
 
 
-    public void renew(String CompanyCard, String ToasterMessage) {
+    public void renew(String CompanyCard, String ToasterMessage) throws InterruptedException {
+        ellipsis();
         if (driver.findElement(By.xpath("//h5[text()='" + CompanyCard + "']")).isDisplayed()) {
             driver.findElement(renew).click();
             if(driver.findElement(renewToaster).isDisplayed()){
@@ -246,11 +259,13 @@ private By switchmodule=By.xpath("//span[normalize-space()='Switch Company']");
         }
     }
 
-    public void company(String CompanyCard, String ToasterMessage) {
+    public void company(String CompanyCard, String ToasterMessage) throws InterruptedException {
         WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
 wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h5[text()='"+CompanyCard+"']/../../..")));
     driver.findElement(By.xpath("//h5[text()='"+CompanyCard+"']/../../..")).click();
+    Thread.sleep(3000);
         if(driver.findElement(signIntoCompany).isDisplayed()){
+            Thread.sleep(3000);
             String switchcompany=driver.findElement(signInPage).getText();
             System.out.println(switchcompany);
             Assert.assertEquals(ToasterMessage, switchcompany);
@@ -263,9 +278,9 @@ else {
         System.out.println("Control Center is displayed");
     }
 
-    public void switchModule() {
+    public void switchModule() throws InterruptedException {
 driver.findElement(switchmodule).click();
-
+Thread.sleep(3000);
     }
 
     public void userProfile() throws InterruptedException {

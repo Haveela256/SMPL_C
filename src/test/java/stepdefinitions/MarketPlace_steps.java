@@ -32,39 +32,42 @@ public class MarketPlace_steps {
         marketPlacePage.cancelButton();
     }
     @And("validate the email textfield of invite complianceexpert popup {string} {string} {string}")
-    public void validateTheEmailTextfieldOfInviteComplianceexpertPopup(String Email, String ErrorMessage, String ToasterMessage) {
+    public void validateTheEmailTextfieldOfInviteComplianceexpertPopup(String Email, String ErrorMessage, String ToasterMessage) throws InterruptedException {
         marketPlacePage.emailFiled(Email, ErrorMessage,ToasterMessage);
     }
 
 
-    @When("validate the submit button of invite compliance expert popup")
-    public void validate_the_submit_button_of_invite_compliance_expert_popup() {
-       marketPlacePage.submitButtonOfExpert();
+
+    @And("Validate the ellipsis {string}")
+    public void validateTheEllipsis(String ExpertName) throws InterruptedException {
+        marketPlacePage.ellipsisFHireExpert(ExpertName);
     }
 
-    @When("validate the ellipsis")
-    public void validate_the_ellipsis() throws InterruptedException {
-       marketPlacePage.ellipsis();
+
+    @And("validate the Download details option {string}")
+    public void validateTheDownloadDetailsOption(String ExpertName) throws InterruptedException {
+        marketPlacePage.downloaddetails(ExpertName);
     }
 
-    @When("validate the Download details option")
-    public void validate_the_download_details_option() throws InterruptedException {
-      marketPlacePage.downloaddetails();
+
+
+    @And("validate the ask to associate {string} {string}")
+    public void validateTheAskToAssociate(String ToasterMessage, String ExpertName) throws InterruptedException {
+        marketPlacePage.askToassociate(ToasterMessage,ExpertName);
     }
 
-    @When("validate the Email option")
-    public void validate_the_email_option() throws InterruptedException {
-       marketPlacePage.emailPopup();
+
+
+
+    @And("validate the send email popup functionality {string} {string} {string} {string} {string}")
+    public void validateTheSendEmailPopupFunctionality(String Email, String ToasterMessage, String ErrorMessage,String Body, String Subject) throws InterruptedException {
+        marketPlacePage.emailBodyAndSubject(Email, ToasterMessage, ErrorMessage,Body, Subject);
     }
 
-    @And("validate the send email popup functionality {string} {string} {string}")
-    public void validateTheSendEmailPopupFunctionality(String Email, String ToasterMessage, String ErrorMessage) throws InterruptedException {
-        marketPlacePage.emailBodyAndSubject(Email,  ToasterMessage, ErrorMessage);
-    }
 
-    @When("validate the ask to associate {string}")
-    public void validate_the_ask_to_associate(String ToasterMessage) throws InterruptedException {
-        marketPlacePage.askToassociate(ToasterMessage);
+    @And("validate the Email option {string}")
+    public void validateTheEmailOption(String ExpertName) throws InterruptedException {
+        marketPlacePage.emailOption(ExpertName);
     }
 
 

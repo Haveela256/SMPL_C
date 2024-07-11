@@ -14,9 +14,16 @@ public class ResetPassword_Steps {
 
 
 
-
-    @And("validate the submit button functionality by entering valid and invalid OTP {} {} {} {} {} {} {} {}")
-    public void validateTheSubmitButtonFunctionalityByEnteringValidAndInvalidOTP(String OTPOne, String OTPTwo, String OTPThree, String OTPFour, String NewPassword, String ConfirmPassword, String ErrorMessage, String ErrorToaster) throws InterruptedException {
-    resetPasswordPage.clickOnSubmit(OTPOne, OTPTwo, OTPThree,  OTPFour,  NewPassword,  ConfirmPassword,  ErrorMessage,  ErrorToaster);
+    @And("validate the submit button functionality by entering valid and invalid OTP {string} {string} {string} {string} {string} {string}")
+    public void validateTheSubmitButtonFunctionalityByEnteringValidAndInvalidOTP(String OTPOne,String OTPTwo,String OTPThree, String OTPFour,String NewPassword, String ConfirmPassword) {
+        resetPasswordPage.clickOnSubmit(OTPOne, OTPTwo, OTPThree,  OTPFour, NewPassword, ConfirmPassword);
     }
-}
+
+
+
+    @And("verify errors messages {string} {string} {string} {string} {string} {string}")
+    public void verifyErrorsMessages(String PasswordCharacterError,String PasswordUppercaseError,String PasswordsError,String NewPasswordError,String ConfirmPasswordError,String ErrorToaster) {
+        resetPasswordPage.veifyError(PasswordCharacterError, PasswordUppercaseError, PasswordsError, NewPasswordError, ConfirmPasswordError, ErrorToaster);
+    }
+    }
+

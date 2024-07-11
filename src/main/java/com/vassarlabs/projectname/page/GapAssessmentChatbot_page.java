@@ -51,7 +51,7 @@ public class GapAssessmentChatbot_page {
 
 
     public void gapAssessmentModule() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         Thread.sleep(3000);
         if (driver.findElement(controlCenterTitle).isDisplayed()) {
             Thread.sleep(3000);
@@ -285,6 +285,9 @@ public class GapAssessmentChatbot_page {
         dropdown.selectByIndex(3);
         dropdown.selectByIndex(4);
     }
+        else {
+            System.out.println("Pagination is not displayed");
+        }
 }}
 
 

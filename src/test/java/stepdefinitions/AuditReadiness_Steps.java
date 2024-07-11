@@ -73,6 +73,11 @@ AuditReadiness_page auditReadinessPage=new AuditReadiness_page(WebdriverInitiali
     public void validateSelectYearDropdownForAuditReadiness() throws InterruptedException {
         auditReadinessPage.selectYearDropdown();
     }
+
+    @And("validate the delete icon functionality {string} {string}")
+    public void validateTheDeleteIconFunctionality(String DeletedFileToaster, String AssessmentName) throws InterruptedException {
+        auditReadinessPage.deleteIcon(DeletedFileToaster, AssessmentName);
+    }
 }
 
 

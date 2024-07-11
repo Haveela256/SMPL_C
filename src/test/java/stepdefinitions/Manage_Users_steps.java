@@ -8,8 +8,9 @@ import com.driver.WebdriverInitializer;
 public class Manage_Users_steps {
     Manage_Users_page manageUsersPage=new Manage_Users_page(WebdriverInitializer.getDriver());
 
-    @When("Click n the Manage Users module")
-    public void click_n_the_manage_users_module() {
+
+    @And("Click n the Manage Users module")
+    public void clickNTheManageUsersModule() {
         manageUsersPage.manageUsersModule();
     }
 
@@ -18,10 +19,13 @@ public class Manage_Users_steps {
         manageUsersPage.clickOnAddUserIcon();
     }
 
-    @When("Add users by providing the {string} {string} {string} {string} {string} {string} {string} {string}")
-    public void add_users_by_providing_the(String FirstName, String MiddleName, String LastName, String Email, String Designation, String SuccessfulToaster, String ErrorToaster, String ErrorMessage) throws InterruptedException {
-        manageUsersPage.userDetails(FirstName, MiddleName, LastName, Email, Designation, SuccessfulToaster, ErrorToaster, ErrorMessage);
+
+    @And("Add users by providing the {string} {string} {string} {string} {string} {string} {string} {string}")
+    public void addUsersByProvidingThe(String FirstName,String MiddleName, String LastName, String Email, String Designation, String SuccessfulToaster, String ErrorToaster, String ErrorMessage) throws InterruptedException {
+    manageUsersPage.userDetails(FirstName, MiddleName, LastName, Email,Designation, SuccessfulToaster, ErrorToaster, ErrorMessage);
     }
+
+
 
     @When("Click on the Submit button with and without entering all fields and verify {string} {string} {string}")
     public void click_on_the_submit_button_with_and_without_entering_all_fields_and_verify(String SuccessfulToaster, String ErrorToaster, String ErrorMessage) throws InterruptedException {
@@ -29,12 +33,12 @@ public class Manage_Users_steps {
     }
 
     @And("Verify the added user {string}")
-    public void verifyTheAddedUser(String Email) {
+    public void verifyTheAddedUser(String Email) throws InterruptedException {
         manageUsersPage.verifyUser(Email);
     }
 
     @And("Click on the Unlock and Lock icon of {string} {string} {string}")
-    public void clickOnTheUnlockAndLockIconOf(String FirstName, String LastName, String Email) {
+    public void clickOnTheUnlockAndLockIconOf(String FirstName, String LastName, String Email) throws InterruptedException {
         manageUsersPage.lockUserAndUnlock( FirstName,  LastName,  Email);
     }
 
@@ -42,10 +46,9 @@ public class Manage_Users_steps {
 
 
     @And("Delete the user by providing {string} {string} {string} {string} {string} {string} {string}")
-    public void deleteTheUserByProviding(String FirstName, String LastName, String SuccessfulToaster, String ErrorToaster, String ErrorMessage, String Email, String DeleteToaster) {
+    public void deleteTheUserByProviding(String FirstName, String LastName, String SuccessfulToaster, String ErrorToaster, String ErrorMessage, String Email, String DeleteToaster) throws InterruptedException {
         manageUsersPage.deleteUser(FirstName, LastName, SuccessfulToaster, ErrorToaster, ErrorMessage, Email, DeleteToaster);
     }
-
 
 
     @And("Edit the details of by changing {string} {string} {string} {string} {string} or {string}")
@@ -54,5 +57,9 @@ public class Manage_Users_steps {
     }
 
 
+    @And("Validate search field {string}")
+    public void validateSearchField(String FirstName) throws InterruptedException {
+        manageUsersPage.search(FirstName);
+    }
 }
 

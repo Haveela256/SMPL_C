@@ -88,16 +88,6 @@ public class ScopeDocument_page {
         wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
         driver.findElement(uploadFilePath).click();
         Thread.sleep(3000);
-        driver.findElement(namePath).sendKeys(ScopeDocFileName);
-        System.out.println("2nd time Name is Entered");
-        Thread.sleep(3000);
-        WebElement fileInputElement1 = driver.findElement(By.xpath("//input[@type='file']"));
-        fileInputElement1.sendKeys(File);
-        WebElement fileInputElement2 = driver.findElement(By.xpath("//button[text()='Upload Replacement File']"));
-        fileInputElement2.sendKeys(File);
-        WebElement submitElement1 = wait.until(ExpectedConditions.elementToBeClickable(submitPath));
-        submitElement1.click();
-        Thread.sleep(4000);
     }
 
 
@@ -110,6 +100,7 @@ public class ScopeDocument_page {
         Thread.sleep(3000);
         driver.findElement(uploadFilePath).click();
         Thread.sleep(3000);
+        wait.until(ExpectedConditions.elementToBeClickable(cancelButton));
         driver.findElement(cancelButton).click();
         Thread.sleep(3000);
     }
@@ -178,6 +169,7 @@ public class ScopeDocument_page {
         Thread.sleep(3000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(downloadFile));
         Thread.sleep(3000);
+        wait.until(ExpectedConditions.elementToBeClickable(downloadIcon));
         driver.findElement(downloadIcon).click();
         Thread.sleep(3000);
         driver.findElement(deleteIcon).click();
@@ -199,10 +191,10 @@ public class ScopeDocument_page {
         Assert.assertEquals(DeletedFileToaster, toaster);
     }
 
-    public void pagination(String ScopeDocFileName, String uploadCount, String File) throws InterruptedException {
+    public void pagination(String ScopeDocFileName, String UploadCount, String File) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        uploadCount = uploadCount.replace("\"", "");
-        for (int i = 1; i < Integer.parseInt(uploadCount); i++) {
+        UploadCount = UploadCount.replace("\"", "");
+        for (int i = 1; i <= Integer.parseInt(UploadCount); i++) {  // Changed to <= to include the final count
             Thread.sleep(3000);
             driver.findElement(uploadFilePath).isDisplayed();
             Thread.sleep(3000);
@@ -210,8 +202,12 @@ public class ScopeDocument_page {
             wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
             Thread.sleep(3000);
             driver.findElement(uploadFilePath).click();
-            driver.findElement(namePath).sendKeys(ScopeDocFileName);
-            System.out.println("Name is Entered");
+
+            // Add number to ScopeDocFileName
+            String numberedFileName = ScopeDocFileName + i;
+
+            driver.findElement(namePath).sendKeys(numberedFileName);
+            System.out.println("Name is Entered: " + numberedFileName);
             Thread.sleep(3000);
             WebElement fileInputElement = driver.findElement(By.xpath("//input[@type='file']"));
             fileInputElement.sendKeys(File);
@@ -219,8 +215,6 @@ public class ScopeDocument_page {
             WebElement submitElement = wait.until(ExpectedConditions.elementToBeClickable(submitPath));
             submitElement.click();
             Thread.sleep(3000);
-
-
             }
 
 
