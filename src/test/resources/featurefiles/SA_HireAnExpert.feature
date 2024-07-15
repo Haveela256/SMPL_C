@@ -7,6 +7,6 @@ Feature: Hire an Expert
       | username             | password   | pin       | search         | Subject | body | toaster                   | ErrorMessage |
       | "smplappc@gmail.com" | "Bond@009" | "1-2-3-4" | "Abhi Manager" | "H"  | ""   | "Email Send Successfully" | ""           |
 #      | "smplappc@gmail.com" | "Bond@009" | "1-2-3-4" | "Compliance Test" | ""       | ""          | ""                        | " Email Body is Required " |
-#      | "smplappc@gmail.com" | "Bond@009" | "1-2-3-4" | "Mail tester"     | ""       | ""          |                           | ""                         |
+#      | "smplappc@gmail.com" | "Bond@009" | "1 -2-3-4" | "Mail tester"     | ""       | ""          |                           | ""                         |
 
 
