@@ -28,13 +28,15 @@ public class InitialSystemSecurityPlanReport_steps {
 
     @When("Verify the System Environment section")
     public void verify_the_system_environment_section() {
-       initialSystemSecurityPlanReportPage.systemEnvironment();
+
+        initialSystemSecurityPlanReportPage.systemEnvironment();
     }
 
 
     @When("Verify the Software Details panel")
     public void verify_the_software_details_panel() {
-      initialSystemSecurityPlanReportPage.softwareDetails();
+
+        initialSystemSecurityPlanReportPage.softwareDetails();
     }
 
     @When("Verify the Requirements section {string}")
@@ -45,6 +47,7 @@ public class InitialSystemSecurityPlanReport_steps {
 
     @When("Verify the Record of changes table")
     public void verify_the_record_of_changes_table() {
+
         initialSystemSecurityPlanReportPage.recordOfChangesTable();
     }
 

@@ -229,13 +229,13 @@ private By changePasswordBackLink= By.xpath("//a[text()='Back']");
         act.moveToElement(ele).perform();
         String data = driver.findElement(lightBulb).getText();
         System.out.println(data);
-        driver.findElement(lastLogin).isDisplayed();
-        Thread.sleep(3000);
-        String lastLoginTime = driver.findElement(lastLogin).getText();
-        System.out.println(lastLoginTime);
+        if (driver.findElement(lastLogin).isDisplayed()) {
+            Thread.sleep(3000);
+            String lastLoginTime = driver.findElement(lastLogin).getText();
+            System.out.println(lastLoginTime);
+        }
+
     }
-
-
     public void chatbot() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(chatbot).isDisplayed();

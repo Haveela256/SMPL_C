@@ -1,6 +1,6 @@
-Feature: Gap Assessment Module
+Feature: Reporting Module
 
-  Scenario Outline: Validate Gap Assessment Module
+  Scenario Outline: Validate Reporting Module
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     And Click on the Reporting module and click on the Reports sub-module
     And click on the Prioritized Remeditaion Plan card

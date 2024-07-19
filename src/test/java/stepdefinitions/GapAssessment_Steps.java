@@ -20,8 +20,8 @@ public class GapAssessment_Steps {
         gapAssessmentPage.sortIcons();
     }
     @Given("Validate the copy icon functionality {string} {string} {string} {string}")
-    public void validate_the_copy_icon_functionality(String CopyAssessmentToaster, String NewName, String RenameAssessment, String ErrorToaster) throws InterruptedException {
-        gapAssessmentPage.copyIcon(CopyAssessmentToaster,  NewName,  RenameAssessment, ErrorToaster);
+    public void validate_the_copy_icon_functionality(String CopyAssessmentToaster, String CopyName, String RenameAssessment, String ErrorToaster) throws InterruptedException {
+        gapAssessmentPage.copyIcon(CopyAssessmentToaster,  CopyName,  RenameAssessment, ErrorToaster);
     }
 
     @Given("Validate the Rename icon functionality {string} {string} {string} {string}")
@@ -40,18 +40,18 @@ gapAssessmentPage.pagination();
     }
 
     @Given("verify progress bar {string}")
-    public void verify_progress_bar(String RenameAssessment) throws InterruptedException {
-gapAssessmentPage.progressBar(RenameAssessment);
+    public void verify_progress_bar(String AssessmentName) throws InterruptedException {
+gapAssessmentPage.progressBar(AssessmentName);
     }
 
-    @Given("verify current Sprs score {string}")
-    public void verify_current_sprs_score(String RenameAssessment) {
-gapAssessmentPage.sPRSScore(RenameAssessment);
+    @Given("verify current Sprs score")
+    public void verify_current_sprs_score() {
+gapAssessmentPage.sPRSScore();
     }
 
     @Given("verify the bar chart {string}")
-    public void verify_the_bar_chart(String RenameAssessment) throws InterruptedException {
- gapAssessmentPage.barChart(RenameAssessment);
+    public void verify_the_bar_chart(String AssessmentName) throws InterruptedException {
+ gapAssessmentPage.barChart(AssessmentName);
     }
 
 

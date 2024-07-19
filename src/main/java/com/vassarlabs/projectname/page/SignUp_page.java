@@ -1,24 +1,27 @@
 package com.vassarlabs.projectname.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.devtools.v85.network.model.DataReceived;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class SignUp_page {
     private WebDriver driver;
     private By inviteButton = By.xpath("//button[text()='Invite']");
     private By inviteTitle = By.xpath("//h4[text()='Invite']");
     private By emailFeild = By.xpath("//div[@class='form-custom-label']//input[@id='exampleFormControlInput1']");
-    private By subscriptionDropdown = By.xpath("//select[@class='form-select ng-pristine ng-invalid border-danger ng-touched']");
-    private By orderNumber = By.xpath("//div[@class='form-custom-label ng-star-inserted']//input[@id='exampleFormControlInput1']");
+    private By subscriptionDropdown = By.xpath("//select[@class='form-select ng-untouched ng-pristine ng-invalid']");
+    private By orderNumber = By.xpath("//input[@formcontrolname='orderNumber']");
     private By submit = By.xpath("//button[text()='Submit']");
     private By refresh = By.xpath("//button[@id='refresh']");
-    private By registerButton = By.xpath("//div[text()='Please register & signup for SMPL-C!']//following::b[text()='Register']");
+    private By registerButton = By.xpath("//b[text()='Register']");
     private By signUptitle = By.xpath("//h3[text()='Sign up for SMPL-C ']");
     private By firstNameTextfield = By.xpath("//input[@formcontrolname='firstName']");
     private By middleNameTextField = By.xpath("//input[@formcontrolname='middleName']");
@@ -42,41 +45,62 @@ public class SignUp_page {
     private By middleNameInvalid = By.xpath("//span[text()=' Middle name is Invalid ']");
     private By firtNameRequired = By.xpath("//span[text()=' First name is Required ']");
     private By lastNameRequired = By.xpath("//span[text()=' Last name is Required ']");
+    private By yopmailEmailField=By.xpath("//input[@class='ycptinput']");
     boolean submitCheck = false;
 
     public SignUp_page(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void sendInviteFromSuperAdmin(String Email, String Subscription, String OrderNumber) {
+    public void sendInviteFromSuperAdmin(String Email, String Subscription, String OrderNumber) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.findElement(inviteButton).click();
+        Thread.sleep(3000);
+        if (driver.findElement(inviteTitle).isDisplayed()) {
+            Thread.sleep(3000);
+            driver.findElement(emailFeild).click();
+            driver.findElement(emailFeild).sendKeys(Email);
         WebElement subsrciptiondropdown = driver.findElement(subscriptionDropdown);
         Select subscription = new Select(subsrciptiondropdown);
-        subscription.selectByValue(Subscription);
+        subscription.selectByVisibleText(Subscription);
         driver.findElement(orderNumber).sendKeys(OrderNumber);
         if (driver.findElement(submit).isEnabled()) {
             driver.findElement(submit).click();
 
         } else {
             System.out.println("Submit is disabled");
-        }
+        } }
     }
-
-    public void register() throws InterruptedException {
+    public void register(String Email) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        driver.get("https://yopmail.com/wm");
-        driver.findElement(refresh).click();
-        Thread.sleep(3000);
-        driver.findElement(registerButton).click();
-        Thread.sleep(2000);
-    }
+        String window1 = driver.getWindowHandle();
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+        Set<String> windowHandles = driver.getWindowHandles();
+        for (String handle : windowHandles) {
 
-    public void signUpPage() {
+        }
+        driver.findElement(yopmailEmailField).sendKeys(Email);
+        driver.findElement(yopmailEmailField).sendKeys(Keys.ENTER);
+        driver.navigate().refresh();
+        Thread.sleep(4000);
+//        driver.findElement(registerButton).click();
+//        wait.until(driver -> driver.getWindowHandles().size() > 1);
+//        Set<String> handles = driver.getWindowHandles();
+//        for (String window : handles) {
+//            if (!window.equals(window1)) {
+//                driver.switchTo().window(window);
+//                break;
+            }
+
+
+
+
+        public void signUpPage() throws InterruptedException {
+        Thread.sleep(3000);
         if (driver.findElement(signUptitle).isDisplayed()) {
             String title = driver.findElement(signUptitle).getText();
             System.out.println(title);
-        }
-    }
-
+        }}
     public void firstNameField(String FirstName) {
         driver.findElement(firstNameTextfield).sendKeys(FirstName);
     }
