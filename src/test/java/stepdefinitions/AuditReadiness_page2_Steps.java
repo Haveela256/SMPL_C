@@ -17,9 +17,9 @@ public class AuditReadiness_page2_Steps {
         auditReadinessPage2Page.cmmcRegulation(Cards, AssessmentName,Regulationtabs, UploadFile , ReuploadFile,JustificationToaster, DeletedFileToaster, EditText);
     }
 
-    @And("validate panel functionality {string} {string} {string}")
-    public void validatePanelFunctionality(String JustificationToaster,String DeletedFileToaster, String EditText) throws InterruptedException {
-        auditReadinessPage2Page.panel( JustificationToaster, DeletedFileToaster, EditText);
+    @And("validate panel functionality {string} {string}")
+    public void validatePanelFunctionality(String JustificationToaster, String EditText) throws InterruptedException {
+        auditReadinessPage2Page.panel( JustificationToaster, EditText);
     }
 
 
@@ -49,13 +49,14 @@ public class AuditReadiness_page2_Steps {
 
 
 
-    @And("Validate the download and delete icons {string} {string} {string}")
-    public void validateTheDownloadAndDeleteIcons(String Cards,String AssessmentName,String Regulationtabs) throws InterruptedException {
-        auditReadinessPage2Page.icons(Cards,AssessmentName,Regulationtabs);
+    @And("Validate the download and delete icons {string} {string} {string} {string}")
+    public void validateTheDownloadAndDeleteIcons(String Cards,String AssessmentName,String Regulationtabs, String DeletedFileToaster) throws InterruptedException {
+        auditReadinessPage2Page.icons(Cards,AssessmentName,Regulationtabs, DeletedFileToaster);
     }
 
     @And("Validate the submit button")
     public void validateTheSubmitButton() throws InterruptedException {
         auditReadinessPage2Page.submitButton();
     }
+
 }

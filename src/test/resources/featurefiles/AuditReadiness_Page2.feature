@@ -4,13 +4,14 @@ Feature: Audit Readiness Module
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     And Validate the Card functionality <Cards> <AssessmentName>
     And Validate the CMMC Regulation tab <Cards> <AssessmentName> <Regulationtabs> <UploadFile> <ReuploadFile> <JustificationToaster> <DeletedFileToaster> <EditText>
-    And validate panel functionality <JustificationToaster> <DeletedFileToaster> <EditText>
+    And validate panel functionality <JustificationToaster> <EditText>
+    And Validate the submit button
+    And Validate the download and delete icons <Cards> <AssessmentName> <Regulationtabs> <DeletedFileToaster>
     And Reupload a file <UploadFile>
     And Validate the pagination of uploaded files table
     And Validate upload policy button <UploadPolicy> <PolicyDocToaster>
-    And Validate the submit button
     And Validate the card status <Cards> <AssessmentName>
-    And Validate the download and delete icons <Cards> <AssessmentName> <Regulationtabs>
+
 
 
 

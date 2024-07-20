@@ -263,7 +263,9 @@ public class GapAssessment_page {
             Select dropdown = new Select(ele);
             dropdown.selectByIndex(1);
             driver.findElement(nextIcon).click();
+            Thread.sleep(3000);
             driver.findElement(previous).click();
+            Thread.sleep(3000);
             driver.findElement(numberhyperlink).click();
             // Select options by index
             dropdown.selectByIndex(2);
@@ -275,9 +277,10 @@ public class GapAssessment_page {
 }
 
     public void progressBar(String RenameAssessment) throws InterruptedException {
+        driver.navigate().refresh();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
-        Thread.sleep(3000);
+        Thread.sleep(8000);
         driver.findElement(By.xpath("//table//span[normalize-space()='" + RenameAssessment + "']")).click();
         Thread.sleep(3000);
         String progressData = driver.findElement(progress).getText();
