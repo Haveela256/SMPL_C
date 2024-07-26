@@ -42,7 +42,7 @@ public class SA_SignIn_page {
 
 
     public SA_SignIn_page(WebDriver driver) {
-        this.driver=driver;
+        this.driver = driver;
     }
 
     public void signInButton(String EmailAddress, String Password, String Toaster) throws InterruptedException {

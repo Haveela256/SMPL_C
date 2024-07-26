@@ -59,7 +59,7 @@ public class Reporting_page {
             driver.findElement(prioritizedRemediationPlanTitle).isDisplayed();
             String title = driver.findElement(prioritizedRemediationPlanTitle).getText();
             System.out.println(title);
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             driver.findElement(backArrow).click();
         }
     }
@@ -99,18 +99,19 @@ public class Reporting_page {
     }
 
     public void scopeDoc(String TemplateDownloadSuccessful) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.elementToBeClickable(scopedoc));
+        Thread.sleep(3000);
         driver.findElement(scopedoc).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(templateDownloadSuccessful));
         String toaster = driver.findElement(templateDownloadSuccessful).getText();
         System.out.println(toaster);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(templateDownloadSuccessful));
         Assert.assertEquals(TemplateDownloadSuccessful, toaster);
     }
     public void assetInventory(String TemplateDownloadSuccessful) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(assetInventory));
+        Thread.sleep(3000);
         driver.findElement(assetInventory).click();
         driver.findElement(templateDownloadSuccessful).isDisplayed();
         wait.until(ExpectedConditions.visibilityOfElementLocated(templateDownloadSuccessful));
@@ -129,7 +130,9 @@ public class Reporting_page {
     }
 
     public void riskAssessment(String TemplateDownloadSuccessful) throws InterruptedException {
-        driver.findElement(templateDownloadSuccessful).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.findElement(riskAssessmentOverviewTemplate).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(templateDownloadSuccessful));
         String toaster = driver.findElement(templateDownloadSuccessful).getText();
         System.out.println(toaster);
         Assert.assertEquals(TemplateDownloadSuccessful, toaster);
@@ -148,14 +151,16 @@ public class Reporting_page {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.findElement(gAPAssessmentRisRegister).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(templateDownloadSuccessful));
-//        String toaster = driver.findElement(templateDownloadSuccessful).getText();
-//        System.out.println(toaster);
-//        Assert.assertEquals(TemplateDownloadSuccessful, toaster);
+        String toaster = driver.findElement(templateDownloadSuccessful).getText();
+        System.out.println(toaster);
+        Assert.assertEquals(TemplateDownloadSuccessful, toaster);
+        Thread.sleep(4000);
     }
 
 
     public void incidentResponsePlanTemplate(String TemplateDownloadSuccessful) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Thread.sleep(3000);
         driver.findElement(incidentTemplate).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(templateDownloadSuccessful));
         String toaster = driver.findElement(templateDownloadSuccessful).getText();

@@ -48,7 +48,7 @@ public class PrioritizedRemediationPlan_steps {
 
 
     @When("Validate the pagination of Implementation Status table")
-    public void validate_the_pagination_of_implementation_status_table() {
+    public void validate_the_pagination_of_implementation_status_table() throws InterruptedException {
         prioritizedRemediationPlanPage.paginationOfimplementationStatus();
     }
 

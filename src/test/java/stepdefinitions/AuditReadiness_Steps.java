@@ -64,9 +64,9 @@ AuditReadiness_page auditReadinessPage=new AuditReadiness_page(WebdriverInitiali
         auditReadinessPage.pagination();
     }
 
-    @And("Validate the download icon functionality {string} {string} {string} {string}")
-    public void validateTheDownloadIconFunctionality(String RenameSuccessfulToaster,String RenameAssessment,String AssessmentNam,String ErrorToaster) {
-    auditReadinessPage.download(RenameSuccessfulToaster, RenameAssessment, AssessmentNam, ErrorToaster);
+    @And("Validate the download icon functionality {string}")
+    public void validateTheDownloadIconFunctionality(String AssessmentName) {
+    auditReadinessPage.download(AssessmentName);
     }
 
     @Given("Validate Select year dropdown for audit readiness")
@@ -75,8 +75,28 @@ AuditReadiness_page auditReadinessPage=new AuditReadiness_page(WebdriverInitiali
     }
 
     @And("validate the delete icon functionality {string} {string}")
-    public void validateTheDeleteIconFunctionality(String DeletedFileToaster, String AssessmentName) throws InterruptedException {
-        auditReadinessPage.deleteIcon(DeletedFileToaster, AssessmentName);
+    public void validateTheDeleteIconFunctionality(String DeletedFileToaster, String NewName) throws InterruptedException {
+        auditReadinessPage.deleteIcon(DeletedFileToaster, NewName);
+    }
+
+    @And("Validate the Card status {string} {string}")
+    public void validateTheCardStatus(String AssessmentName,String Cards) throws InterruptedException {
+        auditReadinessPage.card(AssessmentName, Cards);
+    }
+
+    @And("Verify progress bar {string}")
+    public void verifyProgressBar(String AssessmentName) throws InterruptedException {
+        auditReadinessPage.progress(AssessmentName);
+    }
+
+    @And("validate the copy icon functionality {string} {string} {string} {string}")
+    public void validateTheCopyIconFunctionality(String CopyAssessmentToaster, String NewName, String AssessmentName, String ErrorToaster) throws InterruptedException {
+        auditReadinessPage.copy(CopyAssessmentToaster,NewName,AssessmentName,ErrorToaster);
+    }
+
+    @And("Verify current Sprs score")
+    public void verifyCurrentSprsScore() {
+        auditReadinessPage.sprs();
     }
 }
 

@@ -38,8 +38,8 @@ public class InitialSystemSecurityPlanReport_page {
     private By hardware = By.xpath("//div[@class='label-form']");
     private By requiremetns = By.xpath("//div[text()=' 3. Requirements ']");
     private By recordOfChangesTable = By.xpath("//div[text()=' 4. Record of changes: ']");
-    private By nextIcon = By.xpath("//pagination-controls/pagination-template/nav/ul/li/a/span[text()='page']/parent::a");
-    private By previous = By.xpath("//pagination-controls/pagination-template/nav/ul/li[@class='pagination-previous']");
+    private By nextIcon = By.xpath("//li[@class='pagination-next ng-star-inserted']");
+    private By previous = By.xpath("//li[@class='pagination-previous ng-star-inserted']");
     private By numberhyperlink = By.xpath("//span[text()='2']");
     private By paginationDropdown = By.xpath("//select[@class='form-select form-select-sm small-dd ng-untouched ng-pristine ng-valid']");
     private By reportingModule = By.xpath("//span[text()='Reporting']");
@@ -49,6 +49,7 @@ public class InitialSystemSecurityPlanReport_page {
     public InitialSystemSecurityPlanReport_page(WebDriver driver) {
         this.driver = driver;
     }
+
     public void backIcon() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(reporting));
@@ -65,112 +66,114 @@ public class InitialSystemSecurityPlanReport_page {
 
         WebElement backIconElement = driver.findElement(backIcon);
         if (backIconElement.isDisplayed()) {
-            Thread.sleep(4000);
+            Thread.sleep(7000);
             wait.until(ExpectedConditions.elementToBeClickable(backIconElement));
             backIconElement.click();
             Thread.sleep(4000);
         } else {
             System.out.println("Back Icon is not displayed");
-        }}
+        }
+    }
+
     public void initialSystemSecurityPlanReportCard(String AssessmentName) throws InterruptedException {
         driver.findElement(initialSystemSecurityCard).click();
         Thread.sleep(7000);
     }
 
 
-
-public void print() throws InterruptedException {
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(30));
-    for (int i = 0; i < 1; i++) {
-        wait.until(ExpectedConditions.elementToBeClickable(printButton));
-        Thread.sleep(3000);
-        driver.findElement(printButton).click();
-        Thread.sleep(5000);
-    }
-}
-
-public void systemIdentification() {
-    if (driver.findElement(systemIdentificationTitle).isDisplayed()) {
-        String systemtitle = driver.findElement(systemTitle).getText();
-        System.out.println(systemtitle);
-        String systemcategory = driver.findElement(systemCategorization).getText();
-        System.out.println(systemcategory);
-        String uniqueIdentifier = driver.findElement(systemUniqueIdentifier).getText();
-        System.out.println(uniqueIdentifier);
-        String responsibleorganization = driver.findElement(responsibleOrganization).getText();
-        System.out.println(responsibleorganization);
-        String informationowner = driver.findElement(informationOwnerDetails).getText();
-        System.out.println(informationowner);
-        String systemonwer = driver.findElement(systemOnwer).getText();
-        System.out.println(systemonwer);
-        String systemsecirtyOfficer = driver.findElement(systemsecuirty).getText();
-        System.out.println(systemsecirtyOfficer);
-        String purpose = driver.findElement(purposeOfSyetm).getText();
-        System.out.println(purpose);
-        String users = driver.findElement(noOfUsers).getText();
-        System.out.println(users);
-        String cui = driver.findElement(cuiInformation).getText();
-        System.out.println(cui);
-    }
-}
-
-public void systemEnvironment() {
-    if (driver.findElement(systemEnvironment).isDisplayed()) {
-        System.out.println("System Enviorment section is displayed");
-    }
-}
-
-public void softwareDetails() {
-    driver.findElement(softwareDetails).click();
-    String hardwareAndSoftware = driver.findElement(hardware).getText();
-    System.out.println(hardwareAndSoftware);
-}
-
-public void requirements(String RequirementsCard) {
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    ArrayList<String> cards = new ArrayList<>(Arrays.asList(RequirementsCard.split(",")));
-    cards.add(0, RequirementsCard);
-    System.out.println(cards);
-    for (String card : cards) {
-        List<WebElement> elements = driver.findElements(By.xpath("//button[@aria-controls='ngb-accordion-item-2-collapse']//span[text()='" + RequirementsCard + "']"));
-        if (elements.isEmpty()) {
-            System.out.println("Cards are displayed");
-        } else {
-            System.out.println("Cards are not found");
-            WebElement currentElement = elements.get(0);
-            if (currentElement.isDisplayed()) {
-                Actions actions = new Actions(driver);
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-
-                actions.moveToElement(currentElement).perform();
-                js.executeScript("document.activeElement.previousElementSibling.focus();");
-
-                WebElement previousElement = driver.switchTo().activeElement();
-                // Perform actions on the previousElement if necessary
-            } else {
-                System.out.println("Element not displayed: " + cards);
-            }
+    public void print() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        for (int i = 0; i < 1; i++) {
+            wait.until(ExpectedConditions.elementToBeClickable(printButton));
+            Thread.sleep(3000);
+            driver.findElement(printButton).click();
+            Thread.sleep(5000);
         }
-
     }
-}
+
+    public void systemIdentification() {
+        if (driver.findElement(systemIdentificationTitle).isDisplayed()) {
+            String systemtitle = driver.findElement(systemTitle).getText();
+            System.out.println(systemtitle);
+            String systemcategory = driver.findElement(systemCategorization).getText();
+            System.out.println(systemcategory);
+            String uniqueIdentifier = driver.findElement(systemUniqueIdentifier).getText();
+            System.out.println(uniqueIdentifier);
+            String responsibleorganization = driver.findElement(responsibleOrganization).getText();
+            System.out.println(responsibleorganization);
+            String informationowner = driver.findElement(informationOwnerDetails).getText();
+            System.out.println(informationowner);
+            String systemonwer = driver.findElement(systemOnwer).getText();
+            System.out.println(systemonwer);
+            String systemsecirtyOfficer = driver.findElement(systemsecuirty).getText();
+            System.out.println(systemsecirtyOfficer);
+            String purpose = driver.findElement(purposeOfSyetm).getText();
+            System.out.println(purpose);
+            String users = driver.findElement(noOfUsers).getText();
+            System.out.println(users);
+            String cui = driver.findElement(cuiInformation).getText();
+            System.out.println(cui);
+        }
+    }
+
+    public void systemEnvironment() {
+        if (driver.findElement(systemEnvironment).isDisplayed()) {
+            System.out.println("System Enviorment section is displayed");
+        }
+    }
+
+    public void softwareDetails() {
+        driver.findElement(softwareDetails).click();
+        String hardwareAndSoftware = driver.findElement(hardware).getText();
+        System.out.println(hardwareAndSoftware);
+    }
+
+    public void requirements(String RequirementsCard) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        ArrayList<String> cards = new ArrayList<>(Arrays.asList(RequirementsCard.split(",")));
+        cards.add(0, RequirementsCard);
+        System.out.println(cards);
+        for (String card : cards) {
+            List<WebElement> elements = driver.findElements(By.xpath("//button[@aria-controls='ngb-accordion-item-2-collapse']//span[text()='" + RequirementsCard + "']"));
+            if (elements.isEmpty()) {
+                System.out.println(RequirementsCard+ " is displayed");
+            } else {
+                System.out.println("Cards are not found");
+                WebElement currentElement = elements.get(0);
+                if (currentElement.isDisplayed()) {
+                    Actions actions = new Actions(driver);
+                    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+                    actions.moveToElement(currentElement).perform();
+                    js.executeScript("document.activeElement.previousElementSibling.focus();");
+
+                    WebElement previousElement = driver.switchTo().activeElement();
+                    // Perform actions on the previousElement if necessary
+                } else {
+                    System.out.println("Element not displayed: " + cards);
+                }
+            }
+
+        }
+    }
 
 
-public void recordOfChangesTable() {
-    String tableName = driver.findElement(recordOfChangesTable).getText();
-    System.out.println(tableName + "is displayed");
-}
+    public void recordOfChangesTable() {
+        String tableName = driver.findElement(recordOfChangesTable).getText();
+        System.out.println(tableName + "is displayed");
+    }
 
-public void paginationOfRecordOfChanges() throws InterruptedException {
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-    try {
-        WebElement paginationDropdownElement = driver.findElement(paginationDropdown);
-        if (paginationDropdownElement.isDisplayed()) {
-            wait.until(ExpectedConditions.elementToBeClickable(nextIcon)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(previous)).click();
-            wait.until(ExpectedConditions.elementToBeClickable(numberhyperlink)).click();
-
+    public void paginationOfRecordOfChanges() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        List<WebElement> paginationElements = driver.findElements(paginationDropdown);
+        if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
+            WebElement paginationDropdownElement = paginationElements.get(0);
+            Thread.sleep(3000);
+            driver.findElement(nextIcon).click();
+            Thread.sleep(3000);
+            driver.findElement(previous).click();
+            Thread.sleep(3000);
+          driver.findElement(numberhyperlink).click();
             Select dropdown = new Select(paginationDropdownElement);
             dropdown.selectByIndex(1);
             dropdown.selectByIndex(2);
@@ -179,38 +182,26 @@ public void paginationOfRecordOfChanges() throws InterruptedException {
         } else {
             System.out.println("Pagination dropdown is not displayed");
         }
-    } catch (NoSuchElementException | TimeoutException e) {
-        System.out.println("Pagination dropdown is not displayed or timed out: " + e.getMessage());
     }
+
+
+public void downloadIcon() throws InterruptedException {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    Actions actions = new Actions(driver);
+    WebElement ele = driver.findElement(By.xpath("//div//img[@class='pdf-img']"));
+    actions.moveToElement(ele).perform();
+    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);
+    wait.until(ExpectedConditions.elementToBeClickable(ele));
+    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ele);
 }
 
-    public void downloadIcon() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        Actions actions = new Actions(driver);
-        WebElement ele = driver.findElement(By.xpath("//div//img[@class='pdf-img']"));
 
-        // Move to the element using Actions class
-        actions.moveToElement(ele).perform();
+public void selectAssessment(String AssessmentName) throws InterruptedException {
+    if (driver.findElement(selectAssessmentDropdown).isDisplayed()) {
+        WebElement ele = driver.findElement(selectAssessmentDropdown);
+        Select dropdown = new Select(ele);
+        dropdown.selectByVisibleText(AssessmentName);
 
-        // Scroll the element into view
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ele);
-
-        // Wait until the element is clickable
-        wait.until(ExpectedConditions.elementToBeClickable(ele));
-
-        // Click the element using JavaScript
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ele);
     }
-
-
-
-    public void selectAssessment(String AssessmentName) throws InterruptedException {
-      if(  driver.findElement(selectAssessmentDropdown).isDisplayed()){
-          WebElement ele = driver.findElement(selectAssessmentDropdown);
-          Select dropdown = new Select(ele);
-          dropdown.selectByVisibleText(AssessmentName);
-//          driver.findElement(initialSystemSecurityCard).click();
-//          Thread.sleep(3000);
-        }
-    }
+}
 }

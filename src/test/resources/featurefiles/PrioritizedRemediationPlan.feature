@@ -1,6 +1,6 @@
 Feature: Prioritized Remeditaion Plan report verification
 
-  Scenario Outline: Validate Gap Assessment Module
+  Scenario Outline: Validate Prioritized Remeditaion Plan repor
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     And click on the Prioritized Remeditaion Plan card  <AssessmentName>
     And validate the print button

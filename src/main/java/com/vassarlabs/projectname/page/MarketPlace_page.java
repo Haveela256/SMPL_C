@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 public class MarketPlace_page {
     private WebDriver driver;
@@ -33,8 +34,10 @@ public class MarketPlace_page {
     private By bodyError = By.xpath("//span[@class='error-text ng-star-inserted']");
     private By emailSentSuccesfu = By.xpath("//div[text()=' Email Send Successfully ']");
     private By askToAssociate = By.xpath("//div[text()=' Association request successfully sent to superadmin ']");
+    private By askToUnAssociate=By.xpath("//div[text()=' Un-Association request successfully sent to superadmin ']");
     private By asociate = By.xpath("//button[text()='Ask to Associate']");
-    private By collapse=By.xpath("//i[@class='bi bi-chevron-down']");
+    private By unasociate=By.xpath("//button[text()='Ask to Un-Associate']");
+    private By collapse = By.xpath("//i[@class='bi bi-chevron-down']");
     boolean check = false;
 
     public MarketPlace_page(WebDriver driver) {
@@ -56,7 +59,7 @@ public class MarketPlace_page {
     }
 
     public void inviteCompliance() throws InterruptedException {
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.elementToBeClickable(inviteBUtton));
         driver.findElement(inviteBUtton).click();
         Thread.sleep(3000);
@@ -72,212 +75,180 @@ public class MarketPlace_page {
         if (driver.findElement(popupTitle).isDisplayed()) {
             driver.findElement(cancel).click();
 
-            }
-}
+        }
+    }
+
     public void emailFiled(String Email, String ErrorMessage, String ToasterMessage) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        boolean check = true;  // Initialize check variable
-
-        try {
+        if (driver.findElement(inviteBUtton).isDisplayed()) {
             driver.findElement(inviteBUtton).click();
             Thread.sleep(3000);
             driver.findElement(emailTextField).sendKeys(Email);
             Thread.sleep(2000);
+            List<WebElement> submitbutton = driver.findElements(submit);
             if (driver.findElement(submit).isEnabled()) {
                 Thread.sleep(3000);
-                wait.until(ExpectedConditions.elementToBeClickable(submit));
+                WebElement ele = submitbutton.get(0);
+                Thread.sleep(8000);
                 driver.findElement(submit).click();
-                Thread.sleep(3000);
-                check = false;
                 System.out.println("Submit button is enabled and clicked.");
-            } else if (!driver.findElement(submit).isEnabled()) {
+            } if(!driver.findElement(submit).isEnabled()) {
                 driver.findElement(popupTitle).click();
-                Thread.sleep(3000);
-                try {
-                    if (driver.findElement(invitedSuccesful).isDisplayed()) {
-                        String invite = driver.findElement(invitedSuccesful).getText();
-                        Assert.assertEquals(ToasterMessage, invite);
-                        check = false;
-                        System.out.println("Invitation was successful.");
-                    }
-                } catch (NoSuchElementException e) {
-                    // Handle case where invitedSuccesful element is not found
-                }
-
-                try {
-                    if (driver.findElement(blankInviteError).isDisplayed()) {
-                        Thread.sleep(5000);
-                        String blankError = driver.findElement(blankInviteError).getText();
-                        Assert.assertEquals(ErrorMessage, blankError);
-                        check = false;
-
-                        // Log and ensure the element is clickable
-                        System.out.println("Waiting for the close button to be clickable.");
-                        wait.until(ExpectedConditions.elementToBeClickable(close));
-
-                        // Extra wait to ensure element is ready
-                        Thread.sleep(3000);
-
-                        // Try clicking with JavaScript if normal click doesn't work
-                        WebElement closeButton = driver.findElement(close);
-                        System.out.println("Attempting to click the close button.");
-                        try {
-                            closeButton.click();
-                        } catch (Exception e) {
-                            System.out.println("Normal click didn't work, trying JavaScript click.");
-                            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", closeButton);
-                        }
-
-                    }}catch (NoSuchElementException e) {
-                    // Handle case where blankInviteError element is not found
-                }
-
-                try {
-                    if (driver.findElement(invalidInviteError).isDisplayed()) {
-                        Thread.sleep(4000);
-                        String invalid = driver.findElement(invalidInviteError).getText();
-                        Assert.assertEquals(ErrorMessage, invalid);
-                        check = false;
-                        wait.until(ExpectedConditions.elementToBeClickable(close));
-                        driver.findElement(close).click();
-                        Thread.sleep(3000);
-                        System.out.println("Invalid invite error displayed.");
-                    }
-                } catch (NoSuchElementException e) {
-                    // Handle case where invalidInviteError element is not found
-                }
-
-                if (check) {
-                    driver.findElement(close).click();
-                    System.out.println("Submit button is disabled. Close button clicked.");
-                    check = false;
-                } else {
-                    System.out.println("Email not sent and no specific error found.");
-                }
+                System.out.println("Submit button is disabled");
             }
-        } catch (NoSuchElementException e) {
-            System.out.println("An expected element was not found: " + e.getMessage());
-        } catch (InterruptedException e) {
-            System.out.println("Thread sleep was interrupted: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("An unexpected error occurred: " + e.getMessage());
-        }}
-    // Method to check if the submit button is displayed
-
-    public void ellipsisFHireExpert(String ExpertName) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        String xpath = "//h3[contains(text(), '" + ExpertName + "')]/parent::div/parent::div//a/i";
-
-        try {
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-            Thread.sleep(5000);
-            element.click();
-
-            // Wait for menu options to be displayed
-            WebElement menuOptionsElement = wait.until(ExpectedConditions.visibilityOfElementLocated(menuOptions));
-            String options = menuOptionsElement.getText();
-            System.out.println(options + " are displayed");
-        } catch (TimeoutException e) {
-            System.err.println("Timeout waiting for element with xpath: " + xpath);
-        }
-        catch (NoSuchElementException e) {
-            System.out.println("An expected element was not found: " + e.getMessage());}
-    }
-
-    public void downloaddetails(String ExpertName) throws InterruptedException {
-        try {
-        if (driver.findElement(By.xpath("//h3[contains(text(),'"+ExpertName+"')]/parent::div/parent::div//a/i")).isDisplayed()) {
-            Thread.sleep(3000);
-            if (driver.findElement(download).isDisplayed()) {
+            List<WebElement> inviteSuccess = driver.findElements(invitedSuccesful);
+            if (!inviteSuccess.isEmpty() && inviteSuccess.get(0).isDisplayed()) {
+                WebElement ele1 = inviteSuccess.get(0);
+                String invite = driver.findElement(invitedSuccesful).getText();
+                Assert.assertEquals(ToasterMessage, invite);
+                System.out.println("Invitation was successful.");
+            } else {
+                System.out.println("Invite successful toaster is not displayed");
+            }
+            List<WebElement> blankerror = driver.findElements(blankInviteError);
+            if (!blankerror.isEmpty() && blankerror.get(0).isDisplayed()) {
+                WebElement ele2 = blankerror.get(0);
+                Thread.sleep(5000);
+                String blankError = driver.findElement(blankInviteError).getText();
+                Assert.assertEquals(ErrorMessage, blankError);
+                System.out.println("Waiting for the close button to be clickable.");
+                wait.until(ExpectedConditions.elementToBeClickable(close));
                 Thread.sleep(3000);
-                driver.findElement(download).click();
-                if (driver.findElement(downloadPopup).isDisplayed()) {
-                    driver.findElement(downloadYes).click();
+                WebElement closeButton = driver.findElement(close);
+                System.out.println("Attempting to click the close button.");}
+            else {
+                System.out.println("Blank error is not displayed");
+                List<WebElement> invaliderror = driver.findElements(invalidInviteError);
+                if (!invaliderror.isEmpty() && invaliderror.get(0).isDisplayed()) {
+                    WebElement ele3 = invaliderror.get(0);
+                    String invalid = driver.findElement(invalidInviteError).getText();
+                    Assert.assertEquals(ErrorMessage, invalid);
+                    wait.until(ExpectedConditions.elementToBeClickable(close));
+                    driver.findElement(close).click();
+                    Thread.sleep(3000);
+                    System.out.println("Invalid invite error displayed.");
+                } else {
+                    System.out.println("Invalid error is not displayed");
                 }
+
+            }}}
+
+public void ellipsisFHireExpert(String ExpertName) throws InterruptedException {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    String xpath = "//h3[contains(text(), '" + ExpertName + "')]/parent::div/parent::div//a/i";
+    List<WebElement> menu = driver.findElements(menuOptions);
+    if (!menu.isEmpty() && menu.get(0).isDisplayed()) {
+        WebElement elee = menu.get(0);
+        String option=driver.findElement(menuOptions).getText();
+        System.out.println(option + " are displayed");
+    } else {
+        System.out.println("menu options re not displayed");
+    }}
+
+public void downloaddetails(String ExpertName) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+    List<WebElement> complExpert = driver.findElements(By.xpath("//h3[contains(text(),'" + ExpertName + "')]/parent::div/parent::div//a/i"));
+    if (!complExpert.isEmpty() && complExpert.get(0).isDisplayed()) {
+        WebElement element = complExpert.get(0);
+        List<WebElement> dOwnload = driver.findElements(download);
+        if (!dOwnload.isEmpty() && dOwnload.get(0).isDisplayed()) {
+            WebElement elee2 = dOwnload.get(0);
+            driver.findElement(download).click();
+            if (driver.findElement(downloadPopup).isDisplayed()) {
+                driver.findElement(downloadYes).click();
             } else {
                 System.out.println("download popup is not displayed");
-
             }
-        }}
-    catch (NoSuchElementException e) {
-                System.out.println("An expected element was not found: " + e.getMessage());}}
+        }else {
+            System.out.println("Expert is not displayed");
 
-    public void emailBodyAndSubject(String Email, String ToasterMessage, String ErrorMessage, String Subject, String Body) throws InterruptedException {
-        try{
-        if (driver.findElement(emailTitle).isDisplayed()){
-            driver.findElement(subject).sendKeys(Subject);
+        }
+    }
+}
+
+public void emailBodyAndSubject(String Email, String ToasterMessage, String ErrorMessage, String Subject, String Body) throws InterruptedException {
+    List<WebElement> emailHeading = driver.findElements(emailTitle);
+    if (!emailHeading.isEmpty() && emailHeading.get(0).isDisplayed()) {
+        WebElement element = emailHeading.get(0);
             Thread.sleep(3000);
             driver.findElement(body).sendKeys(Body);
-            if (driver.findElement(submit).isEnabled()){
-                Thread.sleep(3000);
-                driver.findElement(submit).click();} else if (!driver.findElement(submit).isEnabled()) {
+            if (driver.findElement(submit).isEnabled()) {
+                Thread.sleep(5000);
+                driver.findElement(submit).click();
+            } else if (!driver.findElement(submit).isEnabled()) {
                 driver.findElement(emailTitle).click();
-              if (driver.findElement(bodyError).isDisplayed()) {
-                Thread.sleep(3000);
-                String bodyerror = driver.findElement(bodyError).getText();
-                System.out.println(bodyerror);
-                Assert.assertEquals(ErrorMessage, bodyerror);
-                driver.findElement(close).click();
-            } else if (driver.findElement(emailSentSuccesfu).isDisplayed()) {
-                Thread.sleep(3000);
-                String sentEmail = driver.findElement(emailSentSuccesfu).getText();
-                System.out.println(sentEmail);
-                Assert.assertEquals(ToasterMessage, sentEmail);
-            }  else {
-                System.out.println("email not sent");
+                if (driver.findElement(bodyError).isDisplayed()) {
+                    Thread.sleep(3000);
+                    String bodyerror = driver.findElement(bodyError).getText();
+                    System.out.println(bodyerror);
+                    Assert.assertEquals(ErrorMessage, bodyerror);
+                    driver.findElement(close).click();
+                } else if (driver.findElement(emailSentSuccesfu).isDisplayed()) {
+                    Thread.sleep(3000);
+                    String sentEmail = driver.findElement(emailSentSuccesfu).getText();
+                    System.out.println(sentEmail);
+                    Assert.assertEquals(ToasterMessage, sentEmail);
+                }
 
-            }
-        }}}catch (NoSuchElementException e) {
-            System.out.println("An expected element was not found: " + e.getMessage());}}
+                }}
+    else {
+        System.out.println("email not sent");
+}}
 
-    public void askToassociate(String ToasterMessage, String ExpertName) throws InterruptedException {
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
-        try {
-        if (driver.findElement(By.xpath("//h3[contains(text(),'"+ExpertName+"')]/parent::div/parent::div//a/i")).isDisplayed()) {
-//            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath(" //div[@class='market-wraper']//h3[text()='"+ExpertName+"']")));
-//
-//// Click using JavaScript
-//            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(By.xpath(" //div[@class='market-wraper']//h3[text()='"+ExpertName+"']")));
+public void askToassociate(String ToasterMessagee, String ExpertName, String ToasterMessageee) throws InterruptedException {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    List<WebElement> exPert = driver.findElements(By.xpath("//h3[contains(text(),'" + ExpertName + "')]/parent::div/parent::div//a/i"));
+    if (!exPert.isEmpty() && exPert.get(0).isDisplayed()) {
+        WebElement element = exPert.get(0);
             wait.until(ExpectedConditions.presenceOfElementLocated(verticaEllipsis));
             wait.until(ExpectedConditions.visibilityOfElementLocated(verticaEllipsis));
             wait.until(ExpectedConditions.elementToBeClickable(verticaEllipsis));
-
-// Scroll the element into view
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(verticaEllipsis));
-
-// Click using JavaScript
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(verticaEllipsis));
-
             Thread.sleep(5000);
             String options = driver.findElement(menuOptions).getText();
             System.out.println(options + " are displayed");
             Thread.sleep(3000);
+        List<WebElement> asSociate = driver.findElements(asociate);
+        if (!asSociate.isEmpty() && asSociate.get(0).isDisplayed()) {
+            WebElement element1 = asSociate.get(0);
             if (driver.findElement(asociate).isDisplayed()) {
-                Thread.sleep(3000);
+                Thread.sleep(7000);
                 driver.findElement(asociate).click();
-
                 if (driver.findElement(askToAssociate).isDisplayed()) {
                     String associate = driver.findElement(askToAssociate).getText();
                     System.out.println(associate);
-                    Assert.assertEquals(ToasterMessage, associate);
+                    Assert.assertEquals(ToasterMessagee, associate);
                 } else {
-                    System.out.println("Ask to associate option is not displayed after clicking.");
+                    List<WebElement> unasSociate = driver.findElements(unasociate);
+                    if (!unasSociate.isEmpty() && unasSociate.get(0).isDisplayed()) {
+                        WebElement element2 = asSociate.get(0);
+                        driver.findElement(unasociate).click();
+                        if (driver.findElement(askToUnAssociate).isDisplayed()) {
+                            String associate1 = driver.findElement(askToUnAssociate).getText();
+                            System.out.println(associate1);
+                            Assert.assertEquals(ToasterMessageee, associate1);
+                        }
+                    } else {
+                        System.out.println("Associate button is not displayed.");
+                    }
                 }
             } else {
-                System.out.println("Associate button is not displayed.");
-            }} }catch (NoSuchElementException e) {
-                System.out.println("An expected element was not found: " + e.getMessage());
+                System.out.println("Expert is not displayed");
+            }}}
 
-            }}
-    public void emailOption(String ExpertName) throws InterruptedException {
-        try{
-        if (driver.findElement(By.xpath("//h3[contains(text(),'"+ExpertName+"')]/parent::div/parent::div//a/i")).isDisplayed()) {
+}
+
+public void emailOption(String ExpertName) throws InterruptedException {
+    List<WebElement> eXpert = driver.findElements(By.xpath("//h3[contains(text(),'" + ExpertName + "')]/parent::div/parent::div//a/i"));
+    if (!eXpert.isEmpty() && eXpert.get(0).isDisplayed()) {
+        WebElement element = eXpert.get(0);
             driver.findElement(verticaEllipsis).click();
             Thread.sleep(3000);
             driver.findElement(email).click();
             Thread.sleep(3000);
-        }
-    }catch (NoSuchElementException e) {
-            System.out.println("An expected element was not found: " + e.getMessage());
-        }}}
+        }else {
+        System.out.println("Expert is not displayed");
+    }
+    }
+}

@@ -51,17 +51,17 @@ public class MarketPlace_steps {
 
 
 
-    @And("validate the ask to associate {string} {string}")
-    public void validateTheAskToAssociate(String ToasterMessage, String ExpertName) throws InterruptedException {
-        marketPlacePage.askToassociate(ToasterMessage,ExpertName);
+    @And("validate the ask to associate {string} {string} {string}")
+    public void validateTheAskToAssociate(String ToasterMessagee, String ExpertName, String ToasterMessageee) throws InterruptedException {
+        marketPlacePage.askToassociate(ToasterMessagee, ExpertName,  ToasterMessageee);
     }
 
 
 
 
     @And("validate the send email popup functionality {string} {string} {string} {string} {string}")
-    public void validateTheSendEmailPopupFunctionality(String Email, String ToasterMessage, String ErrorMessage,String Body, String Subject) throws InterruptedException {
-        marketPlacePage.emailBodyAndSubject(Email, ToasterMessage, ErrorMessage,Body, Subject);
+    public void validateTheSendEmailPopupFunctionality(String Email,String ToasterMessage,String ErrorMessage,String Body,String Subject) throws InterruptedException {
+        marketPlacePage.emailBodyAndSubject(Email,ToasterMessage,ErrorMessage,Body,Subject);
     }
 
 
@@ -69,6 +69,9 @@ public class MarketPlace_steps {
     public void validateTheEmailOption(String ExpertName) throws InterruptedException {
         marketPlacePage.emailOption(ExpertName);
     }
+
+
+
 
 
 }

@@ -35,8 +35,8 @@ public class PrioritizedRemediationPlan_page {
     private By notAnsweredLegend = By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='Not Answered']");
     private By updatedOnUp = By.xpath("//span[text()='Fully Implemented ']//following::i[@class='px-1 bi bi-sort-down ng-star-inserted']");
     private By updatedOnDown = By.xpath("//span[text()='Fully Implemented ']//following::i[@class='px-1 bi ng-star-inserted bi-sort-up']");
-    private By nextIcon = By.xpath("//pagination-controls/pagination-template/nav/ul/li/a/span[text()='page']/parent::a");
-    private By previous = By.xpath("//pagination-controls/pagination-template/nav/ul/li[@class='pagination-previous']");
+    private By nextIcon = By.xpath("//li[@class='pagination-next ng-star-inserted']");
+    private By previous = By.xpath("//li[@class='pagination-previous ng-star-inserted']");
     private By numberhyperlink = By.xpath("//span[text()='2']");
     private By prioritizedGrapgh = By.xpath("//b[text()='Plan of Action & Milestones (POA&M) Status']");
     private By openLegend = By.xpath("//highcharts-chart//*[@class='highcharts-root']//*[text()='Open']");
@@ -69,6 +69,7 @@ public class PrioritizedRemediationPlan_page {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(priotizedTitle));
         wait.until(ExpectedConditions.visibilityOfElementLocated(printButton));
+        Thread.sleep(3000);
         driver.findElement(printButton).click();
         Thread.sleep(3000);
     }
@@ -79,17 +80,6 @@ public class PrioritizedRemediationPlan_page {
         js.executeScript("window.scrollBy(0,1000)");
         String assessment = driver.findElement(By.xpath("//div[text()=' Assessment Name: ']/..")).getText();
         System.out.println(assessment);
-//        driver.findElement(By.xpath("//div[text()=' Assessment Name: ']//following::div[text()=' "+AssessmentName+" ']")).click();
-//        if (driver.findElement(By.xpath("//span[text()='In Progress']")).isDisplayed()) {
-//            String status = driver.findElement(By.xpath("//span[text()='In Progress']")).getText();
-//            System.out.println(status);
-//            Thread.sleep(3000);
-//            System.out.println(status);
-//        } else if (driver.findElement(By.xpath("//span[text()='Draft']")).isDisplayed()) {
-//            String status1 = driver.findElement(By.xpath("//span[text()='In Progress']")).getText();
-//            System.out.println(status1);
-//            Thread.sleep(3000);
-//        }
         driver.findElement(progress).isDisplayed();
         Thread.sleep(3000);
         String progresss = driver.findElement(progress).getText();
@@ -108,9 +98,6 @@ public class PrioritizedRemediationPlan_page {
         if (driver.findElement(sprsTitle).isDisplayed()) {
             String sprs = driver.findElement(sprsTitle).getText();
             System.out.println(sprs);
-//        }
-//        else {
-//            System.out.println("SPRS Score is not displayed");
         }
     }
 
@@ -183,22 +170,26 @@ public class PrioritizedRemediationPlan_page {
 
     }
 
-    public void paginationOfimplementationStatus() {
+    public void paginationOfimplementationStatus() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
-        driver.findElement(nextIcon).click();
-        wait.until(ExpectedConditions.elementToBeClickable(previous));
-        driver.findElement(previous).click();
-        wait.until(ExpectedConditions.elementToBeClickable(numberhyperlink));
-        driver.findElement(numberhyperlink).click();
-        WebElement ele = driver.findElement(paginationDropdown);
-        Select dropdown = new Select(ele);
-        dropdown.selectByIndex(1);
-        dropdown.selectByIndex(2);
-        dropdown.selectByIndex(3);
-        dropdown.selectByIndex(4);
-
-    }
+        List<WebElement> paginationElements = driver.findElements(paginationDropdown);
+        if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
+            WebElement paginationDropdownElement = paginationElements.get(0);
+            Thread.sleep(3000);
+            driver.findElement(nextIcon).click();
+            Thread.sleep(3000);
+            driver.findElement(previous).click();
+            Thread.sleep(3000);
+            driver.findElement(numberhyperlink).click();
+            Select dropdown = new Select(paginationDropdownElement);
+            dropdown.selectByIndex(1);
+            dropdown.selectByIndex(2);
+            dropdown.selectByIndex(3);
+            dropdown.selectByIndex(4);
+        } else {
+            System.out.println("Pagination dropdown is not displayed");
+        }
+}
 
     public void poamGraph() {
         if (driver.findElement(poam).isDisplayed()) {

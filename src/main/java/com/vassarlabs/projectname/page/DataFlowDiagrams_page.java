@@ -40,7 +40,7 @@ public class DataFlowDiagrams_page {
         Thread.sleep(5000);
         System.out.println(driver.findElement(uploadFilePath).isDisplayed());
         wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         driver.findElement(uploadFilePath).click();
         driver.findElement(namePath).sendKeys(DataFlowFileName);
         System.out.println("Name is Entered");

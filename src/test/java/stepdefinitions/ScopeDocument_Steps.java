@@ -61,8 +61,8 @@ public class ScopeDocument_Steps {
 
 
 
-    @And("Validate the delete functionality {string}")
-    public void validateTheDeleteFunctionality(String DeletedFileToaster) throws InterruptedException {
-        scopeDocumentPage.deletedFile(DeletedFileToaster);
+    @And("Validate the delete functionality {string} {string}")
+    public void validateTheDeleteFunctionality(String DeletedFileToaster,String ScopeDocFileName) throws InterruptedException {
+        scopeDocumentPage.deletedFile(DeletedFileToaster,ScopeDocFileName);
     }
 }

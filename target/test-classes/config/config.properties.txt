@@ -1,3 +1,0 @@
-browser =chrome
-Username = superadmin
-Password = stanley@123
