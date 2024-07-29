@@ -8,4 +8,4 @@ Feature: Sign In page of Compliance Expert
     And Validate the switch company functionality
     Examples:
       | EmailAddress                 | Password     | Toaster | CompanyName | ToasterMessage                     |
-      | "new.compliance@yopmail.com" | "Vassar@123" | ""      | "Soda labz" | "Sign In Into Company Successfull" |
+      | "smpl.compliance@yopmail.com" | "Vassar@123" | ""      | "Soda labz" | "Sign In Into Company Successfull" |

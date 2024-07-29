@@ -85,7 +85,7 @@ public class InitialSystemSecurityPlanReport_page {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         for (int i = 0; i < 1; i++) {
             wait.until(ExpectedConditions.elementToBeClickable(printButton));
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             driver.findElement(printButton).click();
             Thread.sleep(5000);
         }

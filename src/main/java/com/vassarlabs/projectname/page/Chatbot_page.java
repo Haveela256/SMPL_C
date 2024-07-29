@@ -12,11 +12,10 @@ public class Chatbot_page {
     private WebDriver driver;
     private By maximise=By.xpath("//i[@class='bi bi-fullscreen']");
     private By minimize=By.xpath( "//i[@class='bi bi-fullscreen-exit']");
-    private By micIcon=By.xpath("//i[@class='bi bi-mic-mute-fill']");
-    private By micicon=By.xpath("bi bi-mic-fill");
+    private By micicon=By.xpath("//i[@class='bi bi-mic-mute-fill']");
     private By history=By.xpath("//i[@class='bi bi-envelope-at-fill']");
     private By historyToaster=By.xpath("//div[text()=' No chat history found ']");
-    private By collpase=By.xpath("//span[@class='arrow-icon']");
+    private By collpase=By.xpath("//i[@class='bi bi-chevron-down']");
     private By textfield=By.xpath("//input[@placeholder='Enter your Message']");
     private By sendIcon=By.xpath("//i[@class='bi bi-send-fill']");
     private By userProfileButton=By.xpath("//button[text()='User Profile']");
@@ -47,13 +46,15 @@ public class Chatbot_page {
 
     public void mic() throws InterruptedException {
         WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.elementToBeClickable(micIcon));
-        driver.findElement(micIcon).click();
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.elementToBeClickable(micicon));
         driver.findElement(micicon).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//i[@class='bi bi-mic-fill']")).click();
     }
 
     public void collpase() {
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(collpase));
         driver.findElement(collpase).click();
     }
 

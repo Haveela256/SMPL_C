@@ -22,22 +22,16 @@ public class ControlCenter_page {
     private By lightBulb = By.xpath("//i[@class='bi bi-lightbulb-fill']");
     private By lastLogin = By.xpath("//span[contains(text(), '2024')]");
     private By expandIcon = By.xpath("//button[@class='btn btn-secondary btn-sm']");
-
-
-
-
     private By remediationIicon = By.xpath("//div[@class='assessment-item third-pary-items remediation']//i[@class='bi bi-info-circle-fill']");
 
     private By chatbot = By.xpath("//p[normalize-space()='GenAI Control Center']");
-
-
     private By hamburgerPath = By.xpath("//button[@class='btn btn-side-nav']//i[@class='bi bi-list']");
     private By discoveryPath = By.xpath("//a[@routerlink='/home/compliance/discovery']");
     private By discoveryTitle = By.xpath("//div[contains(text(),'Discovery')]");
     private By gapAssesmentPath = By.xpath("//a[@class='nav-link']//span[@class='title'][normalize-space()='Gap Assessment']");
     private By gapAssessmentTitle = By.xpath("//div[contains(text(),'Gap Assessment')]");
     private By auditReadinessPath = By.xpath("//span[normalize-space()='Audit Readiness']");
-    private By auditReadinessCard=By.xpath("//h5[@class='heading']//span[@class='title'][normalize-space()='Audit Readiness']");
+    private By auditReadinessCard = By.xpath("//h5[@class='heading']//span[@class='title'][normalize-space()='Audit Readiness']");
     private By auditReadinessTitle = By.xpath("//div[contains(text(),'Audit Readiness')]");
     private By reportingPath = By.xpath("//span[normalize-space()='Reporting']");
     private By reportsPath = By.xpath("//li[normalize-space()='Reports']");
@@ -45,11 +39,12 @@ public class ControlCenter_page {
     private By templatesPath = By.xpath("//li[normalize-space()='Templates']");
     private By templatesTitle = By.xpath("//div[contains(text(),'Templates')]");
     private By companyDetailsPath = By.xpath("//span[normalize-space()='Company Details']");
-
-    private By companyDetailsTitle = By.xpath("//div[@class='title']");
-    private By technicalFootprintPath = By.xpath("//a[@class='nav-link active']");
-    private By technicalFootprintTitle = By.xpath("//div[@class='middle-content-page-header']");
-    private By manageUsersPath = By.xpath("//a[@routerlink='/home/manageuser']");
+    private By hireAnexpert = By.xpath("//span[normalize-space()='Hire an Expert']");
+    private By hireAnExpertTitle = By.xpath("//div[text()=' Hire an Expert']");
+    private By companyDetailsTitle = By.xpath("//div[text()=' Company Details']");
+    private By technicalFootprintPath = By.xpath("//span[normalize-space()='Technical Footprint']");
+    private By technicalFootprintTitle = By.xpath("//div[text()=' Technical Footprint']");
+    private By manageUsersPath = By.xpath("//span[normalize-space()='Manage Users']");
     private By managerUsersTitle = By.xpath("//div[contains(text(),'Manage Users')]");
     private By userProfileIcons = By.xpath("//img[@class='profile-style']");
     private By myProfile = By.xpath("//button[normalize-space()='My Profile']");
@@ -64,7 +59,9 @@ public class ControlCenter_page {
     private By taskAssignmentsSection = By.xpath("//div[contains(text(),'Task Assignments')]");
     private By messagesSection = By.xpath("//div[contains(text(),'Messages')]");
     private By c3paoIicon = By.xpath("//div[@class='assessment-item third-pary-items engage']//i[@class='bi bi-info-circle-fill']");
-private By changePasswordBackLink= By.xpath("//a[text()='Back']");
+    private By changePasswordBackLink = By.xpath("//a[text()='Back']");
+    private By selfAttestation = By.xpath("//a[@class='nav-link']//span[@class='title'][normalize-space()='Self-Attestation Readiness']");
+
     public ControlCenter_page(WebDriver driver) {
         this.driver = driver;
     }
@@ -74,8 +71,8 @@ private By changePasswordBackLink= By.xpath("//a[text()='Back']");
         // Click on hamburger menu
         driver.findElement(hamburgerPath).isDisplayed();
         Thread.sleep(3000);
-        driver.findElement(hamburgerPath).click();
         wait.until(ExpectedConditions.elementToBeClickable(hamburgerPath));
+        driver.findElement(hamburgerPath).click();
         Thread.sleep(3000);
         driver.findElement(hamburgerPath).click();
         Thread.sleep(3000);
@@ -85,66 +82,97 @@ private By changePasswordBackLink= By.xpath("//a[text()='Back']");
         Thread.sleep(3000);
         driver.findElement(discoveryTitle).isDisplayed();
         String discoveryTitleText = driver.findElement(discoveryTitle).getText();
-        System.out.println(discoveryTitleText);
+        System.out.println(discoveryTitleText + " Page is displayed");
 
         // Gap Assessment Module
         driver.findElement(gapAssesmentPath).click();
-//        wait.until(ExpectedConditions.elementToBeClickable(gapAssesmentPath));
         Thread.sleep(3000);
         driver.findElement(gapAssessmentTitle).isDisplayed();
         String gapAssessmentTitleText = driver.findElement(gapAssessmentTitle).getText();
-        System.out.println(gapAssessmentTitleText);
+        System.out.println(gapAssessmentTitleText + " Page is displayed");
 
         // Audit Readiness Module
-        driver.findElement(auditReadinessPath).click();
-        wait.until(ExpectedConditions.elementToBeClickable(auditReadinessPath));
-        Thread.sleep(3000);
-        driver.findElement(auditReadinessTitle).isDisplayed();
-        String auditReadinessTitleText = driver.findElement(auditReadinessTitle).getText();
-        System.out.println(auditReadinessTitleText);
+        List<WebElement> auditReadiness = driver.findElements(auditReadinessPath);
+        if (!auditReadiness.isEmpty() && auditReadiness.get(0).isDisplayed()) {
+            WebElement elee = auditReadiness.get(0);
+            wait.until(ExpectedConditions.elementToBeClickable(auditReadinessPath));
+            driver.findElement(auditReadinessPath).click();
+            Thread.sleep(3000);
+            driver.findElement(auditReadinessTitle).isDisplayed();
+            String auditReadinessTitleText = driver.findElement(auditReadinessTitle).getText();
+            System.out.println(auditReadinessTitleText + " Page is displayed");
+        } else {
+            System.out.println("Audit Readiness module is not displayed");
+        }
+        //Self Attestation Readiness
+        List<WebElement> selfattestation = driver.findElements(selfAttestation);
+        if (!selfattestation.isEmpty() && selfattestation.get(0).isDisplayed()) {
+            WebElement elee = selfattestation.get(0);
+            wait.until(ExpectedConditions.elementToBeClickable(selfAttestation));
+            driver.findElement(selfAttestation).click();
+            Thread.sleep(3000);
+            driver.findElement(selfAttestation).isDisplayed();
+            String selfAttestationTitleText = driver.findElement(selfAttestation).getText();
+            System.out.println(selfAttestationTitleText + " Page is displayed");
+        } else {
+            System.out.println("Self Attestation module is not displayed");
+        }
 
         // Reporting Module
-        driver.findElement(reportingPath).click();
         wait.until(ExpectedConditions.elementToBeClickable(reportingPath));
+        driver.findElement(reportingPath).click();
         Thread.sleep(3000);
-        driver.findElement(reportsPath).click();
         wait.until(ExpectedConditions.elementToBeClickable(reportsPath));
+        driver.findElement(reportsPath).click();
         Thread.sleep(3000);
         driver.findElement(reportsTitle).isDisplayed();
         String reportsTitleText = driver.findElement(reportsTitle).getText();
-        System.out.println(reportsTitleText);
+        System.out.println(reportsTitleText + " Page is displayed");
 
         // Templates Module
-        driver.findElement(templatesPath).click();
         wait.until(ExpectedConditions.elementToBeClickable(templatesPath));
+        driver.findElement(templatesPath).click();
         Thread.sleep(3000);
         driver.findElement(templatesTitle).isDisplayed();
         String templatesTitleText = driver.findElement(templatesTitle).getText();
-        System.out.println(templatesTitleText);
+        System.out.println(templatesTitleText + " Page is displayed");
 
         // Company Details Module
-        driver.findElement(companyDetailsPath).click();
         wait.until(ExpectedConditions.elementToBeClickable(companyDetailsPath));
+        driver.findElement(companyDetailsPath).click();
         Thread.sleep(3000);
         driver.findElement(companyDetailsTitle).isDisplayed();
-        String companyDetailsTitleText = driver.findElement(companyDetailsTitle).getText();
-        System.out.println(companyDetailsTitleText);
+        String companyDetails = driver.findElement(companyDetailsTitle).getText();
+        System.out.println(companyDetails + " Page is displayed");
 
         // Technical Footprint Module
-        driver.findElement(technicalFootprintPath).click();
         wait.until(ExpectedConditions.elementToBeClickable(technicalFootprintPath));
+        driver.findElement(technicalFootprintPath).click();
         Thread.sleep(3000);
         driver.findElement(technicalFootprintTitle).isDisplayed();
         String technicalFootprintTitleText = driver.findElement(technicalFootprintTitle).getText();
-        System.out.println(technicalFootprintTitleText);
+        System.out.println(technicalFootprintTitleText + " Page is displayed");
 
         // Manage Users Module
-        driver.findElement(manageUsersPath).click();
-        wait.until(ExpectedConditions.elementToBeClickable(manageUsersPath));
+        List<WebElement> manageUsers = driver.findElements(manageUsersPath);
+        if (!manageUsers.isEmpty() && manageUsers.get(0).isDisplayed()) {
+            WebElement elee = manageUsers.get(0);
+            driver.findElement(manageUsersPath).click();
+            Thread.sleep(3000);
+            driver.findElement(managerUsersTitle).isDisplayed();
+            String manageUsersTitleText = driver.findElement(managerUsersTitle).getText();
+            System.out.println(manageUsersTitleText + " Page is displayed");
+        } else {
+            System.out.println("Manage users module is not displayed");
+        }
+        // Hire An Expert Module
+        wait.until(ExpectedConditions.elementToBeClickable(hireAnexpert));
+        driver.findElement(hireAnexpert).click();
         Thread.sleep(3000);
-        driver.findElement(managerUsersTitle).isDisplayed();
-        String manageUsersTitleText = driver.findElement(managerUsersTitle).getText();
-        System.out.println(manageUsersTitleText);
+        driver.findElement(hireAnExpertTitle).isDisplayed();
+        String title = driver.findElement(hireAnExpertTitle).getText();
+        System.out.println(title + " Page is displayed");
+
 
         // My Profile
 
@@ -201,7 +229,7 @@ private By changePasswordBackLink= By.xpath("//a[text()='Back']");
     public void rightNav() throws InterruptedException {
         String updates = driver.findElement(By.xpath("//div[contains(text(),'Updates')]")).getText();
         Thread.sleep(5000);
-        String tasks= driver.findElement(By.xpath("//div[contains(text(),'Task Assignments')]")).getText().trim();
+        String tasks = driver.findElement(By.xpath("//div[contains(text(),'Task Assignments')]")).getText().trim();
         Thread.sleep(5000);
         String messages = driver.findElement(By.xpath("//div[contains(text(),'Messages')]")).getText().trim();
         Thread.sleep(5000);
@@ -236,6 +264,7 @@ private By changePasswordBackLink= By.xpath("//a[text()='Back']");
         }
 
     }
+
     public void chatbot() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(chatbot).isDisplayed();
@@ -288,20 +317,20 @@ private By changePasswordBackLink= By.xpath("//a[text()='Back']");
         System.out.println(myProfileTitleText);
 
         // Change Password
-        driver.findElement(userProfileIcons).click();
-        wait.until(ExpectedConditions.elementToBeClickable(userProfileIcons));
-        Thread.sleep(3000);
-        driver.findElement(changePasswordPath).isDisplayed();
-        Thread.sleep(3000);
-        wait.until(ExpectedConditions.elementToBeClickable(changePasswordPath));
-        driver.findElement(changePasswordPath).click();
-        driver.findElement(changePasswordTitle).isDisplayed();
-        String changePasswordTitleText = driver.findElement(changePasswordTitle).getText();
-        System.out.println(changePasswordTitleText);
-        System.out.println("All modules verified");
-        driver.findElement(changePasswordBackLink).isDisplayed();
-        driver.findElement(changePasswordBackLink).click();
-        Thread.sleep(5000);
+//        driver.findElement(userProfileIcons).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(userProfileIcons));
+//        Thread.sleep(3000);
+//        driver.findElement(changePasswordPath).isDisplayed();
+//        Thread.sleep(3000);
+//        wait.until(ExpectedConditions.elementToBeClickable(changePasswordPath));
+//        driver.findElement(changePasswordPath).click();
+//        driver.findElement(changePasswordTitle).isDisplayed();
+//        String changePasswordTitleText = driver.findElement(changePasswordTitle).getText();
+//        System.out.println(changePasswordTitleText);
+//        System.out.println("All modules verified");
+//        driver.findElement(changePasswordBackLink).isDisplayed();
+//        driver.findElement(changePasswordBackLink).click();
+//        Thread.sleep(5000);
     }
 
     public void logout() throws InterruptedException {

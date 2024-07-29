@@ -1,13 +1,11 @@
 package com.vassarlabs.projectname.page;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 public class ForgetPassword_page {
     private WebDriver driver;
@@ -98,21 +96,15 @@ public class ForgetPassword_page {
 
         public void backtoSignIn () throws InterruptedException {
         WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
-        try {
-            if (driver.findElement(backToSIgnIn).isDisplayed()) {
+            List<WebElement> backk = driver.findElements(backToSIgnIn);
+            if (!backk.isEmpty() && backk.get(0).isDisplayed()) {
+                WebElement ele = backk.get(0);
                 wait.until(ExpectedConditions.elementToBeClickable(backToSIgnIn)).click();
                 Thread.sleep(3000); // Optionally wait after clicking
             } else {
                 // Handle case where backToSignIn is not displayed
                 System.out.println("Back hyperlink is not displayed");
             }
-        } catch (NoSuchElementException | TimeoutException e) {
-            // Handle exceptions if element is not found or timeout occurs
-            System.out.println("Element backToSignIn not found or clickable within 20 seconds");
-        } catch (InterruptedException e) {
-            // Handle interruption exception if needed
-            e.printStackTrace();
-        }
 }}
 
 

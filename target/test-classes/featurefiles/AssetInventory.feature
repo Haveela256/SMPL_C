@@ -1,7 +1,7 @@
 Feature: Discovery Module
 
 #Asset Inventory tab
-  Scenario Outline: Upload files on Scope Document tab
+  Scenario Outline: Upload files on Asset Inventory tab
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     When Click on the discovery  module Asset Inventory tab
     And Click on Upload File button and enter the <AssetFileName> <File> of asset inventory tab

@@ -1,4 +1,4 @@
-Feature: Sign In page
+Feature: Sign In page of Customer Admin
 
 
   Scenario Outline: Login to the page

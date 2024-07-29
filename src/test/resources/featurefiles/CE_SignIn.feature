@@ -12,9 +12,9 @@ Feature: Sign In page of Compliance Expert
 
 
     Examples:
-      | EmailAddress                  | Password     | ErrorMessage | Toaster | Example  |
-      | "new.compliance@yopmail.com" | "Vassar@123" | ""           | ""      | Positive |
-      | "compliance.test@yopmail.com" | "Vassar123"  | ""                     | "Invalid login attempt." | Negative |
-      | "compliance"                  | "Vassar@123" | ""                     | " Email is Invalid " | Negative |
-      | ""                            | "Vassar@123" | "Email is Required"    | ""      | Negative |
-      | "compliance.test@yopmail.com" | ""           | "Password is Required" | ""      | Negative |
+      | EmailAddress                   | Password     | ErrorMessage           | Toaster                  | Example  |
+      | "nsmpl.compliance@yopmail.com" | "Vassar@123" | ""                     | ""                       | Positive |
+      | "smpl.complianceyopmail.com"   | "Vassar123"  | ""                     | "Invalid login attempt." | Negative |
+      | "compliance"                   | "Vassar@123" | ""                     | " Email is Invalid "     | Negative |
+      | ""                             | "Vassar@123" | "Email is Required"    | ""                       | Negative |
+      | "compliance.test@yopmail.com"  | ""           | "Password is Required" | ""                       | Negative |

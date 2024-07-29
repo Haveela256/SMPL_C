@@ -114,7 +114,7 @@ public class MarketPlace_page {
                 System.out.println("Waiting for the close button to be clickable.");
                 wait.until(ExpectedConditions.elementToBeClickable(close));
                 Thread.sleep(3000);
-                WebElement closeButton = driver.findElement(close);
+                driver.findElement(close).click();
                 System.out.println("Attempting to click the close button.");}
             else {
                 System.out.println("Blank error is not displayed");
@@ -124,7 +124,7 @@ public class MarketPlace_page {
                     String invalid = driver.findElement(invalidInviteError).getText();
                     Assert.assertEquals(ErrorMessage, invalid);
                     wait.until(ExpectedConditions.elementToBeClickable(close));
-                    driver.findElement(close).click();
+                    driver.findElement(cancel).click();
                     Thread.sleep(3000);
                     System.out.println("Invalid invite error displayed.");
                 } else {
@@ -207,7 +207,7 @@ public void askToassociate(String ToasterMessagee, String ExpertName, String Toa
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(verticaEllipsis));
             Thread.sleep(5000);
             String options = driver.findElement(menuOptions).getText();
-            System.out.println(options + " are displayed");
+            System.out.println(options + " is displayed");
             Thread.sleep(3000);
         List<WebElement> asSociate = driver.findElements(asociate);
         if (!asSociate.isEmpty() && asSociate.get(0).isDisplayed()) {

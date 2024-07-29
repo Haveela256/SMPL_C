@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 
 import org.openqa.selenium.By;
@@ -169,33 +170,12 @@ public class ChangePassword_page {
 
 
  public void backHyperlink() throws InterruptedException {
-  try {
    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-   // Wait for the backHyperlink to be visible
-   WebElement backLink = wait.until(ExpectedConditions.visibilityOfElementLocated(backHyperlink));
-
-   if (backLink.isDisplayed()) {
-    System.out.println("Back Hyperlink is displayed");
-    // Click the back hyperlink
-    backLink.click();
-
-    // Wait for the control center to be displayed
-    WebElement controlCenterElement = wait.until(ExpectedConditions.visibilityOfElementLocated(controlCenter));
-
-    if (controlCenterElement.isDisplayed()) {
-     System.out.println("controlCenter is displayed");
-    } else {
-     System.out.println("controlCenter is not displayed after clicking the back hyperlink");
-    }
-   } else {
-    System.out.println("Back Hyperlink is not displayed");
-   }
-  } catch (Exception e) {
-   System.out.println("An error occurred: " + e.getMessage());
+  List<WebElement> backk = driver.findElements(backHyperlink);
+  if (!backk.isEmpty() && backk.get(0).isDisplayed()) {
+   WebElement ele = backk.get(0);
+   driver.findElement(backHyperlink).click();
   }
- }
-
-
-}
-
+  else {
+   System.out.println("Back hyperlink is not displayed");
+  }}}

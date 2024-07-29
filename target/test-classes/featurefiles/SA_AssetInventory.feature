@@ -11,8 +11,8 @@ Feature: Super Admin Discovery module
     And validate the pagination of scope tab
 
     Examples:
-      | EmailAddress         | Password   | Toaster | CompanyCard                 | ToasterMessage                     | DataFlowFileName
-      | "smplappc@gmail.com" | "Bond@009" | ""      | "random3.test@yopmail.com"  | "Sign In Into Company Successfull" | "Data flow image" "Scope File" |
-      | "smplappc@gmail.com" | "Bond@009" | ""      | "vassar.qa@yopmail.com"     | "Sign In Into Company Successfull" | "Data flow pdf" "Evidence"     |
-      | "smplappc@gmail.com" | "Bond@009" | ""      | "Vassar.tester@yopmail.com" | "Sign In Into Company Successfull" | "Doc" "new"                    |
-      | "smplappc@gmail.com" | "Bond@009" | ""      | "vassar.labs@yopmail.com"   | "Sign In Into Company Successfull" | "File" "Scope"                 |
+      | EmailAddress         | Password   | Toaster | CompanyCard                 | ToasterMessage                     | DataFlowFileName  |
+      | "smplappc@gmail.com" | "Bond@009" | ""      | "random3.test@yopmail.com"  | "Sign In Into Company Successfull" | "Data flow image" |
+      | "smplappc@gmail.com" | "Bond@009" | ""      | "vassar.qa@yopmail.com"     | "Sign In Into Company Successfull" | "Data flow pdf"   |
+      | "smplappc@gmail.com" | "Bond@009" | ""      | "Vassar.tester@yopmail.com" | "Sign In Into Company Successfull" | "Doc" "new"       |
+      | "smplappc@gmail.com" | "Bond@009" | ""      | "vassar.labs@yopmail.com"   | "Sign In Into Company Successfull" | "File" "Scope"    |

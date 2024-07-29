@@ -26,6 +26,7 @@ public class HireAnExpert_Page {
     private By requestPath = By.xpath("//span[text()='Requests']");
     private By pendingDropDownPath = By.xpath("//select[@class='form-select form-select-sm ng-pristine ng-valid ng-touched']");
     private By bodyError = By.xpath("//span[text()=' Email Body is Required ']");
+    private By cancelButtonPath = By.xpath("//button[text()='Cancel']");
 
     String expected = "Expected: ";
     String but_Found = "But Found: ";
@@ -78,13 +79,25 @@ public class HireAnExpert_Page {
             driver.findElement(subjectPath).sendKeys(Subject);
             Thread.sleep(1000);
             driver.findElement(bodyPath).sendKeys(body);
-            wait.until(ExpectedConditions.elementToBeClickable(submitButtonPath));
-            driver.findElement(submitButtonPath).click();
-            Thread.sleep(3000);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(toasterPath));
-            Thread.sleep(3000);
-            expectedToaster = driver.findElement(toasterPath).getText();
-            Assert.assertEquals(toaster, expectedToaster);
+            if (Subject.length() < 3 || body.length() < 3) {
+                //span[text()=' Please enter a Subject with at least 3 characters ']
+                if (Subject.length() < 3) {
+                    driver.findElement(By.xpath("//span[text()=' Please enter a Subject with at least 3 characters ']")).isDisplayed();
+                    System.out.println("Please enter a Subject with at least 3 characters");
+                }
+                if (body.isEmpty()) {
+                    System.out.println("Body is Email boody is required");
+                }
+                wait.until(ExpectedConditions.elementToBeClickable(cancelButtonPath));
+                driver.findElement(cancelButtonPath).click();
+            } else {
+                Thread.sleep(1000);
+                wait.until(ExpectedConditions.elementToBeClickable(submitButtonPath));
+                driver.findElement(submitButtonPath).click();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(toasterPath));
+                expectedToaster = driver.findElement(toasterPath).getText();
+                Assert.assertEquals(toaster, expectedToaster);
+            }
 
         } else {
             System.out.println("No experts Found");
@@ -99,28 +112,36 @@ public class HireAnExpert_Page {
             wait.until(ExpectedConditions.elementToBeClickable(subjectPath));
             driver.findElement(subjectPath).sendKeys(Subject);
             driver.findElement(bodyPath).sendKeys(body);
-            wait.until(ExpectedConditions.elementToBeClickable(submitButtonPath));
-            driver.findElement(submitButtonPath).click();
-            Thread.sleep(3000);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(toasterPath));
-            Thread.sleep(3000);
-            expectedToaster = driver.findElement(toasterPath).getText();
-            Assert.assertEquals(expectedToaster, toaster, expected + expectedToaster + but_Found + toaster);
+            if (Subject.length() < 3 || body.length() < 3) {
+                //span[text()=' Please enter a Subject with at least 3 characters ']
+                if (Subject.length() < 3) {
+                    driver.findElement(By.xpath("//span[text()=' Please enter a Subject with at least 3 characters ']")).isDisplayed();
+                    System.out.println("Please enter a Subject with at least 3 characters");
+                }
+                if (body.isEmpty()) {
+                    System.out.println("Body is Email boody is required");
+                }
+                wait.until(ExpectedConditions.elementToBeClickable(cancelButtonPath));
+                driver.findElement(cancelButtonPath).click();
+            } else {
 
-            //Decline
-            wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Decline'][1]"))));
-            driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Decline'][1]")).click();
 
-            //Approve
-            wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Approve'][1]"))));
-            driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Approve'][1]")).click();
+                wait.until(ExpectedConditions.elementToBeClickable(submitButtonPath));
+                driver.findElement(submitButtonPath).click();
 
-        } else if (driver.findElement(bodyError).isDisplayed()) {
-            String error = driver.findElement(bodyError).getText();
-            System.out.println(bodyError);
-            Assert.assertEquals(ErrorMessage, error);
-        } else {
-            System.out.println("Error is not displayed");
+                wait.until(ExpectedConditions.visibilityOfElementLocated(toasterPath));
+
+                expectedToaster = driver.findElement(toasterPath).getText();
+                Assert.assertEquals(expectedToaster, toaster, expected + expectedToaster + but_Found + toaster);
+
+                //Decline
+                wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Decline'][1]"))));
+                driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Decline'][1]")).click();
+
+                //Approve
+                wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Approve'][1]"))));
+                driver.findElement(By.xpath("//div[@class='card ng-star-inserted'][1]/descendant::button[text()='Approve'][1]")).click();
+            }
         }
     }
 }

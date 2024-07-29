@@ -1,6 +1,6 @@
 Feature: Audit Readiness Module
 
-  Scenario Outline: Validate Gap Assessment Module
+  Scenario Outline: Validate Audit Readiness Module
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     Given Validate Select year dropdown for audit readiness
     And validate sort icon of updated on and assessment name columns

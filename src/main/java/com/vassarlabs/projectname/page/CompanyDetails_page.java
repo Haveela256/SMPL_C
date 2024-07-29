@@ -1,6 +1,7 @@
 package com.vassarlabs.projectname.page;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,13 +12,14 @@ import org.testng.Assert;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
+import java.util.List;
 
 public class CompanyDetails_page {
     private WebDriver driver;
     private By companydetailsModule = By.xpath("//span[text()='Company Details']");
     private By editButton = By.xpath("//button[@class='btn btn-primary btn-sm']"); // edit_button = driver.find_element(By.XPATH, "//button[contains(@class, 'btn') and contains(@class, 'btn-primary') and contains(@class, 'btn-sm') and .//i[contains(@class, 'bi') and contains(@class, 'bi-pencil-square')]]")
 
-    private By replaceIcon = By.xpath("//i[@class='bi bi-repeat']");
+    private By replaceIcon = By.xpath("//button[@class='btn upload-btn btn-sm ng-star-inserted']/i[@class='bi bi-repeat']");
     private By companyNameFiled = By.xpath("//input[@placeholder='Enter Company Name']");
     private By fienNo = By.xpath("//input[@formcontrolname='feinNo']");
 
@@ -82,8 +84,6 @@ public class CompanyDetails_page {
     public void addDetails(String CompanyName, String FEINno, String URL, String DUNSno, String Phone, String AddressOne, String AddressTwo, String ZipCode, String City) throws InterruptedException, AWTException {
         WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
         editButton();
-
-// Clear and enter new values in the fields with waits
         wait.until(ExpectedConditions.elementToBeClickable(companyNameFiled)).clear();
         driver.findElement(companyNameFiled).sendKeys(CompanyName);
 
@@ -100,25 +100,10 @@ public class CompanyDetails_page {
         driver.findElement(dUNSno).sendKeys(DUNSno);
 
         Robot robot = new Robot();
-
-        wait.until(ExpectedConditions.elementToBeClickable(phone));
-
-        // Click on the element to focus
-        driver.findElement(phone).click();
-
-        // Clear the input using Robot class (Control + A then Backspace)
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_A);
-        robot.keyRelease(KeyEvent.VK_A);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_BACK_SPACE);
-        robot.keyRelease(KeyEvent.VK_BACK_SPACE);
-
-        // Wait for 3 seconds
-        Thread.sleep(3000);
-
-        // Send the keys to the element using WebDriver's sendKeys
-        driver.findElement(phone).sendKeys(Phone);
+        WebElement phoneElement = wait.until(ExpectedConditions.elementToBeClickable(phone));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value='';", phoneElement);
+        phoneElement.sendKeys(Phone);
 
         wait.until(ExpectedConditions.elementToBeClickable(address1)).clear();
         driver.findElement(address1).sendKeys(AddressOne);
@@ -141,33 +126,45 @@ public class CompanyDetails_page {
     }
 
     public void profile(String File, String ReplaceFile) throws InterruptedException {
-        editButton();
-        if (driver.findElement(browse).isDisplayed()) {
-            Thread.sleep(3000);
-            driver.findElement(browse).sendKeys(File);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        List<WebElement> browseLink = driver.findElements(browse);
+        List<WebElement> replaceButton = driver.findElements(replaceIcon);
+
+        if (!browseLink.isEmpty() && browseLink.get(0).isDisplayed()) {
+            WebElement ele = browseLink.get(0);
+            ele.sendKeys(File);
             System.out.println("File selected");
-            Thread.sleep(7000);
-            if (driver.findElement(cropPopup).isDisplayed()) {
-                driver.findElement(cropPopupCancel).isDisplayed();
-                driver.findElement(cropPopupCancel).click();
-            }
-            driver.findElement(browse).sendKeys(File);
-            System.out.println("File selected");
-            Thread.sleep(7000);
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(cropPopupTitle));
             if (driver.findElement(cropPopupTitle).isDisplayed()) {
-                driver.findElement(cropMinus).click();
-                driver.findElement(cropPlus).click();
-                driver.findElement(fitImage).click();
-                driver.findElement(ok).isDisplayed();
-                Thread.sleep(3000);
-                driver.findElement(ok).click();
+                performCropActions(wait);
             }
-            if (driver.findElement(replaceIcon).isDisplayed()) {
-                Thread.sleep(9000);
-                driver.findElement(replaceIcon).sendKeys(ReplaceFile);
+        } else if (!replaceButton.isEmpty() && replaceButton.get(0).isDisplayed()) {
+            WebElement ele1 = replaceButton.get(0);
+            System.out.println("Replace icon is displayed");
+            ele1.sendKeys(ReplaceFile);
+            System.out.println("File uploaded");
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(cropPopupTitle));
+            if (driver.findElement(cropPopupTitle).isDisplayed()) {
+                performCropActions(wait);
             }
+        } else {
+            System.out.println("Neither Browse hyperlink nor Replace icon is displayed");
         }
     }
+
+    private void performCropActions(WebDriverWait wait) {
+        driver.findElement(cropMinus).click();
+        driver.findElement(cropPlus).click();
+        driver.findElement(fitImage).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ok));
+        driver.findElement(ok).click();
+    }
+
+
+
     public void cancelButton() throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(cancelButton).click();

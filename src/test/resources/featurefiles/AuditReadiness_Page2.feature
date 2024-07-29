@@ -1,6 +1,6 @@
 Feature: Audit Readiness Module
 
-  Scenario Outline: Validate Gap Assessment Module
+  Scenario Outline: Validate Audit Readiness Module
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     And Validate the Card functionality <Cards> <AssessmentName>
     And Validate the CMMC Regulation tab <Cards> <AssessmentName> <Regulationtabs> <UploadFile> <ReuploadFile> <JustificationToaster> <DeletedFileToaster> <EditText>
@@ -11,6 +11,8 @@ Feature: Audit Readiness Module
     And Validate the pagination of uploaded files table
     And Validate upload policy button <UploadPolicy> <PolicyDocToaster>
     And Validate the card status <Cards> <AssessmentName>
+
+
 
 
 

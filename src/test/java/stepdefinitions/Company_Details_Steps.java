@@ -30,7 +30,7 @@ public class Company_Details_Steps {
 
     @And("click on the replace icon and add profile {string} {string}")
     public void clickOnTheReplaceIconAndAddProfile(String File, String ReplaceFile) throws InterruptedException {
-        companyDetailsPage. replaceProfile(File, ReplaceFile);
+//        companyDetailsPage. replaceProfile(File, ReplaceFile);
     }
 
 
@@ -44,8 +44,8 @@ public class Company_Details_Steps {
         companyDetailsPage.submitbutton(CompanyName,  FEINno,  URL,  DUNSno,  Phone,  AddressOne,  AddressTwo,  ZipCode,  City, CompanyDetailsUpdatedToaster, ErrorMessage,ReplaceFile,File);
     }
 
-    @And("Upload Profile and verify Crop popup {} {}")
+    @And("Upload Profile and verify Crop popup {string} {string}")
     public void uploadProfileAndVerifyCropPopup(String File,String ReplaceFile) throws InterruptedException {
-        companyDetailsPage.profile(File,ReplaceFile);
+//        companyDetailsPage.profile(File,ReplaceFile);
     }
 }

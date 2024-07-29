@@ -2,7 +2,11 @@ package com.vassarlabs.projectname.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class CE_Landing_page {
     private WebDriver driver;
@@ -13,8 +17,10 @@ public class CE_Landing_page {
     }
 
     public void companyCard(String CompanyName) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
         if(driver.findElement(By.xpath("//h5[text()='"+CompanyName+"']/../../..")).isDisplayed()){
             Thread.sleep(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h5[text()='"+CompanyName+"']/../../..")));
             driver.findElement(By.xpath("//h5[text()='"+CompanyName+"']/../../..")).click();
             Thread.sleep(3000);
         }
@@ -31,4 +37,5 @@ public class CE_Landing_page {
         driver.findElement(switchCompany).click();
         Thread.sleep(3000);
     }
+
 }

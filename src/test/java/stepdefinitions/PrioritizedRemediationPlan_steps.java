@@ -69,5 +69,8 @@ prioritizedRemediationPlanPage.sortPoam();
     }
 
 
-
+    @And("validate the pagination of poam table")
+    public void validateThePaginationOfPoamTable() {
+        prioritizedRemediationPlanPage.poamPagination();
+    }
 }

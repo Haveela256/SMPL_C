@@ -1,6 +1,6 @@
 Feature: Prioritized Remeditaion Plan report verification
 
-  Scenario Outline: Validate Prioritized Remeditaion Plan repor
+  Scenario Outline: Validate Prioritized Remeditaion Plan report
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     And click on the Prioritized Remeditaion Plan card  <AssessmentName>
     And validate the print button
@@ -14,6 +14,7 @@ Feature: Prioritized Remeditaion Plan report verification
     And verify the poam graph
     And validate the legends of poam graph
     And Validate the sort icons of poam table
+
     Examples:
       | EmailAddress            | Password     | Toaster | AssessmentName       | RegulationCards                                                                                                                                                                                                                                                                                                   |
       | "Vassar.qa@yopmail.com" | "Vassar@123" | ""      | "New QA assessment3" | "Access Control,Physical Protection,Situational Awareness,Systems and Communications Protection,Identification and Authentication,Media Protection"                                                                                                                                                               |

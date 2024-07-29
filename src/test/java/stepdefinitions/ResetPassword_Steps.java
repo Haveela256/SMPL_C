@@ -21,9 +21,11 @@ public class ResetPassword_Steps {
 
 
 
-    @And("verify errors messages {string} {string} {string} {string} {string} {string}")
+
+    @And("verify error messages {string} {string} {string} {string} {string} {string}")
     public void verifyErrorsMessages(String PasswordCharacterError,String PasswordUppercaseError,String PasswordsError,String NewPasswordError,String ConfirmPasswordError,String ErrorToaster) {
         resetPasswordPage.veifyError(PasswordCharacterError, PasswordUppercaseError, PasswordsError, NewPasswordError, ConfirmPasswordError, ErrorToaster);
+
     }
     }
 

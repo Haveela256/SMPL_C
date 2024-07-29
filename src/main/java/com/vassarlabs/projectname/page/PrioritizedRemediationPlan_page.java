@@ -228,4 +228,8 @@ public class PrioritizedRemediationPlan_page {
                 System.out.println("Table is not displayed.");
             }
         }
+
+    public void poamPagination() {
+
     }
+}

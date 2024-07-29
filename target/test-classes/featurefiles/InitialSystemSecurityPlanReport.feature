@@ -1,6 +1,6 @@
-Feature: InitialSystemSecurityPlanReport
+Feature: Initial System Security Plan Report
 
-  Scenario Outline: Validate Gap Assessment Module
+  Scenario Outline: Validate Initial System Security Plan Report
     When Validate the Sign In button functionality by entering valid and invalid credentials <EmailAddress> <Password>  Verify the signIn status <Toaster>
     And Validate the Back icon functionality
     And Select assessment from dropdown <AssessmentName>

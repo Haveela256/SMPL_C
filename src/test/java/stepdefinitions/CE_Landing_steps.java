@@ -23,5 +23,4 @@ public class CE_Landing_steps {
     public void validateTheSwitchCompanyFunctionality() throws InterruptedException {
         ceLandingPage.switchtoCompany();
     }
-
 }

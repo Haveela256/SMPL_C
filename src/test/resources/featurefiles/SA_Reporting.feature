@@ -1,7 +1,7 @@
-Feature: Super admin Company details Module
+Feature: Super admin Reporting module
 
 
-  Scenario Outline: Open Company details of a company
+  Scenario Outline: Validate the Reporting module
     When Validate the Sign In button functionality by entering valid,invalid credentials <EmailAddress> <Password> and  Verify the signIn status <Toaster>
     And Validate the Company functionality <CompanyCard> <ToasterMessage>
     And Click on the Reporting module and click on the Reports sub-module

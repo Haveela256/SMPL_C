@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GapAssessmentChatbot_page {
     private WebDriver driver;
-    private By gapAssessmentModule = By.xpath("//span[text()='Gap Assessment']");
+    private By gapAssessmentModule = By.xpath("//span[normalize-space()='Initial Gap Assessment']");
     private By genAichatbot = By.xpath("//div[@class='chat-box']");
     private By newAssessment = By.xpath("//button[normalize-space()='Create New Assessment']");
     private By textfield = By.xpath("//input[@placeholder='Enter your Message']");
@@ -52,24 +52,24 @@ public class GapAssessmentChatbot_page {
 
     public void gapAssessmentModule() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         if (driver.findElement(controlCenterTitle).isDisplayed()) {
             Thread.sleep(3000);
             wait.until(ExpectedConditions.visibilityOfElementLocated(gapAssessmentModule));
             Thread.sleep(3000);
             wait.until(ExpectedConditions.elementToBeClickable(gapAssessmentModule));
             driver.findElement(gapAssessmentModule).click();
-            Thread.sleep(4000);
+            Thread.sleep(9000);
         }
     }
 
     public void createNewAssessment(String AssessmentName, String Level, String Impact, String AssessmentCount) throws InterruptedException, AWTException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        int count = Integer.parseInt(AssessmentCount);
-        for (int i = 0; i < count; i++) {
-            String currentAssessmentName = AssessmentName + (i + 1);
+//        int count = Integer.parseInt(AssessmentCount);
+//        for (int i = 0; i < count; i++) {
+//            String currentAssessmentName = AssessmentName + (i);
             if (driver.findElement(genAichatbot).isDisplayed()) {
-                Thread.sleep(4000);
+                Thread.sleep(5000);
                 wait.until(ExpectedConditions.elementToBeClickable(newAssessment));
                 driver.findElement(newAssessment).click();
                 Thread.sleep(3000);
@@ -77,7 +77,7 @@ public class GapAssessmentChatbot_page {
                 // Provide assessment name
                 wait.until(ExpectedConditions.visibilityOfElementLocated(chatbotAskingForName));
                 wait.until(ExpectedConditions.visibilityOfElementLocated(textfield));
-                driver.findElement(textfield).sendKeys(currentAssessmentName);
+                driver.findElement(textfield).sendKeys(AssessmentName);
                 driver.findElement(sendicon).click();
                 Thread.sleep(3000);
 
@@ -126,9 +126,9 @@ public class GapAssessmentChatbot_page {
                     Thread.sleep(3000);
                     wait.until(ExpectedConditions.elementToBeClickable(gapAssessmentModule));
                     driver.findElement(gapAssessmentModule).click();
-                    Thread.sleep(3000);
+                    Thread.sleep(8000);
                     WebElement uploadedFile = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("//tbody/tr/td//span[text()='" + currentAssessmentName + "']")));
+                            By.xpath("//tbody/tr/td//span[text()='" + AssessmentName+ "']")));
                     Thread.sleep(3000);
                     if (uploadedFile.isDisplayed()) {
                         List<WebElement> files = driver.findElements(table);
@@ -139,14 +139,14 @@ public class GapAssessmentChatbot_page {
                             String addedFile = file.getText();
                             System.out.println("Assessment name found: " + addedFile);
                             Thread.sleep(5000);
-                            if (currentAssessmentName.equals(addedFile)) {
-                                Assert.assertEquals(currentAssessmentName, addedFile);
+                            if (AssessmentName.equals(addedFile)) {
+                                Assert.assertEquals(AssessmentName, addedFile);
                                 assessmentFound = true;
                                 break;
                             }
                         }
                         if (!assessmentFound) {
-                            System.out.println("Assessment name '" + currentAssessmentName + "' not found");
+                            System.out.println("Assessment name '" + AssessmentName + "' not found");
                         }
                     } else {
                         System.out.println("No assessments found");
@@ -154,7 +154,7 @@ public class GapAssessmentChatbot_page {
                 }
             }
         }
-    }
+
         public void updateTechnicalFootprint(String AssessmentName, String Level, String Impact) throws InterruptedException {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 //        boolean assessmentCreated = true;  // This should be set based on actual assessment creation status

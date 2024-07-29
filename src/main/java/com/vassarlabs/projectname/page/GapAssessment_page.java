@@ -16,8 +16,8 @@ public class GapAssessment_page {
     private WebDriver driver;
     private By selectYearPath = By.xpath("//select//option[text()='Select Year']/..");
     private By yearPath = By.xpath("//option[text()='2024']");
-    private By updatedOnUp = By.xpath("//i[@class='px-1 bi bi-sort-up']");
-    private By updatedOnDown = By.xpath("//i[@class='px-1 bi bi-sort-down']");
+    private By updatedOnUp = By.xpath("//i[@class='px-1 bi ng-star-inserted bi-sort-up']");
+    private By updatedOnDown = By.xpath("//i[@class='px-1 bi bi-sort-down ng-star-inserted']");
     private By assessmentDown = By.xpath("//span[text()='Assessment Name ']/parent::div/span/i[contains(@class,'down')]");
     private By assessmentUp = By.xpath("//span[text()='Assessment Name ']/parent::div/span/i[contains(@class,'up')]");
     private By assessmentIcon = By.xpath("//i[@class='px-1 bi bi-filter']");
@@ -34,8 +34,8 @@ public class GapAssessment_page {
     private By popupNoButton = By.xpath("//button[text()='No']");
     private By popupDeleteButton = By.xpath("//button[text()='Delete']");
     private By filedeletedToaster = By.xpath("//div[@aria-label='File deleted successfully']");
-    private By nextIcon = By.xpath("//li[@class='pagination-next ng-star-inserted']//a");
-    private By previous = By.xpath("//li[@class='pagination-previous ng-star-inserted']//a");
+    private By nextIcon = By.xpath("//li[@class='pagination-next']");
+    private By previous = By.xpath("//li[@class='pagination-previous']");
     private By numberhyperlink = By.xpath("//span[text()='2']");
     private By popup = By.xpath("//span[text()='Are you sure to delete ?']");
     private By uploadIcon = By.xpath("//i[@class='bi bi-upload cursor']");
@@ -67,6 +67,7 @@ public class GapAssessment_page {
     private By existingAssessmentError = By.xpath("//div[text()=' Assessment Name Already Exist Please Choose Another Assessment name !!! ']");
     private By collapseChatbot = By.xpath("//button[@class='btn btn-sm d-none d-md-block']//i[@class='bi bi-chevron-down']");
     boolean errorToaster = false;
+    private By assessmentFilter=By.xpath("//i[@class='px-1 bi bi-filter ng-star-inserted']");
 
 
     public GapAssessment_page(WebDriver driver) {
@@ -87,40 +88,24 @@ public class GapAssessment_page {
     }
 
     public void sortIcons() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         if (driver.findElement(By.xpath("//table")).isDisplayed()) {
-            Thread.sleep(2000);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(updatedOnDown));
             if (driver.findElements(updatedOnDown).size() > 0) {
-                Thread.sleep(2000);
                 wait.until(ExpectedConditions.elementToBeClickable(updatedOnDown));
-                driver.findElement(updatedOnDown).click();
-                Thread.sleep(3000);
+                driver.findElement(updatedOnDown).click();}
+                if (driver.findElements(assessmentFilter).size() > 0) {
+                    wait.until(ExpectedConditions.elementToBeClickable(assessmentFilter));
+                    driver.findElement(assessmentFilter).click();
             }
-            Thread.sleep(2000);
-            driver.findElement(updatedOnUp).click();
-            if (driver.findElements(assessmentIcon).size() > 0) {
-                Thread.sleep(2000);
-                wait.until(ExpectedConditions.elementToBeClickable(assessmentIcon));
-                driver.findElement(assessmentIcon).click();
-                Thread.sleep(3000);
-            }
-            Thread.sleep(2000);
-            if (driver.findElements(assessmentUp).size() > 0) {
-                Thread.sleep(2000);
-                wait.until(ExpectedConditions.elementToBeClickable(assessmentUp));
-                driver.findElement(assessmentUp).click();
-                Thread.sleep(3000);
-            }
-            Thread.sleep(3000);
-            driver.findElement(assessmentDown).click();
         }
     }
-
     public void copyIcon(String CopyAssessmentToaster, String CopyName, String RenameAssessment, String ErrorToaster) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.elementToBeClickable(collapseChatbot));
-        driver.findElement(collapseChatbot).click();
-        Thread.sleep(4000);
+        Thread.sleep(3000);
+//        wait.until(ExpectedConditions.elementToBeClickable(collapseChatbot));
+//        driver.findElement(collapseChatbot).click();
+//        Thread.sleep(4000);
         List<WebElement> paginationElements = driver.findElements(paginationDropdown);
         if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
             WebElement ele = paginationElements.get(0);
@@ -234,7 +219,7 @@ public class GapAssessment_page {
 
     public void deleteIcon(String DeletedFileToaster, String AssessmentName, String RenameAssessment) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        boolean isAssessmentDisplayed = !driver.findElements(By.xpath("//table//tr//td[2]//span[text()='" + AssessmentName + "']")).isEmpty();
+        boolean isAssessmentDisplayed = !driver.findElements(By.xpath("//table//tr//td[2]//span[text()='" + RenameAssessment + "']")).isEmpty();
         if (isAssessmentDisplayed) {
             // Click the delete icon
             WebElement deleteIconElement = wait.until(ExpectedConditions.elementToBeClickable(deleteIcon));
@@ -257,11 +242,14 @@ public class GapAssessment_page {
 
     public void pagination() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.navigate().refresh();
         List<WebElement> paginationElements = driver.findElements(paginationDropdown);
         if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
             WebElement ele = paginationElements.get(0);
             Select dropdown = new Select(ele);
-            dropdown.selectByIndex(1);
+            dropdown.selectByIndex(0);
+            Thread.sleep(9000);
+            wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
             driver.findElement(nextIcon).click();
             Thread.sleep(3000);
             driver.findElement(previous).click();

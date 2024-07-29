@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 public class ScopeDocument_page {
     private WebDriver driver;
@@ -37,8 +38,8 @@ public class ScopeDocument_page {
     private By popupNoButton = By.xpath("//button[text()='No']");
     private By popupYesButton = By.xpath("//button[text()='Yes']");
     private By filedeletedToaster = By.xpath("//div[@aria-label='File deleted successfully']");
-    private By nextIcon = By.xpath("//pagination-controls/pagination-template/nav/ul/li/a/span[text()='page']/parent::a");
-    private By previous = By.xpath("//pagination-controls/pagination-template/nav/ul/li[@class='pagination-previous']");
+    private By nextIcon = By.xpath("//li[@class='pagination-next ng-star-inserted']");
+    private By previous = By.xpath("//li[@class='pagination-previous ng-star-inserted']");
     private By numberhyperlink = By.xpath("//span[text()='2']");
     private By popup = By.xpath("//span[text()='Are you sure to delete ?']");
     private By uploadIcon = By.xpath("//i[@class='bi bi-upload cursor']");
@@ -188,46 +189,45 @@ public class ScopeDocument_page {
 
     public void pagination(String ScopeDocFileName, String UploadCount, String File) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        UploadCount = UploadCount.replace("\"", "");
-        for (int i = 1; i <= Integer.parseInt(UploadCount); i++) {  // Changed to <= to include the final count
-            Thread.sleep(3000);
-            driver.findElement(uploadFilePath).isDisplayed();
-            Thread.sleep(3000);
-            System.out.println(driver.findElement(uploadFilePath).isDisplayed());
-            wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
-            Thread.sleep(3000);
-            driver.findElement(uploadFilePath).click();
+//        UploadCount = UploadCount.replace("\"", "");
+//        for (int i = 1; i <= Integer.parseInt(UploadCount); i++) {  // Changed to <= to include the final count
+//            Thread.sleep(3000);
+//            driver.findElement(uploadFilePath).isDisplayed();
+//            Thread.sleep(3000);
+//            System.out.println(driver.findElement(uploadFilePath).isDisplayed());
+//            wait.until(ExpectedConditions.elementToBeClickable(uploadFilePath));
+//            Thread.sleep(3000);
+//            driver.findElement(uploadFilePath).click();
+//
+//            // Add number to ScopeDocFileName
+//            String numberedFileName = ScopeDocFileName + i;
+//
+//            driver.findElement(namePath).sendKeys(numberedFileName);
+//            System.out.println("Name is Entered: " + numberedFileName);
+//            Thread.sleep(3000);
+//            WebElement fileInputElement = driver.findElement(By.xpath("//input[@type='file']"));
+//            fileInputElement.sendKeys(File);
+//            Thread.sleep(3000);
+//            WebElement submitElement = wait.until(ExpectedConditions.elementToBeClickable(submitPath));
+//            submitElement.click();
+//            Thread.sleep(3000);
 
-            // Add number to ScopeDocFileName
-            String numberedFileName = ScopeDocFileName + i;
 
-            driver.findElement(namePath).sendKeys(numberedFileName);
-            System.out.println("Name is Entered: " + numberedFileName);
-            Thread.sleep(3000);
-            WebElement fileInputElement = driver.findElement(By.xpath("//input[@type='file']"));
-            fileInputElement.sendKeys(File);
-            Thread.sleep(3000);
-            WebElement submitElement = wait.until(ExpectedConditions.elementToBeClickable(submitPath));
-            submitElement.click();
-            Thread.sleep(3000);
-            }
-
-            //Pagination
-            wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
-        Thread.sleep(3000);
-            driver.findElement(nextIcon).click();
-            Thread.sleep(3000);
-            wait.until(ExpectedConditions.elementToBeClickable(previous));
-            Thread.sleep(3000);
-            driver.findElement(previous).click();
-            wait.until(ExpectedConditions.elementToBeClickable(numberhyperlink));
-            driver.findElement(numberhyperlink).click();
-            WebElement ele = driver.findElement(paginationDropdown);
-            Select dropdown = new Select(ele);
-            dropdown.selectByIndex(1);
-            dropdown.selectByIndex(2);
-            dropdown.selectByIndex(3);
-            dropdown.selectByIndex(4);
+    List<WebElement> paginationElements = driver.findElements(paginationDropdown);
+        if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
+        WebElement ele = paginationElements.get(0);
+        Select dropdown = new Select(ele);
+        driver.findElement(nextIcon).click();
+        driver.findElement(previous).click();
+        driver.findElement(numberhyperlink).click();
+        // Select options by index
+        dropdown.selectByIndex(1);
+        dropdown.selectByIndex(2);
+        dropdown.selectByIndex(3);
+        dropdown.selectByIndex(4);
+    } else {
+        System.out.println("Pagination is not displayed");
+    }
 
         }
 

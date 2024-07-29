@@ -126,6 +126,7 @@ public class TechnicalFootprint_page {
                 driver.findElement(fifthQuestionTextfield).sendKeys( Keys.CONTROL + "a" + Keys.DELETE);
                 driver.findElement(fifthQuestionTextfield).sendKeys(FifthQstnPurposeOfSystem);
                 Thread.sleep(3000);
+                driver.findElement(fifthQuestion).click();
             } else {
                 System.out.println("data is not entered");
             }
@@ -148,6 +149,7 @@ public class TechnicalFootprint_page {
 // Print the questions list (assuming 'questions' should be 'seventhQuestions')
         System.out.println(seventhQuestions);
         if (driver.findElement(seventhQuestion).isDisplayed()) {
+            Thread.sleep(3000);
             driver.findElement(seventhQuestion).click();
             driver.findElement(By.xpath("//input[@type='checkbox']//following::label[text()='"+seventhOptions+"']")).click();
             Thread.sleep(3000);
@@ -194,6 +196,7 @@ public class TechnicalFootprint_page {
 
 // Iterate through the questions and check their presence in the graph
         if (driver.findElement(ninethQuestion).isDisplayed()) {
+            Thread.sleep(3000);
             driver.findElement(ninethQuestion).click();
             Thread.sleep(3000);
             driver.findElement(By.xpath("//input[@type='checkbox']//following::label[text()='"+ninthOptions+"']")).click();
@@ -209,6 +212,7 @@ public class TechnicalFootprint_page {
                         System.out.println(questions);
                         // Iterate through the questions and check their presence in the graph
                             if (driver.findElement(tenthQuestion).isDisplayed()) {
+                                Thread.sleep(3000);
                                 driver.findElement(tenthQuestion).click();
                                 driver.findElement(By.xpath("//label[text()='"+tenthOptions+"']/.././/input")).click();
                                 System.out.println(tenthOptions + " is clicked");
@@ -222,6 +226,7 @@ public class TechnicalFootprint_page {
                             System.out.println(questions);
                             // Iterate through the questions and check their presence in the graph
                                 if (driver.findElement(eleventhQuestion).isDisplayed()) {
+                                    Thread.sleep(3000);
                                     driver.findElement(eleventhQuestion).click();
                                     driver.findElement(By.xpath("//label[text()='" + eleventhOptions + "']/.././/input")).click();
                                     System.out.println(eleventhOptions + " is clicked");
@@ -235,6 +240,7 @@ public class TechnicalFootprint_page {
                                 System.out.println(questions);
                                 // Iterate through the questions and check their presence in the graph
                                     if (driver.findElement(twelthQuestion).isDisplayed()) {
+                                        Thread.sleep(3000);
                                         driver.findElement(twelthQuestion).click();
                                         Thread.sleep(3000);
                                         driver.findElement(By.xpath("//label[text()='" + twelthOptions + "']/.././/input")).click();
