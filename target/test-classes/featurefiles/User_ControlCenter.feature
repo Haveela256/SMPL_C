@@ -15,10 +15,19 @@ Feature: User Control Center
     And Verify the Audit Readiness card <AuditReadinessSSP>    <AuditReadinessPolicies>    <AuditReadinessSupport>    <AuditReadinessPiee>    <AuditReadinessChecklist>
     And Validate  icon of the Engage CPAO card <EngageCPAO>
     And Validate the Expand icon functionality of Side panel
+<<<<<<< HEAD
+=======
+    And Verify the chatbot
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
     And Validate the User Profile icon or Expand icon functionality
     Then Validate the Logout option functionality
 
 
     Examples:
+<<<<<<< HEAD
       | EmailAddress            | Password     | Toaster | CMMCJourney          | Remediation   | EngageCPAO     | DiscoveryScope   | DiscoveryAsset    | DiscoveryDatFlow | GapAssessmentBaseline                 | GapAssessmentPoam                   | GapAssessmentPiee                                             | GapAssessmentPrioritized       | GapAssessmentRisk      | GapAssessmentIncident    | GapAssessmentMSP                   | AuditReadinessSSP                  | AuditReadinessPolicies          | AuditReadinessSupport             | AuditReadinessPiee                                       | AuditReadinessChecklist         |
       | "smpl.user@yopmail.com" | "Vassar@123" | ""      | "Start CMMC Journey" | "Remediation" | "Engage C3PAO" | "Scope Document" | "Asset Inventory" | "Data flow"      | "Baseline System Security Plan (SSP)" | "Plan of Action & Milestone (POAM)" | "Assessment PIEE Submission (Ask Kayla, our GenAI Assistant)" | "Prioritized Remediation Plan" | "Risk Assessment Plan" | "Incident Response Plan" | "MSP Shared Responsibility Matrix" | "Final System Security Plan (SSP)" | "Final Policies and Procedures" | "Supporting Evidence & Artifacts" | "Final PIEE Submission (Ask Kayla, our GenAI Assistant)" | "Readiness Checklist for C3PAO" |
+=======
+      | EmailAddress | Password     | Toaster | CMMCJourney          | Remediation   | EngageCPAO     | DiscoveryScope   | DiscoveryAsset    | DiscoveryDatFlow | GapAssessmentBaseline                 | GapAssessmentPoam                   | GapAssessmentPiee                                             | GapAssessmentPrioritized       | GapAssessmentRisk      | GapAssessmentIncident    | GapAssessmentMSP                   | AuditReadinessSSP                  | AuditReadinessPolicies          | AuditReadinessSupport             | AuditReadinessPiee                                       | AuditReadinessChecklist         |
+      | "Vassar@123"           | "Vassar@123" | ""      | "Start CMMC Journey" | "Remediation" | "Engage C3PAO" | "Scope Document" | "Asset Inventory" | "Data flow"      | "Baseline System Security Plan (SSP)" | "Plan of Action & Milestone (POAM)" | "Assessment PIEE Submission (Ask Kayla, our GenAI Assistant)" | "Prioritized Remediation Plan" | "Risk Assessment Plan" | "Incident Response Plan" | "MSP Shared Responsibility Matrix" | "Final System Security Plan (SSP)" | "Final Policies and Procedures" | "Supporting Evidence & Artifacts" | "Final PIEE Submission (Ask Kayla, our GenAI Assistant)" | "Readiness Checklist for C3PAO" |
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2

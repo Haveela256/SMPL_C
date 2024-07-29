@@ -1,6 +1,10 @@
 Feature: Super Admin Discovery module
 
+<<<<<<< HEAD
 #Scope Document tab
+=======
+
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
   Scenario Outline: Open Discovery module of a company
     When Validate the Sign In button functionality by entering valid,invalid credentials <EmailAddress> <Password> and  Verify the signIn status <Toaster>
     And Validate the Company functionality <CompanyCard> <ToasterMessage>

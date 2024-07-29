@@ -16,6 +16,13 @@ Feature: Discovery Module
     Given Click on Select Year dropdown by Selecting Year
 
     Examples:
+<<<<<<< HEAD
+      | EmailAddress           | Password     | Toaster | uploadCount | DataFlowFileName  | File                                                   | FileUploadToaster            | DeletedFileToaster          |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Data flow image" | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Data flow pdf"   | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Doc"             | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+      | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "File"            | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx" | "File uploaded successfully" | "File deleted successfully" |
+=======
       | EmailAddress           | Password     | Toaster | uploadCount | DataFlowFileName  | File                                                      | FileUploadToaster                                         | DeletedFileToaster                                        |
       | "testltwo@yopmail.com" | "Vassar@123" | ""      | "6"         | "Data flow image" | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx"    | "File uploaded successfully"                              | "File deleted successfully"                               |
       | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Data flow pdf"   | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx"    | "File uploaded successfully"                              | "File deleted successfully"                               |
@@ -25,3 +32,4 @@ Feature: Discovery Module
       | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Pdf"             | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx"    | "File uploaded successfully"                              | "File deleted successfully"                               |
       | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Document"        | "C:/Users/user/Downloads/6377_5759_3399_MODIFIED.xlsx"    | "File uploaded successfully"                              | "File deleted successfully"                               |
       | "testltwo@yopmail.com" | "Vassar@123" | ""      | "2"         | "Document"        | "C:/Users/user/Downloads/AssetInventoryTemplateeeee.xlsx" | " Object reference not set to an instance of an object. " | "File deleted successfully" |
+>>>>>>> 1a2da184a64955571b42de9b8c873355143fd19a

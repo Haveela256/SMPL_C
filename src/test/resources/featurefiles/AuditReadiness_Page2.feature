@@ -12,8 +12,11 @@ Feature: Audit Readiness Module
     And Validate upload policy button <UploadPolicy> <PolicyDocToaster>
     And Validate the card status <Cards> <AssessmentName>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
 
 
 

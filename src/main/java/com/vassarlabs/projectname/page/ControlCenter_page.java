@@ -264,7 +264,10 @@ public class ControlCenter_page {
         }
 
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
     public void chatbot() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(chatbot).isDisplayed();

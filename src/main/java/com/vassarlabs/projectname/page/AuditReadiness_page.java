@@ -208,7 +208,11 @@ public class AuditReadiness_page {
     public void card(String AssessmentName,String Cards) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='" + AssessmentName + "']")));
+<<<<<<< HEAD
         Thread.sleep(5000);
+=======
+        Thread.sleep(6000);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         driver.findElement(By.xpath("//span[text()='" + AssessmentName + "']")).click();
         Thread.sleep(4000);
         String[] dummy = Cards.split(",");
@@ -271,9 +275,15 @@ public class AuditReadiness_page {
 
     public void copy(String CopyAssessmentToaster, String NewName, String AssessmentName, String ErrorToaster) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+<<<<<<< HEAD
 //        wait.until(ExpectedConditions.elementToBeClickable(collapseChatbot));
 //        driver.findElement(collapseChatbot).click();
 //        Thread.sleep(4000);
+=======
+        wait.until(ExpectedConditions.elementToBeClickable(collapseChatbot));
+        driver.findElement(collapseChatbot).click();
+        Thread.sleep(4000);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         List<WebElement> paginationElements = driver.findElements(paginationDropdown);
         if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
             WebElement ele = paginationElements.get(0);

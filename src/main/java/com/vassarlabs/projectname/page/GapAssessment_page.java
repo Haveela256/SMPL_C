@@ -34,8 +34,13 @@ public class GapAssessment_page {
     private By popupNoButton = By.xpath("//button[text()='No']");
     private By popupDeleteButton = By.xpath("//button[text()='Delete']");
     private By filedeletedToaster = By.xpath("//div[@aria-label='File deleted successfully']");
+<<<<<<< HEAD
     private By nextIcon = By.xpath("//li[@class='pagination-next']");
     private By previous = By.xpath("//li[@class='pagination-previous']");
+=======
+    private By nextIcon = By.xpath("//li[@class='pagination-next ng-star-inserted']//a");
+    private By previous = By.xpath("//li[@class='pagination-previous ng-star-inserted']//a");
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
     private By numberhyperlink = By.xpath("//span[text()='2']");
     private By popup = By.xpath("//span[text()='Are you sure to delete ?']");
     private By uploadIcon = By.xpath("//i[@class='bi bi-upload cursor']");
@@ -67,7 +72,10 @@ public class GapAssessment_page {
     private By existingAssessmentError = By.xpath("//div[text()=' Assessment Name Already Exist Please Choose Another Assessment name !!! ']");
     private By collapseChatbot = By.xpath("//button[@class='btn btn-sm d-none d-md-block']//i[@class='bi bi-chevron-down']");
     boolean errorToaster = false;
+<<<<<<< HEAD
     private By assessmentFilter=By.xpath("//i[@class='px-1 bi bi-filter ng-star-inserted']");
+=======
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
 
 
     public GapAssessment_page(WebDriver driver) {
@@ -100,12 +108,21 @@ public class GapAssessment_page {
             }
         }
     }
+<<<<<<< HEAD
     public void copyIcon(String CopyAssessmentToaster, String CopyName, String RenameAssessment, String ErrorToaster) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         Thread.sleep(3000);
 //        wait.until(ExpectedConditions.elementToBeClickable(collapseChatbot));
 //        driver.findElement(collapseChatbot).click();
 //        Thread.sleep(4000);
+=======
+
+    public void copyIcon(String CopyAssessmentToaster, String CopyName, String RenameAssessment, String ErrorToaster) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(collapseChatbot));
+        driver.findElement(collapseChatbot).click();
+        Thread.sleep(4000);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         List<WebElement> paginationElements = driver.findElements(paginationDropdown);
         if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
             WebElement ele = paginationElements.get(0);
@@ -219,7 +236,11 @@ public class GapAssessment_page {
 
     public void deleteIcon(String DeletedFileToaster, String AssessmentName, String RenameAssessment) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+<<<<<<< HEAD
         boolean isAssessmentDisplayed = !driver.findElements(By.xpath("//table//tr//td[2]//span[text()='" + RenameAssessment + "']")).isEmpty();
+=======
+        boolean isAssessmentDisplayed = !driver.findElements(By.xpath("//table//tr//td[2]//span[text()='" + AssessmentName + "']")).isEmpty();
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         if (isAssessmentDisplayed) {
             // Click the delete icon
             WebElement deleteIconElement = wait.until(ExpectedConditions.elementToBeClickable(deleteIcon));
@@ -242,14 +263,21 @@ public class GapAssessment_page {
 
     public void pagination() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+<<<<<<< HEAD
         driver.navigate().refresh();
+=======
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         List<WebElement> paginationElements = driver.findElements(paginationDropdown);
         if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
             WebElement ele = paginationElements.get(0);
             Select dropdown = new Select(ele);
+<<<<<<< HEAD
             dropdown.selectByIndex(0);
             Thread.sleep(9000);
             wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
+=======
+            dropdown.selectByIndex(1);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
             driver.findElement(nextIcon).click();
             Thread.sleep(3000);
             driver.findElement(previous).click();

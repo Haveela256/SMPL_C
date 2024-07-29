@@ -114,7 +114,11 @@ public class MarketPlace_page {
                 System.out.println("Waiting for the close button to be clickable.");
                 wait.until(ExpectedConditions.elementToBeClickable(close));
                 Thread.sleep(3000);
+<<<<<<< HEAD
                 driver.findElement(close).click();
+=======
+                WebElement closeButton = driver.findElement(close);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
                 System.out.println("Attempting to click the close button.");}
             else {
                 System.out.println("Blank error is not displayed");
@@ -124,7 +128,11 @@ public class MarketPlace_page {
                     String invalid = driver.findElement(invalidInviteError).getText();
                     Assert.assertEquals(ErrorMessage, invalid);
                     wait.until(ExpectedConditions.elementToBeClickable(close));
+<<<<<<< HEAD
                     driver.findElement(cancel).click();
+=======
+                    driver.findElement(close).click();
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
                     Thread.sleep(3000);
                     System.out.println("Invalid invite error displayed.");
                 } else {

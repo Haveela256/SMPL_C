@@ -1,6 +1,10 @@
 Feature: Sign Up
 
   Scenario Outline: Admin Sign Up
+<<<<<<< HEAD
+=======
+
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
     When Validate the Sign In button functionality by entering valid,invalid credentials <EmailAddress> <Password> and  Verify the signIn status <Toaster>
     And Send invite to customer admin <Email> <Subscription> <OrderNumber>
     And Click on Register button <Email>
@@ -16,7 +20,11 @@ Feature: Sign Up
     And Validate the Terms of Service, Privacy Policy hyperlink
     And Validate the Create Account button functionality <ErrorMessage> <ToasterMessage>
     Examples:
+<<<<<<< HEAD
       | EmailAddress             | Password   | Toaster | FirstName | MiddleName | LastName  | PasswordField | ErrorMessage            | ToasterMessage | UploadFile | ReUploadFile | Email                    | Subscription         | OrderNumber |
+=======
+      | EmailAddress         | Password   | Toaster | FirstName | MiddleName | LastName  | PasswordField | ErrorMessage            | ToasterMessage | UploadFile | ReUploadFile | Email                    | Subscription         | OrderNumber |
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
       | "smplappc@gmail.com" | "Bond@009" | ""      | "123"     | "Wild"     | "Chopper" | "Vassar@123"  | "First Name is Invalid" | ""             | ""         | ""           | "admin.smpl@yopmail.com" | "L-2 Gap Assessment" | "1234"      |
       #| "smplappc@yopmail.com" | "Bond@009" | ""      | ""        | "Wild"     | "Chopper" | "Vassar@123"  | "First Name is required"                                 | ""             | ""         | ""           | "admin.smpl@yopmail.co"  | "L-1 Gap Assessment" | "129"       |
       #| "smplappc@yopmail.com" | "Bond@009" | ""      | "Jones"   | "123"      | "Chopper" | "Vassar@123"  | "Middle Name is Invalid"                                 | ""             | ""         | ""           | "admin.smpl@yopmail.co"  | "L-2 Gap Assessment" | "374"       |

@@ -76,6 +76,7 @@ public class AuditReadiness_page2_page {
 //        WebElement dropdownStatus=driver.findElement(By.xpath("//select//option[text()='Select Implementation Status']"));
 //        Select select1=new Select(dropdownStatus);
 //        select1.selectByIndex(2);
+<<<<<<< HEAD
 
 //        WebElement dropdownElement = driver.findElement(uploadRelevantDoc);
 //        Select dropdown = new Select(dropdownElement);
@@ -198,6 +199,119 @@ public class AuditReadiness_page2_page {
 //            System.out.println("Reupload button is not displayed");
 //        }
 
+=======
+        WebElement dropdownElement = driver.findElement(uploadRelevantDoc);
+        Select dropdown = new Select(dropdownElement);
+        List<WebElement> options = dropdown.getOptions();
+
+        for (int i = 1; i < options.size(); i++) {
+            dropdown.selectByIndex(i);
+            driver.findElement(uploadIcon).sendKeys(UploadFile);
+            Thread.sleep(5000);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table")));
+            if (isFileUploaded(options.get(i).getText())) {
+                System.out.println("File " + options.get(i).getText() + " successfully uploaded and found in the table.");
+                Thread.sleep(10000);
+                if (driver.findElement(By.xpath("//div[text()=' Justification for the implementation of required controls ']//following::button[contains(text(),'" + options.get(i).getText() + "')]")).isDisplayed()) {
+                    Thread.sleep(3000);
+                    driver.findElement(By.xpath("//div[text()=' Justification for the implementation of required controls ']//following::button[contains(text(),'" + options.get(i).getText() + "')]")).click();
+                    Thread.sleep(10000);
+                    driver.findElement(ediTicon).click();
+                    Thread.sleep(3000);
+                    WebElement editDataElement = driver.findElement(editData);
+                    editDataElement.click();
+                    editDataElement.sendKeys(Keys.CONTROL, "a");
+                    Thread.sleep(3000);
+                    editDataElement.sendKeys(Keys.BACK_SPACE);
+                    Thread.sleep(3000);
+                    driver.findElement(By.xpath("//div[@class='note-editable']")).sendKeys(EditText);
+                    Thread.sleep(3000);
+                    driver.findElement(saveIcon).click();
+                    if (driver.findElement(justificationToaster).isDisplayed()) {
+                        String toasterMessage = driver.findElement(justificationToaster).getText();
+                        System.out.println(toasterMessage);
+                        Assert.assertEquals(JustificationToaster, toasterMessage);
+                        Thread.sleep(3000);
+                    }
+                } else {
+                    System.out.println("Panel is not displayed");
+                }
+            } else {
+                System.out.println("File " + options.get(i).getText() + " was not found in the table.");
+            }
+        }
+    }
+
+    private boolean isFileUploaded(String optionText) {
+        WebElement table = driver.findElement(By.xpath("//table"));
+        List<WebElement> rows = table.findElements(By.xpath("//tr"));
+        boolean fileFound = false;
+
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.xpath("//td"));
+            for (WebElement cell : cells) {
+                if (cell.getText().contains(optionText)) {
+                    fileFound = true;
+                    break;
+                }
+            }
+            if (fileFound) {
+                break;
+            }
+        }
+
+        return fileFound;
+    }
+
+    public void panel(String JustificationToaster, String EditText) throws InterruptedException {
+        if (driver.findElement(summarize).isDisplayed()) {
+            driver.findElement(summarize).click();
+            Thread.sleep(2000);
+        } else {
+            System.out.println("Justification panel is not displayed");
+        }
+    }
+
+
+    public void verifyCardStatus(String Cards, String AssessmentName) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        Thread.sleep(9000);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='" + AssessmentName + "']")));
+        driver.findElement(By.xpath("//span[text()='" + AssessmentName + "']")).click();
+        Thread.sleep(3000);
+        if (driver.findElement(By.xpath("//div[text()=' Evidence Collection Status: ']//following::div[text()=' " + Cards + " ']")).isDisplayed()) {
+            String cardStatusElement = driver.findElement(By.xpath("//div[text()=' "+Cards+" ']//following::div[@class='value'][1]")).getText();
+            System.out.println("The Card Status is: " +cardStatusElement);
+            }
+    }
+
+    public void uploadPolicy(String UploadPolicy, String PolicyDocToaster) throws InterruptedException {
+        Thread.sleep(3000);
+        driver.navigate().refresh();
+        driver.findElement(uploadPolicy).sendKeys(UploadPolicy);
+        if (driver.findElement(policytoaster).isDisplayed()) {
+            String policy = driver.findElement(policytoaster).getText();
+            System.out.println(policy);
+            Assert.assertEquals(PolicyDocToaster, policy);
+        }
+    }
+
+
+    public void submitButton() throws InterruptedException {
+        driver.findElement(By.xpath("//button[text()='Submit']")).click();
+        Thread.sleep(4000);
+    }
+
+    public void reupload(String ReuploadFile) {
+//        List<WebElement> reupload = driver.findElements(reuploadButton);
+//        if (!reupload.isEmpty() && reupload.get(0).isDisplayed()) {
+//            WebElement element = reupload.get(0);
+//        driver.findElement(reuploadButton).click();
+//    }else {
+//            System.out.println("Reupload button is not displayed");
+//        }
+
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
     }
 
     public void pagiNation() {
@@ -221,9 +335,13 @@ public class AuditReadiness_page2_page {
 
     public void icons(String Cards, String AssessmentName, String Regulationtabs, String DeletedFileToaster) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+<<<<<<< HEAD
         Thread.sleep(3000);
         cards( Cards,  AssessmentName);
         Thread.sleep(3000);
+=======
+        cards( Cards,  AssessmentName);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='" + Regulationtabs + "']")));
         driver.findElement(By.xpath("//a[text()='" + Regulationtabs + "']")).click();
         Thread.sleep(3000);
@@ -237,11 +355,19 @@ public class AuditReadiness_page2_page {
         Thread.sleep(2000);
         driver.findElement(FileNameSort).isDisplayed();
         driver.findElement(FileNameSort).click();
+<<<<<<< HEAD
         Thread.sleep(3000);
         WebElement download = driver.findElement(downloadIcon);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", download);
         driver.findElement(downloadIcon).click();
         Thread.sleep(5000);
+=======
+        driver.findElement(downloadIcon).click();
+        Thread.sleep(3000);
+        WebElement deleteIconElement = driver.findElement(deleteIcon);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deleteIconElement);
+        Thread.sleep(1000);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         driver.findElement(deleteIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
         driver.findElement(yes).click();

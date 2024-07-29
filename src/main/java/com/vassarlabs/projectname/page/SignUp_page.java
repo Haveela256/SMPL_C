@@ -21,7 +21,11 @@ public class SignUp_page {
     private By orderNumber = By.xpath("//input[@formcontrolname='orderNumber']");
     private By submit = By.xpath("//button[text()='Submit']");
     private By refresh = By.xpath("//button[@id='refresh']");
+<<<<<<< HEAD
     private By registerButton = By.xpath("//tbody//tr//td//div//div//div");
+=======
+    private By registerButton = By.xpath("//b[text()='Register']");
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
     private By signUptitle = By.xpath("//h3[text()='Sign up for SMPL-C ']");
     private By firstNameTextfield = By.xpath("//input[@formcontrolname='firstName']");
     private By middleNameTextField = By.xpath("//input[@formcontrolname='middleName']");
@@ -73,6 +77,7 @@ public class SignUp_page {
     }
     public void register(String Email) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+<<<<<<< HEAD
         driver.get("https://yopmail.com/wm");
         driver.findElement(yopmailEmailField).sendKeys(Email);
         driver.findElement(yopmailEmailField).sendKeys(Keys.ENTER);
@@ -94,6 +99,30 @@ public class SignUp_page {
 
 
         }}
+=======
+        String window1 = driver.getWindowHandle();
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+        Set<String> windowHandles = driver.getWindowHandles();
+        for (String handle : windowHandles) {
+
+        }
+        driver.findElement(yopmailEmailField).sendKeys(Email);
+        driver.findElement(yopmailEmailField).sendKeys(Keys.ENTER);
+        driver.navigate().refresh();
+        Thread.sleep(4000);
+//        driver.findElement(registerButton).click();
+//        wait.until(driver -> driver.getWindowHandles().size() > 1);
+//        Set<String> handles = driver.getWindowHandles();
+//        for (String window : handles) {
+//            if (!window.equals(window1)) {
+//                driver.switchTo().window(window);
+//                break;
+            }
+
+
+
+
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
         public void signUpPage() throws InterruptedException {
         Thread.sleep(3000);
         if (driver.findElement(signUptitle).isDisplayed()) {

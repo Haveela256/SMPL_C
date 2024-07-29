@@ -212,6 +212,7 @@ public class ScopeDocument_page {
 //            submitElement.click();
 //            Thread.sleep(3000);
 
+<<<<<<< HEAD
 
     List<WebElement> paginationElements = driver.findElements(paginationDropdown);
         if (!paginationElements.isEmpty() && paginationElements.get(0).isDisplayed()) {
@@ -228,6 +229,24 @@ public class ScopeDocument_page {
     } else {
         System.out.println("Pagination is not displayed");
     }
+=======
+            //Pagination
+            wait.until(ExpectedConditions.elementToBeClickable(nextIcon));
+        Thread.sleep(3000);
+            driver.findElement(nextIcon).click();
+            Thread.sleep(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(previous));
+            Thread.sleep(3000);
+            driver.findElement(previous).click();
+            wait.until(ExpectedConditions.elementToBeClickable(numberhyperlink));
+            driver.findElement(numberhyperlink).click();
+            WebElement ele = driver.findElement(paginationDropdown);
+            Select dropdown = new Select(ele);
+            dropdown.selectByIndex(1);
+            dropdown.selectByIndex(2);
+            dropdown.selectByIndex(3);
+            dropdown.selectByIndex(4);
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
 
         }
 

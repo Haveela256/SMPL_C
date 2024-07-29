@@ -77,6 +77,29 @@ AuditReadiness_page auditReadinessPage=new AuditReadiness_page(WebdriverInitiali
     @And("validate the delete icon functionality {string} {string}")
     public void validateTheDeleteIconFunctionality(String DeletedFileToaster, String NewName) throws InterruptedException {
         auditReadinessPage.deleteIcon(DeletedFileToaster, NewName);
+<<<<<<< HEAD
+=======
+    }
+
+    @And("Validate the Card status {string} {string}")
+    public void validateTheCardStatus(String AssessmentName,String Cards) throws InterruptedException {
+        auditReadinessPage.card(AssessmentName, Cards);
+    }
+
+    @And("Verify progress bar {string}")
+    public void verifyProgressBar(String AssessmentName) throws InterruptedException {
+        auditReadinessPage.progress(AssessmentName);
+    }
+
+    @And("validate the copy icon functionality {string} {string} {string} {string}")
+    public void validateTheCopyIconFunctionality(String CopyAssessmentToaster, String NewName, String AssessmentName, String ErrorToaster) throws InterruptedException {
+        auditReadinessPage.copy(CopyAssessmentToaster,NewName,AssessmentName,ErrorToaster);
+    }
+
+    @And("Verify current Sprs score")
+    public void verifyCurrentSprsScore() {
+        auditReadinessPage.sprs();
+>>>>>>> 39f7f0990eecc162198cf20a681bb85fc78868c2
     }
 
     @And("Validate the Card status {string} {string}")
